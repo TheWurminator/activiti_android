@@ -5,8 +5,8 @@ var dbconnection = require('./node_modules/database/connectdb');
 
 router.post('/', function(req,res){
 	res.send('POST: Create a message');
-	var query = "";
-	dbconnection.sendQuery(query);
+	// var query = "";
+	// dbconnection.sendQuery(query);
 
 });
 
