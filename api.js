@@ -17,4 +17,4 @@ app.use('/api/user', user);
 app.use('/api/activiti', activiti);
 app.use('/api/search', search);
 app.listen(port);
-console.log('this is happening at port ' + port);
+console.log('Running on Port: ' + port);
