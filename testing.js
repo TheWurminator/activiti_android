@@ -1,5 +1,3 @@
-var testing = require('./sql');
+var testing = require('./node_modules/database/connectdb');
 
-testing.makeEmployee("dsnfjsf", "ewijfoiewjf");
-testing.searchName('Lesley');
 testing.endConnection();
