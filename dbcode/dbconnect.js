@@ -16,6 +16,8 @@ con.connect(function(err){
   console.log('Connection established');
 });
 
+
+
 con.query('SELECT * FROM employees',function(err,rows){
   if(err) {
 	console.log("Query Error");

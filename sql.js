@@ -1,14 +1,12 @@
 
 
 var mysql = require("mysql");
-
 var con = mysql.createConnection({
 	host: "localhost",
 	user: "root",
 	password: "abc123",
 	database: "testingnodeusers"
 });
-
 
 con.connect(function(err){
 	if(err){
