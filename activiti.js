@@ -19,6 +19,5 @@ router.get('/', function(req,res) {
 	res.send('GET: Return Activiti ');
 });
 
-
 module.exports = router; 
 
