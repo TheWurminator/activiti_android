@@ -1,1 +1,1 @@
-haha..
+This is the server software 
