@@ -1,1 +1,1 @@
-This is the server software 
+Server Software
