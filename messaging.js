@@ -1,7 +1,11 @@
 //Init
 var express = require('express');
 var router = express.Router();
-var dbconnection = require('./node_modules/database/connectdb');
+var dbconnection;
+
+// function makeDBConn(){
+// 	this.name = 
+// }
 
 router.post('/', function(req,res){
 	res.send('POST: Create a message');
@@ -19,12 +23,12 @@ router.put('/', function(req,res){
 router.delete('/', function(req,res) {
 	res.send('DELETE: Delete Message ');
 	var query = "";
-	dbconnection.sendQuery(query);
+	db.sendQuery(query);
 
 });
 
 router.get('/', function(req,res) {
-	var query = "select * from employees";
+	var query = "select * from emp";
 	dbconnection.sendQuery(query, queryResponse, res);
 	//Call function here to send response
 	//Async
