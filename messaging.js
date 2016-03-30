@@ -24,11 +24,17 @@ router.delete('/', function(req,res) {
 });
 
 router.get('/', function(req,res) {
-	res.send('GET: Return MSG ');
-	var query = "";
-	dbconnection.sendQuery(query);
-
+	var query = "select * from emp";
+	dbconnection.sendQuery(query, queryResponse, res);
+	//Call function here to send response
+	//Async
 });
+
+//Function to send the query
+//THIS IS THE CALLBACK
+function queryResponse(thing, res) {
+	res.send(thing);
+}
 
 
 module.exports = router; 
