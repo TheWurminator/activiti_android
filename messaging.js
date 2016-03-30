@@ -24,7 +24,7 @@ router.delete('/', function(req,res) {
 });
 
 router.get('/', function(req,res) {
-	var query = "select * from emp";
+	var query = "select * from employees";
 	dbconnection.sendQuery(query, queryResponse, res);
 	//Call function here to send response
 	//Async
