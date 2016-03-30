@@ -1,37 +1,27 @@
 //Init
 var express = require('express');
 var router = express.Router();
-var dbconnection;
-
-// function makeDBConn(){
-// 	this.name = 
-// }
+var DBConnection = require('./node_modules/database/DBConnection');
+var con = new DBConnection();
 
 router.post('/', function(req,res){
 	res.send('POST: Create a message');
 	var query = "";
-	dbconnection.sendQuery(query);
 });
 
 router.put('/', function(req,res){
 	res.send('PUT: not currently implemented');
 	var query = "";
-	dbconnection.sendQuery(query);
-
 });
 
 router.delete('/', function(req,res) {
 	res.send('DELETE: Delete Message ');
 	var query = "";
-	db.sendQuery(query);
-
 });
 
 router.get('/', function(req,res) {
 	var query = "select * from emp";
-	dbconnection.sendQuery(query, queryResponse, res);
-	//Call function here to send response
-	//Async
+	con.sendQuery(query, queryResponse, res);
 });
 
 //Function to send the query
@@ -39,6 +29,5 @@ router.get('/', function(req,res) {
 function queryResponse(thing, res) {
 	res.send(thing);
 }
-
 
 module.exports = router; 
