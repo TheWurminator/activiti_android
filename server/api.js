@@ -22,11 +22,6 @@ https.createServer({
 	cert: fs.readFileSync('cert.pem')
 }, app).listen(port);
 
-router.get('/', function(req,res) {
-	res.send('Send search filter');
-	//var query = "";
-});
-
 app.use('/api/messaging', messaging); //Turning on the messaging route
 app.use('/api/user', user); //Turning on the user route
 app.use('/api/activiti', activiti); //Turning on the activiti route
