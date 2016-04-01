@@ -4,7 +4,6 @@ var router = express.Router();
 var DBConnection = require('./node_modules/database/DBConnection');
 var con = new DBConnection();
 
-
 router.post('/', function(req,res){
 	res.send('POST: Create a message');
 	var query = "";
@@ -23,8 +22,6 @@ router.delete('/', function(req,res) {
 router.get('/', function(req,res) {
 	//Needed to re-instantiate the con in order to reuse it
 	//Because otherwise, the reference is a dead connection after it's ended once
-	console.log(JSON.parse(req));
-	var con = new DBConnection();
 	var query = "select * from users";	
 	con.sendQuery(query, queryResponse, res);
 	con.endConnection();

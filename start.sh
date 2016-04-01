@@ -1,3 +1,3 @@
 #!/bin/bash
 
-nodemon api.js
+nodemon --watch node_modules/database --watch ./ api.js
