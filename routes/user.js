@@ -14,7 +14,7 @@ router.post('/', function(req,res){
 	var firstPart = "insert into users (id, first_name, last_name, age, location)\n";
 	var secondPart = " values (NULL, 'charles', 'barkley', '55', 'tt');";
 	con.sendQuery((firstPart+secondPart), queryResponse, res); //Sends a query to the database. (queryString, queryResponse)
-	con.endConnection();
+	//con.endConnection();
 });
 
 //This should update a user's profile information
