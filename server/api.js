@@ -4,6 +4,7 @@ https = require('https');
 var app = express(); //Making an express instance
 var bodyParser = require('body-parser'); //Need this to parse the body of an http request
 var port = process.env.PORT || 8081; //Setting the port to 8081 for the server to run on
+var router = express.Router();
 
 app.use(bodyParser.urlencoded({ extended: true})); //?
 app.use(bodyParser.json()); //Need to this to be able to parse http requests for JSON
@@ -14,10 +15,17 @@ var user = require('./routes/user'); //Making a route for the user profile part 
 var search = require('./routes/search'); //Making a route for the searching part of the application
 var activiti = require('./routes/activiti'); //Making a route for the activiti search/creation part of the application
 //This is used to create a secure http connection
+
+
 https.createServer({
 	key: fs.readFileSync('key.pem'),
 	cert: fs.readFileSync('cert.pem')
 }, app).listen(port);
+
+router.get('/', function(req,res) {
+	res.send('Send search filter');
+	//var query = "";
+});
 
 app.use('/api/messaging', messaging); //Turning on the messaging route
 app.use('/api/user', user); //Turning on the user route
