@@ -2,7 +2,7 @@
 var express = require('express');
 var router = express.Router();
 var DBConnection = require('../node_modules/database/DBConnection');
-var con = new DBConnection();
+//var con = new DBConnection();
 
 //This will be used to send a message to the group chat
 router.post('/', function(req,res){
@@ -27,8 +27,8 @@ router.get('/', function(req,res) {
 	//Needed to re-instantiate the con in order to reuse it
 	//Because otherwise, the reference is a dead connection after it's ended once
 	var query = "select * from users";	
-	con.sendQuery(query, queryResponse, res);
-	con.endConnection();
+	//con.sendQuery(query, queryResponse, res);
+	//con.endConnection();
 });
 
 //Function to send the query
