@@ -9,7 +9,7 @@ var con = new DBConnection(); //Instantiating the DBConnection module for use in
 //This will need to use facebook authentication
 //TODO: Use passport-facebook and understand how this works
 router.post('/', function(req,res){
-	// res.send('POST: Make new user');
+	//Currently this is being used for testing purposes, these requests will be replaced soon
 	console.log("Going to make a user now");
 	var firstPart = "insert into users (id, first_name, last_name, age, location)\n";
 	var secondPart = " values (NULL, 'charles', 'barkley', '55', 'tt');";
