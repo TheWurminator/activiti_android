@@ -7,10 +7,10 @@ app.use(bodyParser.urlencoded({ extended: true})); //?
 app.use(bodyParser.json()); //Need to this to be able to parse http requests for JSON
 
 //Initializing routers
-var messaging =require('./messaging'); //Making a route for the messaging portion of the application
-var user = require('./user'); //Making a route for the user profile part of the application
-var search = require('./search'); //Making a route for the searching part of the application
-var activiti = require('./activiti'); //Making a route for the activiti search/creation part of the application
+var messaging =require('./routes/messaging'); //Making a route for the messaging portion of the application
+var user = require('./routes/user'); //Making a route for the user profile part of the application
+var search = require('./routes/search'); //Making a route for the searching part of the application
+var activiti = require('./routes/activiti'); //Making a route for the activiti search/creation part of the application
 
 app.use('/api/messaging', messaging); //Turning on the messaging route
 app.use('/api/user', user); //Turning on the user route

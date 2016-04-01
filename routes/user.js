@@ -1,7 +1,7 @@
 //Init
 var express = require('express'); //Needed for the web element of this
 var router = express.Router(); //Need routers to direct API calls
-var DBConnection = require('./node_modules/database/DBConnection'); //Importing the custom module
+var DBConnection = require('../node_modules/database/DBConnection'); //Importing the custom module
 var con = new DBConnection(); //Instantiating the DBConnection module for use in this module
 
 
