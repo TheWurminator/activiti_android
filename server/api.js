@@ -14,7 +14,7 @@ var messaging = require('./routes/messaging'); //Making a route for the messagin
 var user = require('./routes/user'); //Making a route for the user profile part of the application
 var search = require('./routes/search'); //Making a route for the searching part of the application
 var activiti = require('./routes/activiti'); //Making a route for the activiti search/creation part of the application
-//This is used to create a secure http connection
+//This is used to create a secure https connection
 
 
 https.createServer({
@@ -26,5 +26,8 @@ app.use('/api/messaging', messaging); //Turning on the messaging route
 app.use('/api/user', user); //Turning on the user route
 app.use('/api/activiti', activiti); //Turning on the activiti route
 app.use('/api/search', search); //Turning on the search route
-// app.listen(port); //Telling the node server to listen on port 8081
+app.use('/*', function(req,res){
+	res.sendStatus(404);
+})
+
 console.log('Running on Port: ' + port); //DEBUG just seeing that it's actually running
