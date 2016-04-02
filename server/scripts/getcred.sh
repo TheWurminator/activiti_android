@@ -1,5 +1,6 @@
 #/bin/bash
-
+#This just fetches the credentials from the server
+#We do not want to store them in this repository
 echo "Enter activiti.servebeer.com ssh username: "
 read NAME
 echo "Fetching credentials"
