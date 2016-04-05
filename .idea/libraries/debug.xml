@@ -1,0 +1,18 @@
+<component name="libraryTable">
+  <library name="debug">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/android/Activiti/app/build/intermediates/pre-dexed/debug/com.android.support-recyclerview-v7-23.2.1_e9e032aff8a3e2499393a11353201499e968139d.jar!/" />
+      <root url="jar://$PROJECT_DIR$/android/Activiti/app/build/intermediates/pre-dexed/debug/support-annotations-23.2.1_89ebaf82599aec15b54c3c0c5991df922afffec3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/android/Activiti/app/build/intermediates/pre-dexed/debug/com.android.support-support-vector-drawable-23.2.1_780712216caa99d9d0ed4fbbb4a0f8fea2379891.jar!/" />
+      <root url="jar://$PROJECT_DIR$/android/Activiti/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.2.1_fd663649fae1ea33bb0b810271e5bc9a2a0df408.jar!/" />
+      <root url="jar://$PROJECT_DIR$/android/Activiti/app/build/intermediates/pre-dexed/debug/com.android.support-design-23.2.1_4f79ca4924dbc990806408de1f04adfeb7f04455.jar!/" />
+      <root url="jar://$PROJECT_DIR$/android/Activiti/app/build/intermediates/pre-dexed/debug/internal_impl-23.2.1_f3732084550422097992cb1cbbbf5907defe1ea8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/android/Activiti/app/build/intermediates/pre-dexed/debug/com.android.support-animated-vector-drawable-23.2.1_a118fd827bc25f5373d57dac47bf30e8751bd5c3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/android/Activiti/app/build/intermediates/pre-dexed/debug/com.android.volley-volley-1.0.0_7a5425ad819e42f1273835dbd302d65c6dcac6fa.jar!/" />
+      <root url="jar://$PROJECT_DIR$/android/Activiti/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.2.1_3a97dbd396b2a423c51bf78885742740d3fa5783.jar!/" />
+      <root url="jar://$PROJECT_DIR$/android/Activiti/app/build/intermediates/pre-dexed/debug/debug_f4007dd9668018f1cfcab631f55d2c6e8d3fada8.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
