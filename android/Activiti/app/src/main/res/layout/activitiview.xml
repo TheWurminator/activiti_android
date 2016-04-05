@@ -55,7 +55,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Description Here"
+        android:text="Description"
         android:id="@+id/activitiDescriptionView"
         android:layout_below="@+id/activitiTagView"
         android:layout_alignLeft="@+id/activitiTagView"
