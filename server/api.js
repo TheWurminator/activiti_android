@@ -8,6 +8,7 @@ var router = express.Router();
 var passport = require('passport');
 var Strategy = require('passport-facebook').Strategy;
 var fbauth = require('./fbauth.json');
+var randtoken = require('rand-token');
 
 app.use(bodyParser.urlencoded({ extended: true})); //?
 app.use(bodyParser.json()); //Need to this to be able to parse http requests for JSON
@@ -26,6 +27,12 @@ passport.use(new Strategy(fbauth,
     // be associated with a user record in the application's database, which
     // allows for account linking and authentication with other identity
     // providers.
+
+	var token = randtoken.generate(255);
+	console.log("User Generated Token: " + token);
+
+	console.log("\n\nFB Token: " + accessToken);
+
     return cb(null, profile);
   }));
 
@@ -53,7 +60,7 @@ app.set('view engine', 'ejs');
 
 // Use application-level middleware for common functionality, including
 // logging, parsing, and session handling.
-app.use(require('morgan')('combined'));
+//app.use(require('morgan')('combined'));
 app.use(require('cookie-parser')());
 app.use(require('body-parser').urlencoded({ extended: true }));
 app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
