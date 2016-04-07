@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.ksingletary.activiti">
+    package="rendezvous.activiti">
 
-<uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:debuggable="true"
-        android:name = ".MyApplication">
+        android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
         <activity
-            android:name=".MainActivity"
+            android:name=".LoginActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -22,14 +25,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name="com.facebook.FacebookActivity"
-            android:configChanges=
-                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:label="@string/app_name" />
-
-        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+        <activity
+            android:name=".MainMenuActivity"
+            android:label="@string/title_activity_main_menu"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ProfileViewActivity"
+            android:label="@string/title_activity_profile_view"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ActivitiViewActivity"
+            android:label="@string/title_activity_activiti_view"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
