@@ -11,12 +11,32 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="rendezvous.activiti.MainMenuActivity">
 
-    <TextView
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="IT WORKS"
-        android:id="@+id/textView"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:text="View Profile"
+        android:id="@+id/viewProfileButton"
+        android:onClick="viewProfile"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="65dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create Activiti"
+        android:id="@+id/createActivitiButton"
+        android:layout_below="@+id/viewProfileButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="130dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Find Activiti"
+        android:id="@+id/findActivitiButton"
+        android:layout_below="@+id/createActivitiButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="130dp" />
 </RelativeLayout>

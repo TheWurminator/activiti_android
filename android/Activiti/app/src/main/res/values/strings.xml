@@ -5,4 +5,5 @@
     <string name="title_activity_main_menu">Home</string>
     <string name="title_activity_profile_view">View Profile</string>
     <string name="title_activity_activiti_view">View Activity Details</string>
+    <string name="title_activity_edit_profile">Edit Profile</string>
 </resources>
