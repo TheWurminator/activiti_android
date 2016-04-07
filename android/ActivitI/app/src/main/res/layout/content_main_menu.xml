@@ -4,10 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:weightSum="3"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="rendezvous.activiti.MainMenuActivity">
 
@@ -15,28 +12,35 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="View Profile"
+        android:text="Profile"
         android:id="@+id/viewProfileButton"
         android:onClick="viewProfile"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="65dp" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Create Activiti"
+        android:text="Create"
         android:id="@+id/createActivitiButton"
-        android:layout_below="@+id/viewProfileButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="130dp"/>
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Find Activiti"
+        android:text="Find"
         android:id="@+id/findActivitiButton"
-        android:layout_below="@+id/createActivitiButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="130dp" />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/fragmentContainer"
+        android:layout_below="@+id/viewProfileButton" >
+
+    </RelativeLayout>
 </RelativeLayout>

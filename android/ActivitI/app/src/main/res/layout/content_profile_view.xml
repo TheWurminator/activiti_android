@@ -10,7 +10,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="rendezvous.activiti.ProfileViewActivity" >
+    tools:context=".ProfileViewFragment" >
 
     <ScrollView
         android:layout_width="match_parent"
@@ -97,7 +97,7 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:text="Edit"
+        android:text="@string/edit_button_text"
         android:id="@+id/editProfileButton"
         android:layout_alignTop="@+id/nameView"
         android:layout_alignRight="@+id/div1"
@@ -116,7 +116,8 @@
         android:layout_below="@+id/div1"
         android:layout_alignLeft="@+id/div1"
         android:layout_alignStart="@+id/div1"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="10dp"
+        android:onClick="viewActiviti" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -149,7 +150,8 @@
         android:layout_below="@+id/div2"
         android:layout_alignLeft="@+id/div2"
         android:layout_alignStart="@+id/div2"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="10dp"
+        android:onClick="viewActiviti" />
 
     <TextView
         android:layout_width="wrap_content"
