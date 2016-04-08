@@ -8,4 +8,4 @@ then
 fi
 #Starting the node server
 echo "Starting server"
-nodemon --watch node_modules/database --watch ./ api.js
+nodemon --watch node_modules/database --watch ./ app.js
