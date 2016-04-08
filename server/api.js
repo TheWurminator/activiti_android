@@ -8,8 +8,8 @@ var router = express.Router();
 var passport = require('passport');
 var Strategy = require('passport-facebook').Strategy;
 var fbauth = require('./fbauth.json');
-
-app.use(bodyParser.urlencoded({ extended: true})); //?
+var facebookUser = require('./fbuser.js')
+app.use(bodyParser.urlencoded({ extended: true})); 
 app.use(bodyParser.json()); //Need to this to be able to parse http requests for JSON
 
 // Configure the Facebook strategy for use by Passport.
@@ -19,6 +19,7 @@ app.use(bodyParser.json()); //Need to this to be able to parse http requests for
 // behalf, along with the user's profile.  The function must invoke `cb`
 // with a user object, which will be set at `req.user` in route handlers after
 // authentication.
+// This happens when the user is authenticated
 passport.use(new Strategy(fbauth,
   function(accessToken, refreshToken, profile, cb) {
     // In this example, the user's Facebook profile is supplied as the user
@@ -26,6 +27,15 @@ passport.use(new Strategy(fbauth,
     // be associated with a user record in the application's database, which
     // allows for account linking and authentication with other identity
     // providers.
+    var user = new facebookUser(); //Makes a new user
+    user.setFacebookToken(accessToken); //Sets the access token for the new user
+    console.log(user.fb_token); //DEBUG: Seeing if the user worked
+    //TODO: Store this user in a database 
+    //Hint: Uses the DBConnection module
+    //Also possibly involves callbacks
+    console.log("\n");
+    console.log("Profile information: ");
+    console.log(profile); 
     return cb(null, profile);
   }));
 
@@ -47,10 +57,12 @@ passport.deserializeUser(function(obj, cb) {
   cb(null, obj);
 });
 
+//FOR TESTING
 // Configure view engine to render EJS templates.
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
+//ALSO FOR TESTING
 // Use application-level middleware for common functionality, including
 // logging, parsing, and session handling.
 app.use(require('morgan')('combined'));
@@ -68,18 +80,21 @@ var messaging = require('./routes/messaging'); //Making a route for the messagin
 var user = require('./routes/user'); //Making a route for the user profile part of the application
 var search = require('./routes/search'); //Making a route for the searching part of the application
 var activiti = require('./routes/activiti'); //Making a route for the activiti search/creation part of the application
+// var graph = require('./routes/graph'); //Making a route for Facebook Graph API calls
 
 //This is used to create a secure https connection
 https.createServer({
-	key: fs.readFileSync('key.pem'),
-	cert: fs.readFileSync('cert.pem')
+	key: fs.readFileSync('key.pem'), //Private Key
+	cert: fs.readFileSync('cert.pem') //Public certificate
 }, app).listen(port);
 
+
+//TODO: Integrate facebook authentication routes MORE CLEANLY!!!
 app.use('/api/messaging', messaging); //Turning on the messaging route
 app.use('/api/user', user); //Turning on the user route
 app.use('/api/activiti', activiti); //Turning on the activiti route
 app.use('/api/search', search); //Turning on the search route
-
+// app.use('/api/graph', graph); //Turning on the graph route
 // Define routes.
 app.get('/',
   function(req, res) {
@@ -92,10 +107,10 @@ app.get('/login',
   });
 
 app.get('/login/facebook',
-  passport.authenticate('facebook'));
+  passport.authenticate('facebook', { authType: 'rerequest', scope: ['user_friends', 'user_birthday', 'email', 'user_hometown', 'user_about_me', 'user_likes' ] ,failureRedirect: '/login' }));
 
 app.get('/login/facebook/return', 
-  passport.authenticate('facebook', { failureRedirect: '/login' }),
+  passport.authenticate('facebook', { authType: 'rerequest', scope: ['user_friends', 'user_birthday', 'email', 'user_hometown'] ,failureRedirect: '/login' }),
   function(req, res) {
     res.redirect('/');
   });
