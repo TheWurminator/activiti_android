@@ -96,16 +96,15 @@
     <Button
         style="?android:attr/buttonStyleSmall"
         android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:text="@string/edit_button_text"
         android:id="@+id/editProfileButton"
-        android:layout_alignTop="@+id/nameView"
-        android:layout_alignRight="@+id/div1"
-        android:layout_alignEnd="@+id/div1"
         android:textSize="12sp"
         android:background="#acff1c"
-        android:layout_above="@+id/tagsView"
-        android:onClick="editProfile" />
+        android:onClick="editProfile"
+        android:layout_alignParentRight="false"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/nameView" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -179,21 +178,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="More"
+        android:text="@string/see_all"
         android:id="@+id/viewAllActivities"
         android:layout_below="@+id/profileActivitiTime"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="45dp" />
+        android:layout_marginTop="45dp"
+        android:onClick="seeAllActivities" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="More"
+        android:text="@string/see_all"
         android:id="@+id/viewAllPast"
         android:layout_below="@+id/profilePastActivitiTime"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="45dp" />
+        android:layout_marginTop="45dp"
+        android:onClick="seeAllActivities" />
 
     <TextView
         android:layout_width="wrap_content"

@@ -7,4 +7,5 @@
     <string name="title_activity_activiti_view">View Activity Details</string>
     <string name="title_activity_edit_profile">Edit Profile</string>
     <string name="edit_button_text">Edit</string>
+    <string name="see_all"><u>See All</u></string>
 </resources>
