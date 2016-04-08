@@ -8,41 +8,24 @@ var router = express.Router();
 var passport = require('passport');
 var Strategy = require('passport-facebook').Strategy;
 var fbauth = require('./fbauth.json');
-var randtoken = require('rand-token');
 
 app.use(bodyParser.urlencoded({ extended: true})); //?
 var facebookUser = require('./fbuser.js')
-app.use(bodyParser.urlencoded({ extended: true})); 
 app.use(bodyParser.json()); //Need to this to be able to parse http requests for JSON
 
-// Configure the Facebook strategy for use by Passport.
-//
-// OAuth 2.0-based strategies require a `verify` function which receives the
-// credential (`accessToken`) for accessing the Facebook API on the user's
-// behalf, along with the user's profile.  The function must invoke `cb`
-// with a user object, which will be set at `req.user` in route handlers after
-// authentication.
-// This happens when the user is authenticated
+//This is called when the user actually logs in
 passport.use(new Strategy(fbauth,
   function(accessToken, refreshToken, profile, cb) {
-    // In this example, the user's Facebook profile is supplied as the user
-    // record.  In a production-quality application, the Facebook profile should
-    // be associated with a user record in the application's database, which
-    // allows for account linking and authentication with other identity
-    // providers.
-  	var token = randtoken.generate(255);
-  	console.log("User Generated Token: " + token);
-  	console.log("\n\nFB Token: " + accessToken); 
-    
-    var user = new facebookUser(); //Makes a new user
-    user.setFacebookToken(accessToken); //Sets the access token for the new user
-    console.log(user.fb_token); //DEBUG: Seeing if the user worked
+  	//console.log("\n\nFB Token: " + accessToken); 
+    console.log(profile.id);
+    var user = new facebookUser(accessToken, profile.id); //Makes a new user
+    // console.log(user.fb_token); //DEBUG: Seeing if the user worked
     //TODO: Store this user in a database 
     //Hint: Uses the DBConnection module
     //Also possibly involves callbacks
-    console.log("\n");
-    console.log("Profile information: ");
-    console.log(profile); 
+    // console.log("\n");
+    // console.log("Profile information: ");
+    // console.log(profile); 
     return cb(null, profile);
   }));
 
@@ -101,7 +84,6 @@ app.use('/api/messaging', messaging); //Turning on the messaging route
 app.use('/api/user', user); //Turning on the user route
 app.use('/api/activiti', activiti); //Turning on the activiti route
 app.use('/api/search', search); //Turning on the search route
-// app.use('/api/graph', graph); //Turning on the graph route
 // Define routes.
 app.get('/',
   function(req, res) {
@@ -114,10 +96,10 @@ app.get('/login',
   });
 
 app.get('/login/facebook',
-  passport.authenticate('facebook', { authType: 'rerequest', scope: ['user_friends', 'user_birthday', 'email', 'user_hometown', 'user_about_me', 'user_likes' ] ,failureRedirect: '/login' }));
+  passport.authenticate('facebook', { authType: 'rerequest', scope: ['user_birthday', 'user_about_me', 'public_profile'] ,failureRedirect: '/login' }));
 
 app.get('/login/facebook/return', 
-  passport.authenticate('facebook', { authType: 'rerequest', scope: ['user_friends', 'user_birthday', 'email', 'user_hometown'] ,failureRedirect: '/login' }),
+  passport.authenticate('facebook', { authType: 'rerequest', scope: ['user_birthday', 'user_about_me', 'public_profile'] ,failureRedirect: '/login' }),
   function(req, res) {
     res.redirect('/');
   });
