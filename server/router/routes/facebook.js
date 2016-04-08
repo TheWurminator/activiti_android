@@ -5,7 +5,7 @@ var router = express.Router();
 
 //Redirect User to facebook
 router.post('/', function(req,res){
-	var s = passport.authenticate('facebook');
+	passport.authenticate('facebook');
 	res.send("Redirect to Facebook");
 });
 

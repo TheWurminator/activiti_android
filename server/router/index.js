@@ -1,7 +1,5 @@
-//Export Routes
+//Initialize and Export Routes
 module.exports = function (app) {
-	//Initialize Routes
-
 	//Application Routes - From Web-URL redirect to specified file for processing
 	app.use('/api/messaging', require('./routes/messaging')); 
 	app.use('/api/user', require('./routes/user'));

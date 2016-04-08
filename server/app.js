@@ -1,11 +1,11 @@
-var express = require('express'); //We need this for routing and http request/response purposes
-var app = express(); //Making an express instance
-var fs = require('fs');
-var https = require('https');
-var router = require('./router')(app);
-var port = process.env.PORT || 8081; //Setting the port to 8081 for the server to run on
+//Instantiate Modules
+var app = require('express')();
+var fs = require('fs'); //Access ssl key and cert
+var https = require('https'); //Enable ssl (secure connection)
+var port = process.env.PORT || 8081; //Configure port for server to listen
+var router = require('./router')(app); //Configure routes
 
-//This is used to create a secure https connection
+//Create server using secure ssl connection on specified port
 https.createServer({
 	key: fs.readFileSync('key.pem'),
 	cert: fs.readFileSync('cert.pem')
