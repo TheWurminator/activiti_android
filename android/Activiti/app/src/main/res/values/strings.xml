@@ -8,4 +8,6 @@
     <string name="title_activity_edit_profile">Edit Profile</string>
     <string name="edit_button_text">Edit</string>
     <string name="see_all"><u>See All</u></string>
+    <string name="welcome_message">Welcome to ActivitI!\nIt\'s time to go outside."</string>
+    <string name="title_activity_friend_profile_view">FriendProfileViewFragment</string>
 </resources>

@@ -57,7 +57,7 @@ public class MainMenuActivity extends AppCompatActivity {
         //Code for sending updated data to server
     }
 
-    public void seeAllActivities(View view) {
+    public void seeAllActivitis(View view) {
         AllActivitiFragment allActivitiFragment = new AllActivitiFragment();
         navigate(allActivitiFragment);
     }
