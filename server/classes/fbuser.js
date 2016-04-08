@@ -7,7 +7,7 @@ function fbUser(fbtoken, uid) {
 	this.userID = uid;
 	this.fb_token = fbtoken; //User's Facebook token
 	this.first_name, this.last_name, this.birthday, this.age, this.act_token, this.gender = null;
-	this.DBConnection = require('./node_modules/database/DBConnection'); //Importing the custom module
+	this.DBConnection = require('../node_modules/database/DBConnection'); //Importing the custom module
 	this.con = new this.DBConnection(); //Instantiating the DBConnection module for use in this module
 	// this.fetchInformation(this.getFacebookToken());
 	//this is used to 
