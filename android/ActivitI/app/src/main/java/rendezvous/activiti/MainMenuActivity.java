@@ -12,8 +12,15 @@ import android.widget.EditText;
 
 public class MainMenuActivity extends AppCompatActivity {
 
-    private int numTags = 0;
-
+    private ListResultsFragment listResultsFragment = new ListResultsFragment();
+    private ProfileViewFragment profileViewFragment = new ProfileViewFragment();
+    private EditProfileFragment editProfileFragment = new EditProfileFragment();
+    private ActivitiViewFragment activitiViewFragment = new ActivitiViewFragment();
+    private AllActivitiFragment allActivitiFragment = new AllActivitiFragment();
+    private CreateActivitiFragment createActivitiFragment = new CreateActivitiFragment();
+    private FindActivitiFragment findActivitiFragment = new FindActivitiFragment();
+    private FriendProfileViewFragment friendProfileViewFragment = new FriendProfileViewFragment();
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,24 +38,23 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
     public void searchActivities(View view) {
-        ListResultsFragment listResultsFragment = new ListResultsFragment();
         navigate(listResultsFragment);
         //Code to send search query to server
     }
 
+    public void viewOtherProfile(View view) {
+        navigate(friendProfileViewFragment);
+    } 
 
     public void viewProfile(View view) {
-        ProfileViewFragment profileViewFragment = new ProfileViewFragment();
         navigate(profileViewFragment);
     }
 
     public void editProfile(View view) {
-        EditProfileFragment editProfileFragment = new EditProfileFragment();
         navigate(editProfileFragment);
     }
 
     public void viewActiviti(View view) {
-        ActivitiViewFragment activitiViewFragment = new ActivitiViewFragment();
         navigate(activitiViewFragment);
     }
 
@@ -58,7 +64,6 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
     public void seeAllActivitis(View view) {
-        AllActivitiFragment allActivitiFragment = new AllActivitiFragment();
         navigate(allActivitiFragment);
     }
 
@@ -68,40 +73,14 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
     public void createActiviti(View view) {
-        CreateActivitiFragment createActivitiFragment = new CreateActivitiFragment();
         navigate(createActivitiFragment);
     }
 
     public void findActiviti(View view) {
-        FindActivitiFragment findActivitiFragment = new FindActivitiFragment();
         navigate(findActivitiFragment);
     }
 
-
-        /*
-        public boolean checkText() {
-          /*int numTags = getNumTags();
-            int id;
-            EditText currEditTag;
-
-            for(int i = 0; i < numTags; i++) {
-                id = getResources().getIdentifier("editTag"+i, "id", MyApplication.getAppContext().getPackageName());
-                currEditTag = (EditText) findViewById(id);
-                if(currEditTag.getText().toString().trim().length() == 0)
-                    return false;
-            }
-
-            return true;
-
-        }
-        */
-    public void incNumTags() {
-        numTags++;
-    }
-
-
     public void viewAllActivities(View view) {
-        AllActivitiFragment allActivitiFragment = new AllActivitiFragment();
         navigate(allActivitiFragment);
     }
 

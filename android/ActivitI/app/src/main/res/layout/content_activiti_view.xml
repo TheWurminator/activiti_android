@@ -134,7 +134,8 @@
         android:layout_below="@+id/guestListView"
         android:layout_alignLeft="@+id/guestListView"
         android:layout_alignStart="@+id/guestListView"
-        android:layout_marginTop="5dp" />
+        android:layout_marginTop="5dp"
+        android:onClick="viewOtherProfile" />
 
     <TextView
         android:layout_width="wrap_content"

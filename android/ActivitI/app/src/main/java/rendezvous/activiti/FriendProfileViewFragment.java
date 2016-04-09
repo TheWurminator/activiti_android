@@ -10,13 +10,9 @@ import android.view.ViewGroup;
  * A placeholder fragment containing a simple view.
  */
 public class FriendProfileViewFragment extends Fragment {
-
-    public FriendProfileViewFragment() {
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_friend_profile_view, container, false);
+        @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.content_see_all_activities, container, false);
+        return view;
     }
 }
