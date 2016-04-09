@@ -6,8 +6,7 @@ function fbUser(fbtoken, uid) {
 	this.userID = uid;
 	this.fb_token = fbtoken; //User's Facebook token
 	this.first_name, this.last_name, this.birthday, this.age, this.act_token, this.gender = null;
-	this.DBPool = require('../node_modules/database/DBPool');
-	this.pool = new this.DBPool(); 
+	this.pool = require('../node_modules/database/DBPool');
 	this.queryDB(this.userID); 
 }
 
@@ -16,7 +15,7 @@ fbUser.prototype.queryDB = function(uid){
 	var searchQuery = "select * from users where uid = " + this.userID;
 	var currentRef = this; 
 	
-	this.pool.sendQuery(searchQuery, function(response, err){
+	this.DBPool.sendQuery(searchQuery, function(response, err){
 		if(response.length < 1 ){
 			currentRef.setupNewUser(); //Create a new user
 		}
@@ -53,7 +52,7 @@ fbUser.prototype.setupNewUser = function(){
 fbUser.prototype.createUser = function(){
 	//Make a query to add a user to the database
 	var addQuery = "INSERT INTO users (uid, fbtoken, activititoken, first_name, bio, dob, phone_number, gender) VALUES (\'" + this.userID +"\', \'" + this.fb_token +"\', \'" + this.act_token + "\', \'" + this.first_name + "\', \'efijeifjiejfijfeije\', \'" +  this.birthday + "\', \'98498585\', \'" + this.gender + "');";
-	this.pool.sendQuery(addQuery, function(response,err){
+	this.DBPool.sendQuery(addQuery, function(response,err){
 		if(err){
 			console.log(err)
 		}

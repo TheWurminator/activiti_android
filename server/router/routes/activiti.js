@@ -5,12 +5,12 @@ var router = express.Router();
 var bodyParser = require('body-parser');
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
-var checkRef = new require("../../node_modules/token-auth-check/tokenCheck"); 
-var checker = new checkRef();
+var tokenCheckReference = new require("../../node_modules/token-auth-check/tokenCheck"); 
+var tokenChecker = new tokenCheckReference();
 
 //Creating a new activiti
 router.post('/', function(req,res){
-	checker.checkToken(req.body.userToken, cb);
+	tokenChecker.checkToken(req.body.userToken, cb);
 	res.send("Needs to be authenticated");
 });
 
