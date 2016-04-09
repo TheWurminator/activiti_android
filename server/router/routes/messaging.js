@@ -1,6 +1,8 @@
 //Init
 var express = require('express');
 var router = express.Router();
+var tokenCheckReference = new require("../../node_modules/token-auth-check/tokenCheck"); 
+var tokenChecker = new tokenCheckReference();
 
 //This will be used to send a message to the group chat
 router.post('/', function(req,res){

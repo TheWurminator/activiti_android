@@ -12,13 +12,16 @@ router.use(bodyParser.urlencoded({ extended: true }));
 
 //Creating new activiti
 router.post('/', function(req,res){
-	tokenChecker.checkToken(req.body.userToken, cb);
-	res.send("Needs to be authenticated");
+	tokenChecker.checkToken(req.body.userToken, function(response){
+		console.log(response);
+		//Rest of logic goes here
+	});
 });
 
 //Update activiti info
 router.put('/', function(req,res){
 	res.send('PUT: Update Activiti info');
+	//Needs to fetch activiti, then modify information then push it back
 });
 
 //Delete activiti
@@ -30,9 +33,5 @@ router.delete('/', function(req,res) {
 router.get('/', function(req,res) {
 	res.send('GET: Return Activiti ');
 });
-
-function cb(string) {
-	console.log("In callback function and the response is : " + string);
-}
 
 module.exports = router; 

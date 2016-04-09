@@ -7,13 +7,15 @@ var router = express.Router();
 var facebookUser = require('../../classes/fbuser.js');
 var fbauth = require('../../fbauth.json');
 var user_permissions = require('./fb_permissions/user_permissions.json');
+var usercommands = require('../../classes/usercommands');
 
 //Iniialize passport
 router.use(passport.initialize()); 
 
 //Called when user is logged in - redirected back from facebook
 passport.use(new Strategy(fbauth, function(accessToken, refreshToken, profile, cb) {
-    var user = new facebookUser(accessToken, profile.id); //Makes a new user
+    // var user = new facebookUser(accessToken, profile.id); //Makes a new user
+    usercommands.createUser(accessToken, profile.id);
     return cb(null, profile);
 }));
 

@@ -2,39 +2,56 @@
 var express = require('express'); 
 var router = express.Router();
 var pool = require('../../node_modules/database/DBPool');
-
-//Create new user
-router.post('/', function(req,res){
-	//Currently this is being used for testing purposes, these requests will be replaced soon
-	var firstPart = "insert into users (id, first_name, last_name, age, location)\n";
-	var secondPart = " values (NULL, 'charles', 'barkley', '55', 'tt');";
-
-	//Query database
-	pool.sendQuery((firstPart+secondPart), queryResponse, res); 
-});
-
+var tokenCheckReference = new require("../../node_modules/token-auth-check/tokenCheck"); 
+var tokenChecker = new tokenCheckReference();
+var usercommands = require('../../classes/usercommands');
 //Update user profile information
 router.put('/', function(req,res){
-	res.send('PUT: Update user info');
-	var query = "";
+	tokenChecker.checkToken(req.body.userToken, function(response){
+		if(response.contains("User")){
+			res.send("User token is invalid");
+		}
+		else if(response.contains("Invalid")){
+			res.send("Facebook token is invalid");
+		}
+		else{
+			//Grab user information from db
+			//Modify information
+			//Put information back into db
+		}
+	});
 });
 
 //Deletes user from database
 router.delete('/', function(req,res) {
-	res.send('DELETE: Delete User details');
-	var query = "";
+	tokenChecker.checkToken(req.body.userToken, function(response){
+		if(response.contains("User")){
+			res.send("User token is invalid");
+		}
+		else if(response.contains("Invalid")){
+			res.send("Facebook token is invalid");
+		}
+		else{
+			//Find the user in the DB
+			usercommands.deleteUser(req.body.userToken, function(response){
+				console.log(response);
+			});
+			//Delete the user
+		}
+	});
 });
 
 //Fetches user profile information
 router.get('/', function(req,res) {
-	res.send('GET: Return user details');
-	var query = "";
+	tokenChecker.checkToken(req.body.userToken, function(response){
+		if(response.contains("User")){
+			res.send("User token is invalid");
+		}
+		else if(response.contains("Invalid")){
+			res.send("Facebook token is invalid");
+		}
+	});
 });
-
-//HTTP Response callback function
-function queryResponse(dbResponse, res) {
-	res.send(dbResponse); //Sends the passed in response back to the server
-}
 
 //This is used to expose the routers to the api.js (main module)
 module.exports = router;

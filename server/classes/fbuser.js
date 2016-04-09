@@ -8,19 +8,20 @@ function fbUser(fbtoken, uid) {
 	this.first_name, this.last_name, this.birthday, this.age, this.act_token, this.gender = null;
 	this.pool = require('../node_modules/database/DBPool');
 	this.queryDB(this.userID); 
+	this.usercommands = require('./usercommands');
 }
 
 //Query the database - check if user exists or not. Create user object using database info.
+
+fbUser.prototype.setup = function()
 fbUser.prototype.queryDB = function(uid){
-	var searchQuery = "select * from users where uid = " + this.userID;
 	var currentRef = this; 
-	
-	this.pool.sendQuery(searchQuery, function(response, err){
-		if(response.length < 1 ){
-			currentRef.setupNewUser(); //Create a new user
+	this.usercommands.findUser(uid, function(response){
+		if(response.contains("Not")){
+			currentRef.setupNewUser();
 		}
 		else{
-			currentRef.setupExistingUser(response); //Pull existing user
+			currentRef.setupExistingUser(response);
 		}
 	});
 }
@@ -68,28 +69,5 @@ fbUser.prototype.generateToken = function(){
 	return this.randtoken.generate(255); //User's ActivitI token
 }
 
-fbUser.prototype.getFirstName = function(){
-	return this.first_name;
-}
-
-fbUser.prototype.getLastName = function(){
-	return this.last_name;
-}
-
-fbUser.prototype.getBirthday = function(){
-	return this.birthday;
-}
-
-fbUser.prototype.getInformation = function(){
-	return null;
-}
-
-fbUser.prototype.storeInDB = function(userInformation){
-	//Puts the json file, parses it and puts it into the db
-}
-
-fbUser.prototype.getFacebookToken = function(){
-	return this.fb_token;
-}
 
 module.exports = fbUser; //Exporting the instantiation of the class
