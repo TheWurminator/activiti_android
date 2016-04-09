@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.Calendar;
+
 public class MainActivity extends AppCompatActivity {
 
     private ListResultsFragment listResultsFragment = new ListResultsFragment();
@@ -22,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private FindActivitiFragment findActivitiFragment = new FindActivitiFragment();
     private FriendProfileViewFragment friendProfileViewFragment = new FriendProfileViewFragment();
     private BadgeViewFragment badgeViewFragment = new BadgeViewFragment();
+    private LeaveBadgeFragment leaveBadgeFragment = new LeaveBadgeFragment();
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed(){
         int count = getFragmentManager().getBackStackEntryCount();
 
-        if (count == 0){
+        if (count == 1){
             super.onBackPressed();
             //additional code
         }
@@ -47,10 +50,12 @@ public class MainActivity extends AppCompatActivity {
             toast.show();
         }
     }
+
     public void navigate(Fragment fragment) {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragmentContainer, fragment);
+        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
 
@@ -105,4 +110,48 @@ public class MainActivity extends AppCompatActivity {
         navigate(allActivitiFragment);
     }
 
+    public void leaveBadge(View view){
+        navigate(leaveBadgeFragment);
+    }
+
+    public boolean isValidDate(){
+        Calendar c = Calendar.getInstance();
+        int month = 0, day = 0, year = 0;
+
+        //check month
+        if(month < 1 || month > 12){
+            return false;
+        }
+
+        //check leap year days
+        if(month==2){
+            if(year % 4 == 0){
+                if(day > 29)
+                    return false;
+            }
+
+            else
+                if(day > 28)
+                    return false;
+        }
+
+        else if(month == 4 || month == 6 || month == 9 || month == 11){
+            if(day > 30)
+                return false;
+        }
+
+        else{
+            if(day > 31)
+                return false;
+        }
+
+        if(day < 1)
+            return false;
+
+        if(year < c.YEAR || year > (c.YEAR + 10)){
+            return false;
+        }
+
+        return true;
+    }
 }

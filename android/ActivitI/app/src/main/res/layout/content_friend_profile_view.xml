@@ -107,6 +107,16 @@
                 android:layout_toLeftOf="@+id/locationView"
                 android:layout_toStartOf="@+id/locationView" />
 
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Leave Review"
+                android:id="@+id/reviewButton"
+                android:onClick="leaveBadge"
+                android:layout_alignParentBottom="true"
+                android:layout_toRightOf="@+id/nameView"
+                android:layout_toEndOf="@+id/nameView" />
+
         </RelativeLayout>
 
     </ScrollView>
