@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:weightSum="3"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="rendezvous.activiti.MainMenuActivity">
+    tools:context=".MainActivity">
 
     <Button
         android:layout_width="wrap_content"

@@ -196,16 +196,15 @@
         android:layout_marginTop="45dp"
         android:onClick="seeAllActivitis" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Test"
-        android:id="@+id/testView"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/viewAllPast"
-        android:layout_marginTop="20dp" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="See badges"
+            android:id="@+id/button3"
+            android:onClick="badgeView"
+            android:layout_above="@+id/profileActivitiPreview"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
     </RelativeLayout>
 

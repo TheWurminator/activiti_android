@@ -9,8 +9,9 @@ import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
-public class MainMenuActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
     private ListResultsFragment listResultsFragment = new ListResultsFragment();
     private ProfileViewFragment profileViewFragment = new ProfileViewFragment();
@@ -20,6 +21,7 @@ public class MainMenuActivity extends AppCompatActivity {
     private CreateActivitiFragment createActivitiFragment = new CreateActivitiFragment();
     private FindActivitiFragment findActivitiFragment = new FindActivitiFragment();
     private FriendProfileViewFragment friendProfileViewFragment = new FriendProfileViewFragment();
+    private BadgeViewFragment badgeViewFragment = new BadgeViewFragment();
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,21 @@ public class MainMenuActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed(){
+        int count = getFragmentManager().getBackStackEntryCount();
+
+        if (count == 0){
+            super.onBackPressed();
+            //additional code
+        }
+
+        else{
+            getFragmentManager().popBackStack();
+            Toast toast = Toast.makeText(MyApplication.getAppContext(), "Back works!", Toast.LENGTH_SHORT);
+            toast.show();
+        }
+    }
     public void navigate(Fragment fragment) {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -78,6 +95,10 @@ public class MainMenuActivity extends AppCompatActivity {
 
     public void findActiviti(View view) {
         navigate(findActivitiFragment);
+    }
+
+    public void badgeView(View view){
+        navigate(badgeViewFragment);
     }
 
     public void viewAllActivities(View view) {

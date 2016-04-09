@@ -147,4 +147,52 @@
         android:layout_alignLeft="@+id/activitiDateView"
         android:layout_alignStart="@+id/activitiDateView"
         android:layout_marginTop="5dp" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/guestNamesView"
+        android:orientation = "horizontal"
+        android:layout_alignParentBottom="true"
+        android:gravity = "bottom"
+        android:layout_alignLeft="@+id/div1activiti"
+        android:layout_alignStart="@+id/div1activiti">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Going!"
+            android:id="@+id/radioButton" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Interested"
+            android:id="@+id/radioButton3" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign up"
+            android:id="@+id/button"
+            android:layout_alignTop="@+id/moneyRequiredView"
+            android:layout_toRightOf="@+id/activitiTimeView"
+            android:layout_toEndOf="@+id/activitiTimeView"
+            android:layout_gravity="bottom" />
+
+    </RadioGroup>
+
+
+    <!--make this conditional-->
+    <TextView
+        android:visibility="visible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Signed up!"
+        android:id="@+id/textView3"
+        android:layout_alignBottom="@+id/activitiNameView"
+        android:layout_alignRight="@+id/div1activiti"
+        android:layout_alignEnd="@+id/div1activiti" />
+
 </RelativeLayout>
