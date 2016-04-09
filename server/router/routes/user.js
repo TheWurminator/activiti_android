@@ -2,24 +2,10 @@
 var express = require('express'); 
 var router = express.Router();
 var pool = require('../../node_modules/database/DBPool');
-var tokenCheckReference = new require("../../node_modules/token-auth-check/tokenCheck"); 
-var tokenChecker = new tokenCheckReference();
 var usercommands = require('../../queries/userQueries');
 //Update user profile information
 router.put('/', function(req,res){
-	tokenChecker.checkToken(req.body.userToken, function(response){
-		if(response.contains("User")){
-			res.send("User token is invalid");
-		}
-		else if(response.contains("Invalid")){
-			res.send("Facebook token is invalid");
-		}
-		else{
-			//Grab user information from db
-			//Modify information
-			//Put information back into db
-		}
-	});
+res.send(500);
 });
 
 //Deletes user from database
