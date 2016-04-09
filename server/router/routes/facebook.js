@@ -1,4 +1,4 @@
-//Init
+//Import External Module
 var express = require('express');
 var app = express();
 var passport = require('passport');
@@ -8,9 +8,10 @@ var facebookUser = require('../../classes/fbuser.js');
 var fbauth = require('../../fbauth.json');
 var user_permissions = require('./fb_permissions/user_permissions.json');
 
-router.use(passport.initialize()); //Have to initialize passport before using it
+//Iniialize passport
+router.use(passport.initialize()); 
 
-//This is called when the user actually logs in
+//Called when user is logged in - redirected back from facebook
 passport.use(new Strategy(fbauth, function(accessToken, refreshToken, profile, cb) {
     var user = new facebookUser(accessToken, profile.id); //Makes a new user
     return cb(null, profile);

@@ -1,8 +1,7 @@
 //Import Modules
 var express = require('express'); 
 var router = express.Router();
-var DBConnection = require('../../node_modules/database/DBPool');
-var pool = new DBConnection(); 
+var pool = require('../../node_modules/database/DBPool');
 
 //Create new user
 router.post('/', function(req,res){
@@ -11,7 +10,7 @@ router.post('/', function(req,res){
 	var secondPart = " values (NULL, 'charles', 'barkley', '55', 'tt');";
 
 	//Query database
-	con.sendQuery((firstPart+secondPart), queryResponse, res); 
+	pool.sendQuery((firstPart+secondPart), queryResponse, res); 
 });
 
 //Update user profile information
@@ -33,8 +32,8 @@ router.get('/', function(req,res) {
 });
 
 //HTTP Response callback function
-function queryResponse(thing, res) {
-	res.send(thing); //Sends the passed in response back to the server
+function queryResponse(dbResponse, res) {
+	res.send(dbResponse); //Sends the passed in response back to the server
 }
 
 //This is used to expose the routers to the api.js (main module)
