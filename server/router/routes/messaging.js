@@ -1,8 +1,7 @@
 //Init
 var express = require('express');
 var router = express.Router();
-var DBConnection = require('../../node_modules/database/DBConnection');
-//var con = new DBConnection();
+var DBConnection = require('../../node_modules/database/DBPool');
 
 //This will be used to send a message to the group chat
 router.post('/', function(req,res){

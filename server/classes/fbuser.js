@@ -7,28 +7,22 @@ function fbUser(fbtoken, uid) {
 	this.userID = uid;
 	this.fb_token = fbtoken; //User's Facebook token
 	this.first_name, this.last_name, this.birthday, this.age, this.act_token, this.gender = null;
-	this.DBConnection = require('../node_modules/database/DBConnection'); //Importing the custom module
-	this.con = new this.DBConnection(); //Instantiating the DBConnection module for use in this module
+	this.DBPool = require('../node_modules/database/DBPool'); //Importing the custom module
+	this.pool = new this.DBPool(); //Instantiating the DBPool module for use in this module
 	this.queryDB(this.userID); //Looks in the database for the specified user
 }
 
-//The whole point of this function is to see whether a user is present already or not
-//If they are not present, we will need to generate a new activiti token for them
-//Also we will need to add their facebook token into the database
-//If the user is here, we will just return their entry from the database, in JSON
+//Queries the database to see if a user is present or not, then creates a user or gets existing information based on that information
 fbUser.prototype.queryDB = function(uid){
 	var searchQuery = "select * from users where uid = " + this.userID;
-	console.log(searchQuery);
 	var currentRef = this; //Need to keep a reference to this object to use in the DB query's callback function
-	this.con.sendQuery(searchQuery, function(response, err){
-		console.log(response.length);
+	
+	this.pool.sendQuery(searchQuery, function(response, err){
 		if(response.length < 1 ){
-			console.log("User was not found, creating a new user");
-			currentRef.setupNewUser();
+			currentRef.setupNewUser(); //Create a new user
 		}
 		else{
-			console.log("The user was found, pulling fields into object from database");
-			currentRef.setupExistingUser(response);
+			currentRef.setupExistingUser(response); //Pull existing user
 		}
 	});
 }
@@ -59,7 +53,7 @@ fbUser.prototype.setupNewUser = function(){
 fbUser.prototype.createUser = function(){
 	//Make a query to add a user to the database
 	var addQuery = "INSERT INTO users (uid, fbtoken, activititoken, first_name, bio, dob, phone_number, gender) VALUES (\'" + this.userID +"\', \'" + this.fb_token +"\', \'" + this.act_token + "\', \'" + this.first_name + "\', \'efijeifjiejfijfeije\', \'" +  this.birthday + "\', \'98498585\', \'" + this.gender + "');";
-	this.con.sendQuery(addQuery, function(response,err){
+	this.pool.sendQuery(addQuery, function(response,err){
 		if(err){
 			console.log(err)
 		}
@@ -69,7 +63,7 @@ fbUser.prototype.createUser = function(){
 	});
 }
 
-//This generated a unique token for a user
+//Generate unique token for a user
 fbUser.prototype.generateToken = function(){
 	this.randtoken = require('rand-token');
 	return this.randtoken.generate(255); //User's ActivitI token
