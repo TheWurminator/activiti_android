@@ -8,6 +8,7 @@ var facebookUser = require('../../classes/fbuser.js');
 var fbauth = require('../../fbauth.json');
 var user_permissions = require('./fb_permissions/user_permissions.json');
 
+router.use(passport.initialize()); //Have to initialize passport before using it
 
 //This is called when the user actually logs in
 passport.use(new Strategy(fbauth, function(accessToken, refreshToken, profile, cb) {

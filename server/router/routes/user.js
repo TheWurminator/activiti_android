@@ -4,7 +4,6 @@ var router = express.Router(); //Need routers to direct API calls
 var DBConnection = require('../../node_modules/database/DBConnection'); //Importing the custom module
 var con = new DBConnection(); //Instantiating the DBConnection module for use in this module
 
-
 //This is the function that creates a new user
 //This will need to use facebook authentication
 //TODO: Use passport-facebook and understand how this works 04/05 Got it
