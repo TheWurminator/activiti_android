@@ -5,9 +5,8 @@ var router = express.Router();
 var bodyParser = require('body-parser');
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
-var checkRef = new require("../../node_modules/token-auth-check/tokenCheck"); //Initializing the token checker
+var checkRef = new require("../../node_modules/token-auth-check/tokenCheck"); 
 var checker = new checkRef();
-
 
 //Creating a new activiti
 router.post('/', function(req,res){

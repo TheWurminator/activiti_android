@@ -1,21 +1,20 @@
 //User class
 //Pulls in user data from Facebook and makes a new user
 //Or pulls in existing user data from database
-
 function fbUser(fbtoken, uid) {
 	this.graph = require('fbgraph');
 	this.userID = uid;
 	this.fb_token = fbtoken; //User's Facebook token
 	this.first_name, this.last_name, this.birthday, this.age, this.act_token, this.gender = null;
-	this.DBPool = require('../node_modules/database/DBPool'); //Importing the custom module
-	this.pool = new this.DBPool(); //Instantiating the DBPool module for use in this module
-	this.queryDB(this.userID); //Looks in the database for the specified user
+	this.DBPool = require('../node_modules/database/DBPool');
+	this.pool = new this.DBPool(); 
+	this.queryDB(this.userID); 
 }
 
-//Queries the database to see if a user is present or not, then creates a user or gets existing information based on that information
+//Query the database - check if user exists or not. Create user object using database info.
 fbUser.prototype.queryDB = function(uid){
 	var searchQuery = "select * from users where uid = " + this.userID;
-	var currentRef = this; //Need to keep a reference to this object to use in the DB query's callback function
+	var currentRef = this; 
 	
 	this.pool.sendQuery(searchQuery, function(response, err){
 		if(response.length < 1 ){
@@ -36,7 +35,8 @@ fbUser.prototype.setupExistingUser = function(response){
 fbUser.prototype.setupNewUser = function(){
 	this.act_token = this.generateToken();
 	var currentRef = this;
-	//FBtoken is already set up from the constructor
+
+	//FBtoken already set up from the constructor
 	var facebookParameters = "fields=first_name, last_name, birthday, gender&"
 	this.graph
 	  .setAccessToken(this.getFacebookToken())

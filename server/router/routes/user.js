@@ -2,7 +2,7 @@
 var express = require('express'); 
 var router = express.Router();
 var DBConnection = require('../../node_modules/database/DBPool');
-var con = new DBConnection(); 
+var pool = new DBConnection(); 
 
 //Create new user
 router.post('/', function(req,res){
@@ -10,7 +10,8 @@ router.post('/', function(req,res){
 	var firstPart = "insert into users (id, first_name, last_name, age, location)\n";
 	var secondPart = " values (NULL, 'charles', 'barkley', '55', 'tt');";
 
-	con.sendQuery((firstPart+secondPart), queryResponse, res); //Sends a query to the database. (queryString, queryResponse)
+	//Query database
+	con.sendQuery((firstPart+secondPart), queryResponse, res); 
 });
 
 //Update user profile information
@@ -38,4 +39,3 @@ function queryResponse(thing, res) {
 
 //This is used to expose the routers to the api.js (main module)
 module.exports = router;
-

@@ -1,7 +1,8 @@
 //Init
-var express = require('express'); //Need the express module
-var router = express.Router(); //Need the router to be able to catch http requests
-//Will be used to send search parameters and will send back the results in a JSON format
+var express = require('express'); 
+var router = express.Router(); 
+
+//Used to send search parameters and send back the results in a JSON format
 router.post('/', function(req,res){
 	res.send('Not Implemented');
 	var query = "";
