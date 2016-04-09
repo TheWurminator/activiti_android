@@ -1,7 +1,7 @@
-//This is a user class that is made to hold the user's token 
-//And the randomly generated token
+//User class
+//Pulls in user data from Facebook and makes a new user
+//Or pulls in existing user data from database
 
-//
 function fbUser(fbtoken, uid) {
 	this.graph = require('fbgraph');
 	this.userID = uid;
@@ -9,47 +9,32 @@ function fbUser(fbtoken, uid) {
 	this.first_name, this.last_name, this.birthday, this.age, this.act_token, this.gender = null;
 	this.DBConnection = require('../node_modules/database/DBConnection'); //Importing the custom module
 	this.con = new this.DBConnection(); //Instantiating the DBConnection module for use in this module
-	// this.fetchInformation(this.getFacebookToken());
-	//this is used to 
-	this.queryDB(this.userID);
+	this.queryDB(this.userID); //Looks in the database for the specified user
 }
-
 
 //The whole point of this function is to see whether a user is present already or not
 //If they are not present, we will need to generate a new activiti token for them
 //Also we will need to add their facebook token into the database
 //If the user is here, we will just return their entry from the database, in JSON
 fbUser.prototype.queryDB = function(uid){
-
 	var searchQuery = "select * from users where uid = " + this.userID;
 	console.log(searchQuery);
 	var currentRef = this; //Need to keep a reference to this object to use in the DB query's callback function
-	//TODO: Actually check to see if the user is valid.
-	//this currently just prints out the response
 	this.con.sendQuery(searchQuery, function(response, err){
 		console.log(response.length);
 		if(response.length < 1 ){
-			console.log("It wasn't there son");
+			console.log("User was not found, creating a new user");
 			currentRef.setupNewUser();
 		}
 		else{
-			console.log(response);
-			console.log("Yes, it shall");
+			console.log("The user was found, pulling fields into object from database");
 			currentRef.setupExistingUser(response);
 		}
 	});
-	//Search database for UID
-	//If it doesn't exist, generate a token
-	//If it does exist, check if the FB token is valid
-	//If it isn't, request a new token
-	//If it is, we're all good fam
 }
 
-//Generate a new token
-//Parse the information from a FB graph api response for name and other information
-//FB api request is asynchronous, will need to make that a callback
-//Get the hell out of this callback
-
+//NEED TO IMPLEMENT
+//Parses credentials from db found in the response passed in
 fbUser.prototype.setupExistingUser = function(response){
 	console.log(response);
 }
@@ -68,7 +53,6 @@ fbUser.prototype.setupNewUser = function(){
 	      currentRef.gender = data.gender;
 	      currentRef.createUser(); //Calling a function to create a new user
 	  });
-
 }
 
 //Successfully adds a user to the database based on the information that they 
@@ -81,9 +65,8 @@ fbUser.prototype.createUser = function(){
 		}
 		else{
 			console.log("user successfully created");
-			console.log(response);
 		}
-	})
+	});
 }
 
 //This generated a unique token for a user
@@ -105,7 +88,7 @@ fbUser.prototype.getBirthday = function(){
 }
 
 fbUser.prototype.getInformation = function(){
-
+	return null;
 }
 
 fbUser.prototype.storeInDB = function(userInformation){
@@ -115,9 +98,5 @@ fbUser.prototype.storeInDB = function(userInformation){
 fbUser.prototype.getFacebookToken = function(){
 	return this.fb_token;
 }
-
-//Use to call it
-//Executes a query to get the data
-//If the data doesn't exist, put it in the database
 
 module.exports = fbUser; //Exporting the instantiation of the class
