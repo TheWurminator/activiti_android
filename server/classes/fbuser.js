@@ -15,7 +15,7 @@ fbUser.prototype.queryDB = function(uid){
 	var searchQuery = "select * from users where uid = " + this.userID;
 	var currentRef = this; 
 	
-	this.DBPool.sendQuery(searchQuery, function(response, err){
+	this.pool.sendQuery(searchQuery, function(response, err){
 		if(response.length < 1 ){
 			currentRef.setupNewUser(); //Create a new user
 		}
@@ -51,8 +51,8 @@ fbUser.prototype.setupNewUser = function(){
 //Successfully adds a user to the database based on the information that they 
 fbUser.prototype.createUser = function(){
 	//Make a query to add a user to the database
-	var addQuery = "INSERT INTO users (uid, fbtoken, activititoken, first_name, bio, dob, phone_number, gender) VALUES (\'" + this.userID +"\', \'" + this.fb_token +"\', \'" + this.act_token + "\', \'" + this.first_name + "\', \'efijeifjiejfijfeije\', \'" +  this.birthday + "\', \'98498585\', \'" + this.gender + "');";
-	this.DBPool.sendQuery(addQuery, function(response,err){
+	var addQuery = "INSERT INTO users (uid, fbtoken, activititoken, first_name, bio, dob, phone_number, gender) VALUES (\'" + this.userID +"\', \'" + this.fb_token +"\', \'" + this.act_token + "\', \'" + this.first_name + "\', \'efijeifjiejfijfeije\', \'" +  this.birthday + "\', \'3213102110\', \'" + this.gender + "');";
+	this.pool.sendQuery(addQuery, function(response,err){
 		if(err){
 			console.log(err)
 		}
