@@ -12,5 +12,5 @@ module.exports = function (app) {
 	//Wildcard Route - Catch all failed routes
 	app.use('/*', function(req,res){
 		res.sendStatus(404);
-	})
+	});
 };

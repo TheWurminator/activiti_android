@@ -15,8 +15,9 @@ router.post('/', function(req,res){
 	tokenChecker.checkToken(req.body.userToken, function(response){
 		console.log(response);
 		//Rest of logic goes here
+		res.send("not found");
 	});
-});
+}); 
 
 //Update activiti info
 router.put('/', function(req,res){

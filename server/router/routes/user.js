@@ -4,7 +4,7 @@ var router = express.Router();
 var pool = require('../../node_modules/database/DBPool');
 var tokenCheckReference = new require("../../node_modules/token-auth-check/tokenCheck"); 
 var tokenChecker = new tokenCheckReference();
-var usercommands = require('../../classes/usercommands');
+var usercommands = require('../../queries/userQueries');
 //Update user profile information
 router.put('/', function(req,res){
 	tokenChecker.checkToken(req.body.userToken, function(response){
