@@ -1,0 +1,22 @@
+{
+  "restartable": "rs",
+  "ignore": [
+    ".git" ],
+  "ignoreRoot": [".git"],
+  "verbose": true,
+  "execMap": {
+    "js": "node --harmony"
+  },
+  "watch": [
+    ".",
+    "node_modules/database",
+    "node_modules/token-auth-check",
+    "router",
+    "classes",
+    "scripts"
+ ],
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "ext": "js json"
+}
