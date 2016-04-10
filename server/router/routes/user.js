@@ -2,11 +2,9 @@
 var express = require('express'); 
 var router = express.Router();
 var pool = require('../../node_modules/database/DBPool');
-var usercommands = require('../../queries/userQueries');
-//Update user profile information
-router.put('/', function(req,res){
-res.send(500);
-});
+var userQueries = require('../../queries/userQueries');
+var tokenChecker = require('../../node_modules/token-auth-check/tokenCheck');
+
 
 //Deletes user from database
 router.delete('/', function(req,res) {
@@ -19,7 +17,7 @@ router.delete('/', function(req,res) {
 		}
 		else{
 			//Find the user in the DB
-			usercommands.deleteUser(req.body.userToken, function(response){
+			userQueries.deleteUser(req.body.userToken, function(response){
 				console.log(response);
 			});
 			//Delete the user
