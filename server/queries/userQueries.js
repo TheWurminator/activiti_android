@@ -6,13 +6,13 @@ exports.createUser = function(info,fbtoken){
 	var addQuery = "INSERT INTO users (uid, fb_token, activiti_token, first_name, bio, dob, gender, last_name) VALUES (\'" + info.id +"\', \'" + fbtoken +"\', \'" + act_token + "\', \'" + info.first_name + "\', \'efijeifjiejfijfeije\', \'" +  info.birthday + "\', \'" + info.gender + "\', \'" + info.last_name + ");";
 	this.pool.sendQuery(addQuery, function(response,err){
 		if(err){
-			console.log(err)
+			console.log(err);
 		}
 		else{
 			console.log("User successfully created");
 		}
 	});
-}
+};
 
 //Generates a unique token
 function generateToken(){
@@ -26,8 +26,8 @@ exports.updateFacebookToken = function(uid, fbtoken){
 	this.pool.sendQuery(query, function(response){
 		console.log(response);
 		console.log("Hopefully token succesfully changed");
-	})
-}
+	});
+};
 
 //Deletes a user
 exports.deleteUser = function(uid,cb){
@@ -35,7 +35,7 @@ exports.deleteUser = function(uid,cb){
 	this.pool.sendQuery(query, function(response){
 		cb(response);
 	}); 
-}
+};
 
 //Checks to see if user exists based on UID
 exports.uidExists = function(uid, cb){
@@ -51,15 +51,15 @@ exports.uidExists = function(uid, cb){
 			cb(true);
 		}
 	});
-}
+};
 
 //Gets profile information, sends it up through callback
 exports.getProfile = function(token, cb){
 	var query = "select * from users where activiti_token = \'" + token + "\'";
 	this.pool.sendQuery(query, function(response){
 		cb(response);
-	}
-}
+	});
+};
 
 exports.tokenExists = function(token, cb){
 	var query = "select * from users where activiti_token = \'" + token + "\'";
