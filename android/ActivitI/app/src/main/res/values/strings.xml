@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">ActivitI</string>
+    <string name="action_settings">Settings</string>
+    <string name="facebook_app_id">898791360233489</string>
+    <string name="title_activity_main_menu">Home</string>
+    <string name="title_activity_profile_view">View Profile</string>
+    <string name="title_activity_activiti_view">View Activity Details</string>
+    <string name="title_activity_edit_profile">Edit Profile</string>
+    <string name="edit_button_text">Edit</string>
+    <string name="see_all"><u>See All</u></string>
+    <string name="welcome_message">Welcome to ActivitI!\nIt\'s time to go outside."</string>
+    <string name="title_activity_friend_profile_view">FriendProfileViewFragment</string>
+
+    <string name="didnt_show">Didn\'t show up</string>
+    <string name="delightful">Delightful company</string>
+    <string name="likes_trump">Likes Trump</string>
+    <string name="on_phone">On Phone the Whole Time</string>
+    <string name="animal_hater">Hates Animals</string>
+    <string name="is_funny">Super Funny</string>
+    <string name="accidentally_matching">Accidentally Matched Clothes</string>
+    <string name="punched_me">Punched Me in the Face</string>
+    <string name="jacob">Was Jacob</string>
+</resources>

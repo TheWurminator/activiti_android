@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".ActivitiViewFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Activiti Name"
+        android:id="@+id/activitiNameView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="24dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Date"
+        android:id="@+id/activitiDateView"
+        android:layout_below="@+id/activitiHostView"
+        android:layout_alignLeft="@+id/activitiHostView"
+        android:layout_alignStart="@+id/activitiHostView"
+        android:layout_marginTop="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Time"
+        android:id="@+id/activitiTimeView"
+        android:layout_toRightOf="@id/activitiDateView"
+        android:layout_toEndOf="@id/activitiDateView"
+        android:layout_below="@+id/activitiHostView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginStart="100dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Tags:"
+        android:id="@+id/activitiTagView"
+        android:layout_below="@+id/moneyRequiredView"
+        android:layout_alignLeft="@+id/moneyRequiredView"
+        android:layout_alignStart="@+id/moneyRequiredView"
+        android:layout_marginTop="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Description Here"
+        android:id="@+id/activitiDescriptionView"
+        android:layout_below="@+id/activitiTagView"
+        android:layout_alignLeft="@+id/activitiTagView"
+        android:layout_alignStart="@+id/activitiTagView"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Money Requirement"
+        android:id="@+id/moneyRequiredView"
+        android:layout_below="@+id/activitiLocationView"
+        android:layout_alignLeft="@+id/activitiLocationView"
+        android:layout_alignStart="@+id/activitiLocationView"
+        android:layout_marginTop="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Hosted By:"
+        android:id="@+id/activitiHostView"
+        android:layout_below="@+id/activitiNameView"
+        android:layout_alignLeft="@+id/activitiNameView"
+        android:layout_alignStart="@+id/activitiNameView"
+        android:layout_marginTop="5dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:id="@+id/div1activiti"
+        android:layout_below="@+id/activitiDescriptionView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="75dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Guest List"
+        android:id="@+id/guestListView"
+        android:layout_centerVertical="true"
+        android:layout_below="@+id/div1activiti"
+        android:layout_alignLeft="@+id/activitiDescriptionView"
+        android:layout_alignStart="@+id/activitiDescriptionView"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="(0/#)"
+        android:id="@+id/numOfGuestsView"
+        android:layout_alignTop="@+id/guestListView"
+        android:layout_toRightOf="@+id/guestListView"
+        android:layout_toEndOf="@+id/guestListView"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Host"
+        android:id="@+id/guestNamesView"
+        android:layout_below="@+id/guestListView"
+        android:layout_alignLeft="@+id/guestListView"
+        android:layout_alignStart="@+id/guestListView"
+        android:layout_marginTop="5dp"
+        android:onClick="viewOtherProfile" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Location"
+        android:id="@+id/activitiLocationView"
+        android:layout_below="@+id/activitiDateView"
+        android:layout_alignLeft="@+id/activitiDateView"
+        android:layout_alignStart="@+id/activitiDateView"
+        android:layout_marginTop="5dp" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/guestNamesView"
+        android:orientation = "horizontal"
+        android:layout_alignParentBottom="true"
+        android:gravity = "bottom"
+        android:layout_alignLeft="@+id/div1activiti"
+        android:layout_alignStart="@+id/div1activiti">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Going!"
+            android:id="@+id/radioButton" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Interested"
+            android:id="@+id/radioButton3" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign up"
+            android:id="@+id/button"
+            android:layout_alignTop="@+id/moneyRequiredView"
+            android:layout_toRightOf="@+id/activitiTimeView"
+            android:layout_toEndOf="@+id/activitiTimeView"
+            android:layout_gravity="bottom" />
+
+    </RadioGroup>
+
+
+    <!--make this conditional-->
+    <TextView
+        android:visibility="visible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Signed up!"
+        android:id="@+id/textView3"
+        android:layout_alignBottom="@+id/activitiNameView"
+        android:layout_alignRight="@+id/div1activiti"
+        android:layout_alignEnd="@+id/div1activiti" />
+
+</RelativeLayout>

@@ -1,5 +1,4 @@
 /server/node_modules/database/*.json
-/server/config/auth.js
 /server/fbauth.json
 *.pem
 

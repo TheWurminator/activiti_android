@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".ProfileViewFragment" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/profilePic"
+        android:layout_marginTop="26dp"
+        android:minHeight="100dp"
+        android:minWidth="100dp"
+        android:layout_alignParentTop="true"
+        android:background="@android:color/holo_green_light" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Name"
+        android:id="@+id/nameView"
+        android:singleLine="true"
+        android:layout_alignTop="@+id/profilePic"
+        android:layout_toRightOf="@+id/profilePic"
+        android:layout_toEndOf="@+id/profilePic"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Interests:"
+        android:id="@+id/tagsView"
+        android:layout_below="@+id/nameView"
+        android:layout_alignLeft="@+id/nameView"
+        android:layout_alignStart="@+id/nameView"
+        android:layout_marginTop="15dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Location"
+        android:id="@+id/locationView"
+        android:layout_alignBottom="@+id/profilePic"
+        android:layout_alignLeft="@+id/tagsView"
+        android:layout_alignStart="@+id/tagsView"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Biography"
+        android:id="@+id/bioView"
+        android:layout_below="@+id/profilePic"
+        android:layout_alignLeft="@+id/profilePic"
+        android:layout_alignStart="@+id/profilePic"
+        android:layout_marginTop="10dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:id="@+id/div1"
+        android:layout_below="@+id/bioView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="105dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:id="@+id/div2"
+        android:layout_below="@+id/viewAllActivities"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="50dp"
+        android:layout_height="40dp"
+        android:text="@string/edit_button_text"
+        android:id="@+id/editProfileButton"
+        android:textSize="12sp"
+        android:background="#acff1c"
+        android:onClick="editProfile"
+        android:layout_alignParentRight="false"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/nameView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Activiti Name"
+        android:id="@+id/profileActivitiPreview"
+        android:layout_below="@+id/div1"
+        android:layout_alignLeft="@+id/div1"
+        android:layout_alignStart="@+id/div1"
+        android:layout_marginTop="10dp"
+        android:onClick="viewActiviti" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Date"
+        android:id="@+id/profileActivitiDate"
+        android:layout_below="@+id/profileActivitiPreview"
+        android:layout_alignLeft="@+id/profileActivitiPreview"
+        android:layout_alignStart="@+id/profileActivitiPreview"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Time"
+        android:id="@+id/profileActivitiTime"
+        android:layout_below="@+id/profileActivitiDate"
+        android:layout_alignLeft="@+id/profileActivitiDate"
+        android:layout_alignStart="@+id/profileActivitiDate"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Previous Activiti Name"
+        android:id="@+id/profilePastActivitiPreview"
+        android:layout_below="@+id/div2"
+        android:layout_alignLeft="@+id/div2"
+        android:layout_alignStart="@+id/div2"
+        android:layout_marginTop="10dp"
+        android:onClick="viewActiviti" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Previous Date"
+        android:id="@+id/profilePastActivitiDate"
+        android:layout_below="@+id/profilePastActivitiPreview"
+        android:layout_alignLeft="@+id/profilePastActivitiPreview"
+        android:layout_alignStart="@+id/profilePastActivitiPreview"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Previous Time"
+        android:id="@+id/profilePastActivitiTime"
+        android:layout_below="@+id/profilePastActivitiDate"
+        android:layout_alignLeft="@+id/profilePastActivitiDate"
+        android:layout_alignStart="@+id/profilePastActivitiDate"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/see_all"
+        android:id="@+id/viewAllActivities"
+        android:layout_below="@+id/profileActivitiTime"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="45dp"
+        android:onClick="seeAllActivitis" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/see_all"
+        android:id="@+id/viewAllPast"
+        android:layout_below="@+id/profilePastActivitiTime"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="45dp"
+        android:onClick="seeAllActivitis" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="See badges"
+            android:id="@+id/button3"
+            android:onClick="badgeView"
+            android:layout_above="@+id/profileActivitiPreview"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+    </RelativeLayout>
+
+    </ScrollView>
+
+
+
+</RelativeLayout>
