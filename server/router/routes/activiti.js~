@@ -1,14 +1,14 @@
 //Import Modules
 var express = require('express'); 
 var router = express.Router();
-var activitiQueries = require('../../queries/activitiQueries');
+var userQueries = require('../../queries/activitiQueries');
 
 //Creating new activiti
 router.post('/', function(req,res) {
 	//REPLACE ACTIVITIINFO WITH SPECS FROM HEADER -----
-	var activitiInfo = req.get('stuff');
+	var activitiInfo = req.get('token');
 
-	activitiQueries.createActiviti(activitiInfo, req.get('token'), function(response) {
+	userQueries.createActiviti(activitiInfo, req.get('token'), function(response) {
 		if(response == null){
 			res.status(400).send("Unable to create Activiti");
 		}
