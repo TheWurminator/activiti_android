@@ -60,9 +60,32 @@ exports.getProfile = function(token, cb){
 	});
 };
 
+//Updates user's information in the database
 exports.updateProfile = function(userToken, info, cb){
-	var query = "select * from users where activiti_token = \'" + token + "\'";
-	this.pool.sendQuery
+	var dob = info[0]["dob"];
+	var first_name = info[0]["first_name"];
+	var last_name = info[0]["last_name"];
+	var bio = info[0]["bio"];
+	var gender = info[0]["gender"];
+	var query2 = "update users set first_name = \'" + first_name + "\', last_name = \'" + last_name + "\', bio = \'" + bio + "\', gender = \'" + gender + "\' where users.activiti_token = \'" + userToken + "\'";
+	this.pool.sendQuery(query, function(response){
+		if(response == null){
+			cb(null);
+		}
+		else{
+			cb(response);
+		}
+	});
+}
+
+function GetHeaders(obj) {
+        var cols = new Array();
+        var p = obj[0];
+        for (var key in p) {
+            //alert(' name=' + key + ' value=' + p[key]);
+            cols.push(key);
+        }
+        return cols;
 }
 
 exports.tokenExists = function(token, cb){
