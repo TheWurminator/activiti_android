@@ -47,10 +47,9 @@ exports.deleteUser = function(uid,cb){
 //Checks to see if user exists based on UID
 exports.uidExists = function(uid, cb){
 	var query = "select * from users where uid = \'" + uid + "\'";
-	console.log("Query is : " + query);
 	this.pool.sendQuery(query, function(response){
 		//User Does not exist
-		if(response.length < 1){
+		if(response === null){
 			cb(false);
 		}
 		//User does exist
@@ -59,6 +58,13 @@ exports.uidExists = function(uid, cb){
 		}
 	});
 };
+
+exports.getIDProfile = function(uid, cb){
+	var query = "select * from users where uid = \'" + uid + "\'";
+	this.pool.sendQuery(query, function(response){
+		cb(response);
+	})
+}
 
 //Gets profile information, sends it up through callback
 exports.getProfile = function(token, cb){
