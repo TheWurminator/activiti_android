@@ -17,7 +17,7 @@ router.delete('/', function(req,res) {
 		}
 		else{
 			userQueries.deleteUser(req.get('token'), function(response){
-				
+
 			});
 		}
 	});
@@ -25,16 +25,7 @@ router.delete('/', function(req,res) {
 
 //Fetches user profile information
 router.get('/', function(req,res) {
-	userQueries.tokenExists(req.get('token'), function(response){});
-
-	tokenChecker.checkToken(req.get('token'), function(response){
-		if(response === true){
-			res.send("User token is valid");
-		}
-		else if(response === false){
-			res.sendStatus(403);
-		}
-	});
+	
 });
 
 //This is used to expose the routers to the api.js (main module)

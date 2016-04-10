@@ -42,7 +42,6 @@ exports.uidExists = function(uid, cb){
 	var query = "select * from users where uid = \'" + uid + "\'";
 	console.log("Query is : " + query);
 	this.pool.sendQuery(query, function(response){
-		// console.log(JSON.stringify(response));
 		//User Does not exist
 		if(response.length < 1){
 			cb(false);
@@ -54,10 +53,17 @@ exports.uidExists = function(uid, cb){
 	});
 }
 
+//Gets profile information, sends it up through callback
+exports.getProfile = function(token, cb){
+	var query = "select * from users where activiti_token = \'" + token + "\'";
+	this.pool.sendQuery(query, function(response){
+		cb(response);
+	}
+}
+
 exports.tokenExists = function(token, cb){
 	var query = "select * from users where activiti_token = \'" + token + "\'";
 	this.pool.sendQuery(query, function(response){
-		console.log(response);
 		cb(true);
 	});
 }
