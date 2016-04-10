@@ -16,17 +16,17 @@ router.delete('/', function(req,res) {
 			res.send("Facebook token is invalid");
 		}
 		else{
-			//Find the user in the DB
 			userQueries.deleteUser(req.get('token'), function(response){
-				//console.log(response);
+				
 			});
-			//Delete the user
 		}
 	});
 });
 
 //Fetches user profile information
 router.get('/', function(req,res) {
+	userQueries.tokenExists(req.get('token'), function(response){});
+
 	tokenChecker.checkToken(req.get('token'), function(response){
 		if(response === true){
 			res.send("User token is valid");

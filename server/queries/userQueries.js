@@ -54,15 +54,10 @@ exports.uidExists = function(uid, cb){
 	});
 }
 
-//Finds a user based on UID
-exports.findUser = function(uid,cb){
-	var query = "select * from users where uid = " + uid;
-	this.pool.sendQuery(query, function(err, rows){
-		if(response.length < 1){
-			cb("Not found");
-		}
-		else{
-			cb(response);
-		}
+exports.tokenExists = function(token, cb){
+	var query = "select * from users where activiti_token = \'" + token + "\'";
+	this.pool.sendQuery(query, function(response){
+		console.log(response);
+		cb(true);
 	});
 }
