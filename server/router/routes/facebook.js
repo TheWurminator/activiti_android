@@ -16,6 +16,7 @@ router.use(passport.initialize());
 //Called when user is logged in - redirected back from facebook
 passport.use(new Strategy(fbauth, function(accessToken, refreshToken, profile, cb) {
     //Do the graph call
+    console.log("got here");
     userQueries.uidExists(profile.id, function(response){
     	if(response === false){
     		//If a user already exists, update their token
@@ -47,11 +48,7 @@ passport.deserializeUser(function(obj, cb) {
 router.get('/', passport.authenticate('facebook', user_permissions));
 
 //Return from facebook after authentication
-router.get('/return', jsonParser, passport.authenticate('facebook', user_permissions), function(req, res) {
-    console.log(req._passport);
-    userQueries.getIDProfile(req._passport.session.user.id, function(response){
-        console.log(response);
-    })
+router.get('/return', passport.authenticate('facebook', user_permissions), function(req, res) {
 	res.status(200).send('Facebook Redirected.');
 });
 
