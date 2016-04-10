@@ -3,7 +3,7 @@ this.pool = require('../node_modules/database/DBPool');
 //Makes a new user based on FB graph response
 exports.createUser = function(info,fbtoken){
 	var act_token = generateToken();
-	var addQuery = "INSERT INTO users (uid, fbtoken, activititoken, first_name, bio, dob, phone_number, gender) VALUES (\'" + info.id +"\', \'" + fbtoken +"\', \'" + act_token + "\', \'" + info.first_name + "\', \'efijeifjiejfijfeije\', \'" +  info.birthday + "\', \'3213102110\', \'" + info.gender + "');";
+	var addQuery = "INSERT INTO users (uid, fb_token, activiti_token, first_name, bio, dob, gender, last_name) VALUES (\'" + info.id +"\', \'" + fbtoken +"\', \'" + act_token + "\', \'" + info.first_name + "\', \'efijeifjiejfijfeije\', \'" +  info.birthday + "\', \'" + info.gender + "\', \'" + info.last_name + ");";
 	this.pool.sendQuery(addQuery, function(response,err){
 		if(err){
 			console.log(err)
