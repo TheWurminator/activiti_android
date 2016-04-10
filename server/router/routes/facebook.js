@@ -50,7 +50,6 @@ router.get('/', passport.authenticate('facebook', user_permissions));
 
 //Return from facebook after authentication
 router.get('/return', passport.authenticate('facebook', user_permissions), function(req, res) {
-	console.log(req._passport); //NEED TO SEND THE TOKEN TO THE USER, JUST A SIMPLE JSON PARSE
     res.status(200).send('Facebook Redirected.');
 });
 

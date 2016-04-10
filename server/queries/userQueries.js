@@ -3,9 +3,7 @@ this.pool = require('../node_modules/database/DBPool');
 //Makes a new user based on FB graph response
 exports.createUser = function(info,fbtoken,cb){
 	var act_token = generateToken();
-	console.log(info.id);
 	var addQuery = "INSERT INTO users (uid, fb_token, activiti_token, first_name, bio, dob, gender, last_name) VALUES (\'" + info.id +"\', \'" + fbtoken +"\', \'" + act_token + "\', \'" + info.first_name + "\', \'efijeifjiejfijfeije\', \'" +  info.birthday + "\', \'" + info.gender + "\', \'" + info.last_name + "\');";
-	console.log(addQuery);
 	this.pool.sendQuery(addQuery, function(response,err){
 		if(err){
 			console.log(err);
@@ -47,7 +45,6 @@ exports.deleteUser = function(uid,cb){
 //Checks to see if user exists based on UID
 exports.uidExists = function(uid, cb){
 	var query = "select * from users where uid = \'" + uid + "\'";
-	console.log(query);
 	this.pool.sendQuery(query, function(response){
 		//User Does not exist
 		if(response.length < 1 || response === null || response == ""){
