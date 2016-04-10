@@ -24,15 +24,14 @@ function generateToken(){
 exports.updateFacebookToken = function(uid, fbtoken){
 	var query = "update users set fb_token = \'" + fbtoken + "\' where users.uid = \'" + uid + "\'";
 	this.pool.sendQuery(query, function(response){
-		console.log(response);
-		console.log("Hopefully token succesfully changed");
 	});
 };
 
 //Deletes a user
 exports.deleteUser = function(uid,cb){
-	var query = "delete from users where \'users\'.\'uid\' = " + uid;
+	var query = "delete from users where users.uid = \'" + uid + "\'";
 	this.pool.sendQuery(query, function(response){
+		console.log(response);
 		cb(response);
 	}); 
 };
@@ -60,6 +59,11 @@ exports.getProfile = function(token, cb){
 		cb(response);
 	});
 };
+
+exports.updateProfile = function(userToken, info, cb){
+	var query = "select * from users where activiti_token = \'" + token + "\'";
+	this.pool.sendQuery
+}
 
 exports.tokenExists = function(token, cb){
 	var query = "select * from users where activiti_token = \'" + token + "\'";
