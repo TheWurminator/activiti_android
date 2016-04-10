@@ -5,14 +5,14 @@ module.exports = function (app) {
 		var tokenChecker = new require('../node_modules/token-auth-check/tokenCheck');
 		var token = req.get('token');
 		tokenChecker.checkToken(token, function(response){
-			if(Boolean(response) == false){
-				res.sendStatus(403);
+			if(Boolean(response) === false){
+				res.sendStatus(401);
 			}
 			else{
 				next();
 			}
-		})
-	};
+		});
+	}
 
 	//Facebook Routes - Used to authenticate with facebook server
 	app.use('/api/login/facebook', require('./routes/facebook'));
