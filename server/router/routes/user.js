@@ -25,7 +25,9 @@ router.delete('/', function(req,res) {
 
 //Fetches user profile information
 router.get('/', function(req,res) {
-	
+	userQueries.getProfile(req.get('token'), function(profile) {
+		res.send(profile);
+	});
 });
 
 //This is used to expose the routers to the api.js (main module)
