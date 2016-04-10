@@ -1,9 +1,8 @@
 this.pool = require('../node_modules/database/DBPool');
 
 //Makes a new user based on FB graph response
-exports.createActiviti = function(info,fbtoken, cb){
+exports.createActiviti = function(info, fbtoken, cb){
 	var addQuery = "";
-
 	this.pool.sendQuery(addQuery, function(response, err){
 		if(err){
 			console.log(err);
@@ -16,11 +15,15 @@ exports.createActiviti = function(info,fbtoken, cb){
 };
 
 //Deletes a activiti
-exports.deleteActiviti = function(uid,cb){
-	var query = "";
-
+exports.deleteActiviti = function(aid, cb){
+	var query = "delete from activities where activities.aid = \'" + aid + "\'";
 	this.pool.sendQuery(query, function(response){
-		cb(response);
+		if(err){
+			cb(null);
+		}
+		else{
+			cb(response);
+		}
 	}); 
 };
 
@@ -41,13 +44,15 @@ exports.activitiExists = function(uid, cb){
 };
 
 //Gets activiti information, sends it up through callback
-exports.getActiviti = function(token, cb){
-	console.log("get acti");
-	var query = "";
-
+exports.getActiviti = function(aid, cb){
+	console.log("Fetching activiti");
+	var query = "select * from activities where aid = \'" + aid + "\'";
 	this.pool.sendQuery(query, function(response, err){
 		if(err){
 			console.log(err);
+		}
+		if(response.length < 1){ //Response can be an empty set
+			cb(null);
 		}
 		else{
 			cb(response);
@@ -57,8 +62,7 @@ exports.getActiviti = function(token, cb){
 
 //Update activiti information
 exports.updateActiviti = function(userToken, info, cb){
-	var query = "";
-	
+	var query = "select * from activities";
 	this.pool.sendQuery(query, function(response,err){
 		if(err){
 			console.log(err);

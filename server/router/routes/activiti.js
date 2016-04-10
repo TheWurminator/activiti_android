@@ -52,7 +52,6 @@ router.delete('/', function(req,res) {
 router.get('/', function(req,res) {
 	//REPLACE WITH ACTIVITI ID TO BE RETRIEVED	
 	var aid = req.get('aid');
-
 	activitiQueries.getActiviti(aid, function(response) {
 		if(response == null){
 			res.status(400).send("Activiti not found");

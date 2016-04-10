@@ -2,6 +2,9 @@
 var express = require('express'); 
 var router = express.Router();
 var userQueries = require('../../queries/userQueries');
+// var app = express();
+var bodyParser = require('body-parser');
+var jsonParser = bodyParser.json()
 
 //Fetches user profile information
 router.get('/', function(req,res) {
@@ -13,6 +16,19 @@ router.get('/', function(req,res) {
 			res.status(200).send(response);
 		}
 	});
+});
+
+
+router.post('/', jsonParser, function(req,res){
+	console.log(req.body);
+	userQueries.createUser(req.body, "bullshit", function(response){
+		if(response == null){
+			res.status(400).send("User was not successfully created");
+		}
+		else{
+			res.status(400).send("User was successfully created");
+		}
+	});	
 });
 
 //Update user profile information
