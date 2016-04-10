@@ -23,7 +23,7 @@ passport.use(new Strategy(fbauth, function(accessToken, refreshToken, profile, c
     	}
     	else{
 	 	//If a user doesn't exist, make a new one
-          console.log("User Exists");
+          console.log("User doesn't Exists");
     		graphcall.getUserInfo(accessToken, function(response){
     			userQueries.createUser(response, accessToken);
     		});
@@ -44,8 +44,8 @@ passport.deserializeUser(function(obj, cb) {
 router.get('/', passport.authenticate('facebook', user_permissions));
 
 //Return from facebook after authentication
-router.get('/return', function(req, res) {
-	res.send('Facebook Redirected.');
+router.get('/return', passport.authenticate('facebook', user_permissions), function(req, res) {
+	res.status(200).send('Facebook Redirected.');
 });
 
 // Exporting the functionality of the router to the calling module
