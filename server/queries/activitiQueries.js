@@ -1,8 +1,8 @@
 this.pool = require('../node_modules/database/DBPool');
 
 //Makes a new user based on FB graph response
-exports.createActiviti = function(info, fbtoken, cb){
-	var addQuery = "";
+exports.createActiviti = function(info, userToken, cb){
+	var addQuery = "insert into activities (aid, name, cost, max_attendees, date, start_time, end_time, longitude, latitude) values (\'null\', + \'" + info.name + "\', \'" + info.cost + "\', \'" + info.max_attendees + "\', \'" + info.date + "\', \'" + info.start_time + "\', \'" + info.end_time + "\', \'" + info.longitude + "\', \'" + info.latitude + "\');"
 	this.pool.sendQuery(addQuery, function(response, err){
 		if(err){
 			console.log(err);

@@ -4,7 +4,7 @@ var router = express.Router();
 var userQueries = require('../../queries/userQueries');
 // var app = express();
 var bodyParser = require('body-parser');
-var jsonParser = bodyParser.json()
+var jsonParser = bodyParser.json();
 
 //Fetches user profile information
 router.get('/', function(req,res) {

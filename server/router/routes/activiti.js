@@ -2,6 +2,8 @@
 var express = require('express'); 
 var router = express.Router();
 var activitiQueries = require('../../queries/activitiQueries');
+var bodyParser = require('body-parser');
+var jsonParser = bodyParser.json();
 
 //Creating new activiti
 router.post('/', function(req,res) {
