@@ -26,6 +26,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.facebook.FacebookActivity"
+                  android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+                  android:theme="@android:style/Theme.Translucent.NoTitleBar"
+                  android:label="@string/app_name" >
+        </activity>
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main_menu"
@@ -43,13 +48,14 @@
             android:label="@string/title_activity_edit_profile"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".FriendProfileView"
+            android:name=".FriendProfileViewFragment"
             android:label="@string/title_activity_friend_profile_view"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
+
         </activity>
     </application>
 

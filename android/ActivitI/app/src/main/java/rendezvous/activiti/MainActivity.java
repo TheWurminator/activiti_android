@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private FriendProfileViewFragment friendProfileViewFragment = new FriendProfileViewFragment();
     private BadgeViewFragment badgeViewFragment = new BadgeViewFragment();
     private LeaveBadgeFragment leaveBadgeFragment = new LeaveBadgeFragment();
+    private ChatFragment chatFragment = new ChatFragment();
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +46,11 @@ public class MainActivity extends AppCompatActivity {
             //additional code
         }
 
-        else{
+        /*else{
             getFragmentManager().popBackStack();
             Toast toast = Toast.makeText(MyApplication.getAppContext(), "Back works!", Toast.LENGTH_SHORT);
             toast.show();
-        }
+        }*/
     }
 
     public void navigate(Fragment fragment) {
@@ -112,6 +114,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void leaveBadge(View view){
         navigate(leaveBadgeFragment);
+    }
+
+    public void chatFragment(View view) {
+        navigate(chatFragment);
     }
 
     public boolean isValidDate(){

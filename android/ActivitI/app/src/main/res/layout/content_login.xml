@@ -17,7 +17,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:onClick="loginClick"/>
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -28,5 +29,15 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:onClick="getmein" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Annoying Login"
+        android:onClick="loginServer"
+        android:id="@+id/button4"
+        android:layout_below="@+id/login_button"
+        android:layout_centerHorizontal="true"
+        />
 
 </RelativeLayout>
