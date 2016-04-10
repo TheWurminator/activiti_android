@@ -8,7 +8,7 @@ var tokenChecker = require('../../node_modules/token-auth-check/tokenCheck');
 
 //Deletes user from database
 router.delete('/', function(req,res) {
-	tokenChecker.checkToken(req.body.userToken, function(response){
+	tokenChecker.checkToken(req.get('token'), function(response){
 		if(response.contains("User")){
 			res.send("User token is invalid");
 		}
@@ -17,8 +17,8 @@ router.delete('/', function(req,res) {
 		}
 		else{
 			//Find the user in the DB
-			userQueries.deleteUser(req.body.userToken, function(response){
-				console.log(response);
+			userQueries.deleteUser(req.get('token'), function(response){
+				//console.log(response);
 			});
 			//Delete the user
 		}
@@ -27,12 +27,12 @@ router.delete('/', function(req,res) {
 
 //Fetches user profile information
 router.get('/', function(req,res) {
-	tokenChecker.checkToken(req.body.userToken, function(response){
-		if(response.contains("User")){
-			res.send("User token is invalid");
+	tokenChecker.checkToken(req.get('token'), function(response){
+		if(response === true){
+			res.send("User token is valid");
 		}
-		else if(response.contains("Invalid")){
-			res.send("Facebook token is invalid");
+		else if(response === false){
+			res.sendStatus(403);
 		}
 	});
 });

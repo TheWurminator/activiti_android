@@ -22,7 +22,7 @@ function generateToken(){
 
 //Updates existing token
 exports.updateFacebookToken = function(uid, fbtoken){
-	var query = "update users set fbtoken = \'" + fbtoken + "\' where users.uid = \'" + uid + "\'";
+	var query = "update users set fb_token = \'" + fbtoken + "\' where users.uid = \'" + uid + "\'";
 	this.pool.sendQuery(query, function(response){
 		console.log(response);
 		console.log("Hopefully token succesfully changed");
