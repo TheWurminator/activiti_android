@@ -108,7 +108,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/moneyRequiredCheckBox"
-        android:layout_below="@+id/editLocation"
+        android:layout_below="@+id/moneyLabelView"
         android:layout_toRightOf="@+id/moneyLabelView"
         android:layout_toEndOf="@+id/moneyLabelView"
         android:layout_alignBaseline="@+id/moneyLabelView" />
@@ -124,16 +124,22 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="10dp" />
 
-    <fragment
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:name="rendezvous.activiti.AddTagsFragment"
-        android:id="@+id/tagsFragment"
-        android:layout_below="@+id/moneyRequiredCheckBox"
+        android:layout_marginTop="16dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Tags:"
+        android:id="@+id/tagsActivitiView"
+        android:layout_below="@+id/moneyLabelView" />
+
+    <EditText
+        android:layout_width="290dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTag0A"
+        android:layout_below="@+id/tagsActivitiView"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="10dp"
-        tools:layout="@layout/content_add_tags"/>
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -141,9 +147,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Description:"
         android:id="@+id/descriptionLabelView"
-        android:layout_below="@+id/tagsFragment"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_below="@+id/editTag0A" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -157,20 +161,19 @@
         android:layout_alignRight="@+id/editName"
         android:layout_alignEnd="@+id/editName" />
 
+    </RelativeLayout>
+    </ScrollView>
+
     <Button
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Submit"
         android:id="@+id/submitButton"
+        android:onClick="submitNewActiviti"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/editDescription"
-        android:onClick="submitNewActiviti"/>
-
-    </RelativeLayout>
-    </ScrollView>
+        android:layout_alignParentEnd="true" />
 
 
 </RelativeLayout>

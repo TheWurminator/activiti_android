@@ -46,11 +46,11 @@ public class MainActivity extends AppCompatActivity {
             //additional code
         }
 
-        /*else{
+        else{
             getFragmentManager().popBackStack();
-            Toast toast = Toast.makeText(MyApplication.getAppContext(), "Back works!", Toast.LENGTH_SHORT);
-            toast.show();
-        }*/
+            /*Toast toast = Toast.makeText(MyApplication.getAppContext(), "Back works!", Toast.LENGTH_SHORT);
+            toast.show();*/
+        }
     }
 
     public void navigate(Fragment fragment) {

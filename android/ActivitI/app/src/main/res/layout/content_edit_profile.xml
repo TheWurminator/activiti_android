@@ -11,16 +11,24 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".EditProfileFragment">
 
-    <fragment
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:name="rendezvous.activiti.AddTagsFragment"
-        android:id="@+id/userTagsFragment"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Tags:"
+        android:layout_marginTop="30dp"
+        android:id="@+id/tagsView"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="10dp"
-        tools:layout="@layout/content_add_tags"/>
+        android:layout_alignParentStart="true" />
 
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTag0"
+        android:layout_below="@+id/tagsView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -28,7 +36,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Location:"
         android:id="@+id/generalLocationView"
-        android:layout_below="@+id/userTagsFragment"
+        android:layout_below="@+id/editTag0"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="8dp" />
