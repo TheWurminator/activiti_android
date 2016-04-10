@@ -16,7 +16,7 @@ router.use(passport.initialize());
 passport.use(new Strategy(fbauth, function(accessToken, refreshToken, profile, cb) {
     //Do the graph call
     userQueries.uidExists(profile.id, function(response){
-    	if(Boolean(response) == true){
+    	if(Boolean(response) === true){
     		//If a user already exists, update their token
     		console.log("User Exists");
     		userQueries.updateFacebookToken(profile.uid, accessToken);
