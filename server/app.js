@@ -9,7 +9,7 @@ var router = require('./router')(app); //Configure routes
 https.createServer({
 	key: fs.readFileSync('key.pem'), //Private Key
 	cert: fs.readFileSync('cert.pem') //Public certificate
-}, app).listen(port);
+}, app).listen(port, 192.168.0.23);
 
 //Debug Message
 console.log('Server Running on Port: ' + port);
