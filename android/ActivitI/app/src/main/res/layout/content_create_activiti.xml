@@ -122,37 +122,16 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="10dp" />
 
-    <Button
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:text="+"
-        android:id="@+id/addTags"
-        android:layout_marginRight="25dp"
-        android:layout_marginEnd="25dp"
-        android:layout_alignTop="@+id/editTag0"
-        android:layout_alignRight="@+id/editName"
-        android:layout_alignEnd="@+id/editName" />
-
-    <EditText
+    <fragment
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editTag0"
-        android:layout_below="@+id/tagLabelView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/addTags"
-        android:layout_toStartOf="@+id/addTags" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Tags:"
-        android:id="@+id/tagLabelView"
+        android:name="rendezvous.activiti.AddTagsFragment"
+        android:id="@+id/tagsFragment"
         android:layout_below="@+id/moneyRequiredCheckBox"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="5dp" />
+        android:layout_marginTop="10dp"
+        tools:layout="@layout/content_add_tags"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -160,7 +139,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Description:"
         android:id="@+id/descriptionLabelView"
-        android:layout_below="@+id/editTag0"
+        android:layout_below="@+id/tagsFragment"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 

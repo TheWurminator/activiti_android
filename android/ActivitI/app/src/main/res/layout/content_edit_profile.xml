@@ -11,35 +11,15 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".EditProfileFragment">
 
-    <TextView
+    <fragment
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Tags:"
-        android:id="@+id/tagsView"
-        android:layout_alignParentTop="true"
+        android:name="rendezvous.activiti.AddTagsFragment"
+        android:id="@+id/userTagsFragment"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:layout_width="290dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/editTag0"
-        android:layout_below="@+id/tagsView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="+"
-        android:id="@+id/addTag"
-        android:layout_below="@+id/tagsView"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_toRightOf="@+id/editTag0"
-        android:layout_toEndOf="@+id/editTag0"
-        android:layout_alignBottom="@+id/editTag0" />
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp"
+        tools:layout="@layout/content_add_tags"/>
 
 
     <TextView
@@ -48,7 +28,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Location:"
         android:id="@+id/generalLocationView"
-        android:layout_below="@+id/editTag0"
+        android:layout_below="@+id/userTagsFragment"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="8dp" />
