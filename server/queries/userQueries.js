@@ -3,6 +3,7 @@ this.pool = require('../node_modules/database/DBPool');
 //Makes a new user based on FB graph response
 exports.createUser = function(info,fbtoken,cb){
 	var act_token = generateToken();
+	console.log(info.id);
 	var addQuery = "INSERT INTO users (uid, fb_token, activiti_token, first_name, bio, dob, gender, last_name) VALUES (\'" + info.id +"\', \'" + fbtoken +"\', \'" + act_token + "\', \'" + info.first_name + "\', \'efijeifjiejfijfeije\', \'" +  info.birthday + "\', \'" + info.gender + "\', \'" + info.last_name + "\');";
 	console.log(addQuery);
 	this.pool.sendQuery(addQuery, function(response,err){
@@ -20,7 +21,6 @@ exports.createUser = function(info,fbtoken,cb){
 		}
 	});
 };
-
 
 //Generates a unique token
 function generateToken(){
@@ -47,9 +47,10 @@ exports.deleteUser = function(uid,cb){
 //Checks to see if user exists based on UID
 exports.uidExists = function(uid, cb){
 	var query = "select * from users where uid = \'" + uid + "\'";
+	console.log(query);
 	this.pool.sendQuery(query, function(response){
 		//User Does not exist
-		if(response === null){
+		if(response.length < 1 || response === null || response == ""){
 			cb(false);
 		}
 		//User does exist
@@ -92,15 +93,6 @@ exports.updateProfile = function(userToken, info, cb){
 	});
 }
 
-function GetHeaders(obj) {
-        var cols = new Array();
-        var p = obj[0];
-        for (var key in p) {
-            //alert(' name=' + key + ' value=' + p[key]);
-            cols.push(key);
-        }
-        return cols;
-}
 
 exports.tokenExists = function(token, cb){
 	var query = "select * from users where activiti_token = \'" + token + "\'";

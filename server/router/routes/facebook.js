@@ -12,13 +12,13 @@ var bodyParser = require('body-parser');
 var jsonParser = bodyParser.json();
 //Iniialize passport
 router.use(passport.initialize()); 
+app.use(jsonParser);
 
 //Called when user is logged in - redirected back from facebook
 passport.use(new Strategy(fbauth, function(accessToken, refreshToken, profile, cb) {
     //Do the graph call
-    console.log("got here");
     userQueries.uidExists(profile.id, function(response){
-    	if(Boolean(response) === false){
+    	if(response === true){
     		//If a user already exists, update their token
     		console.log("User Exists");
     	}
@@ -26,8 +26,9 @@ passport.use(new Strategy(fbauth, function(accessToken, refreshToken, profile, c
 	 	//If a user doesn't exist, make a new one
           console.log("User doesn't exist");
     		graphcall.getUserInfo(accessToken, function(response){
-    			userQueries.createUser(response, accessToken, function(response){
-                    if(response === null){
+                console.log(response);
+    			userQueries.createUser(response, accessToken, function(res){
+                    if(res === null){
                     }
                 });
     		});
@@ -49,7 +50,8 @@ router.get('/', passport.authenticate('facebook', user_permissions));
 
 //Return from facebook after authentication
 router.get('/return', passport.authenticate('facebook', user_permissions), function(req, res) {
-	res.status(200).send('Facebook Redirected.');
+	console.log(req._passport); //NEED TO SEND THE TOKEN TO THE USER, JUST A SIMPLE JSON PARSE
+    res.status(200).send('Facebook Redirected.');
 });
 
 // Exporting the functionality of the router to the calling module
