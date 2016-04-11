@@ -10,6 +10,7 @@ var userQueries = require('../../queries/userQueries');
 var graphcall = require('../../queries/fbQueries');
 var bodyParser = require('body-parser');
 var jsonParser = bodyParser.json();
+var token = null;
 //Iniialize passport
 router.use(passport.initialize()); 
 app.use(jsonParser);
@@ -27,7 +28,7 @@ passport.use(new Strategy(fbauth, function(accessToken, refreshToken, profile, c
           console.log("User doesn't exist");
     		graphcall.getUserInfo(accessToken, function(response){
                 console.log(response);
-    			userQueries.createUser(response, accessToken, function(res){
+    			userQueries.createUser(token, response, accessToken, function(res){
                     if(res === null){
                     }
                 });
@@ -46,16 +47,23 @@ passport.deserializeUser(function(obj, cb) {
 });
 
 //Redirect User to facebook
-router.get('/', passport.authenticate('facebook', user_permissions));
+router.get('/', generateToken, passport.authenticate('facebook', user_permissions));
 
 //Return from facebook after authentication
 router.get('/return', passport.authenticate('facebook', user_permissions), function(req, res) {
-    var id = req._passport.session.user.id;
-    console.log("id is + " + id);
-    var profile = userQueries.getIDProfile(id, function(response){
-        res.status(200).send(response[0]["activiti_token"]);
-    })
+    res.redirect('/api/login/facebook/finish');
 });
 
+router.get('/finish', function(req,res,next){
+    res.status(200).send(token);
+})
+
+function generateToken(req,res,next){
+    console.log("generateToken");
+    var randtoken = require('rand-token');
+    token = randtoken.generate(255);
+    console.log(token);
+    next();
+}
 // Exporting the functionality of the router to the calling module
 module.exports = router;

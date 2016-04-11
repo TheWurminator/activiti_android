@@ -1,8 +1,8 @@
 this.pool = require('../node_modules/database/DBPool');
 
 //Makes a new user based on FB graph response
-exports.createUser = function(info,fbtoken,cb){
-	var act_token = generateToken();
+exports.createUser = function(usertoken , info,fbtoken,cb){
+	var act_token = usertoken;
 	var addQuery = "INSERT INTO users (uid, fb_token, activiti_token, first_name, bio, dob, gender, last_name) VALUES (\'" + info.id +"\', \'" + fbtoken +"\', \'" + act_token + "\', \'" + info.first_name + "\', \'efijeifjiejfijfeije\', \'" +  info.birthday + "\', \'" + info.gender + "\', \'" + info.last_name + "\');";
 	this.pool.sendQuery(addQuery, function(response,err){
 		if(err){
@@ -20,11 +20,6 @@ exports.createUser = function(info,fbtoken,cb){
 	});
 };
 
-//Generates a unique token
-function generateToken(){
-	var randtoken = require('rand-token');
-	return randtoken.generate(255);
-}
 
 //Updates existing token
 exports.updateFacebookToken = function(uid, fbtoken){
