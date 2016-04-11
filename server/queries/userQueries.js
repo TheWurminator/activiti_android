@@ -1,9 +1,9 @@
 this.pool = require('../node_modules/database/DBPool');
 
 //Makes a new user based on FB graph response
-exports.createUser = function(usertoken , info,fbtoken,cb){
+exports.createUser = function(usertoken ,info, fbtoken, cb){
 	var act_token = usertoken;
-	var addQuery = "INSERT INTO users (uid, fb_token, activiti_token, first_name, bio, dob, gender, last_name) VALUES (\'" + info.id +"\', \'" + fbtoken +"\', \'" + act_token + "\', \'" + info.first_name + "\', \'efijeifjiejfijfeije\', \'" +  info.birthday + "\', \'" + info.gender + "\', \'" + info.last_name + "\');";
+	var addQuery = "INSERT INTO users (uid, fb_token, activiti_token, first_name, bio, dob, gender, last_name) VALUES (\'" + info.uid +"\', \'" + fbtoken +"\', \'" + act_token + "\', \'" + info.first_name + "\', \'"+ this.bio + "\', \'" +  info.dob + "\', \'" + info.gender + "\', \'" + info.last_name + "\');";
 	this.pool.sendQuery(addQuery, function(response,err){
 		if(err){
 			console.log(err);
@@ -29,8 +29,8 @@ exports.updateFacebookToken = function(uid, fbtoken){
 };
 
 //Deletes a user
-exports.deleteUser = function(uid,cb){
-	var query = "delete from users where users.uid = \'" + uid + "\'";
+exports.deleteUser = function(token,cb){
+	var query = "delete from users where users.activiti_token = \'" + token + "\'";
 	this.pool.sendQuery(query, function(response){
 		console.log(response);
 		cb(response);
@@ -70,12 +70,13 @@ exports.getProfile = function(token, cb){
 
 //Updates user's information in the database
 exports.updateProfile = function(userToken, info, cb){
-	var dob = info[0]["dob"];
-	var first_name = info[0]["first_name"];
-	var last_name = info[0]["last_name"];
-	var bio = info[0]["bio"];
-	var gender = info[0]["gender"];
-	var query2 = "update users set first_name = \'" + first_name + "\', last_name = \'" + last_name + "\', bio = \'" + bio + "\', gender = \'" + gender + "\' where users.activiti_token = \'" + userToken + "\'";
+	console.log(info);
+	var dob = info["dob"];
+	var first_name = info["first_name"];
+	var last_name = info["last_name"];
+	var bio = info["bio"];
+	var gender	 = info["gender"];
+	var query = "update users set first_name = \'" + first_name + "\', last_name = \'" + last_name + "\', bio = \'" + bio + "\', gender = \'" + gender + "\' where users.activiti_token = \'" + userToken + "\'";
 	this.pool.sendQuery(query, function(response){
 		if(response == null){
 			cb(null);

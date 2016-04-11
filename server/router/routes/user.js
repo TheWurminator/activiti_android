@@ -19,7 +19,9 @@ router.get('/', function(req,res) {
 
 
 router.post('/', jsonParser, function(req,res){
-	userQueries.createUser(req.body, "bullshit", function(response){
+	var randtoken = require('rand-token');
+    token = randtoken.generate(255);
+	userQueries.createUser(token, req.body, "test_facebooktoken", function(response){
 		if(response === null){
 			res.status(400).send("User was not successfully created");
 		}
@@ -30,7 +32,7 @@ router.post('/', jsonParser, function(req,res){
 });
 
 //Update user profile information
-router.put('/', function(req, res) {
+router.put('/', jsonParser, function(req, res) {
 	userQueries.updateProfile(req.get('token'), req.body, function(response) {
 		if(response === null){
 			res.status(400).send("User profile not updated");
@@ -41,9 +43,9 @@ router.put('/', function(req, res) {
 	});
 });
 
-//Deletes user from database
+//Deletes yourself from database
 router.delete('/', function(req,res) {
-	userQueries.deleteUser(req.get('uid'), function(response){
+	userQueries.deleteUser(req.get('token'), function(response){
 		if(response === null || response.affectedRows === 0){
 			res.status(400).send("Unable to delete user, user not found");
 		}
