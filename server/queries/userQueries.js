@@ -68,6 +68,7 @@ exports.getIDProfile = function(uid, cb){
 exports.getProfile = function(token, cb){
 	var query = "select * from users where activiti_token = \'" + token + "\'";
 	this.pool.sendQuery(query, function(response){
+		console.log(response);
 		cb(response);
 	});
 };

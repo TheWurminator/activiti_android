@@ -50,8 +50,12 @@ router.get('/', passport.authenticate('facebook', user_permissions));
 
 //Return from facebook after authentication
 router.get('/return', passport.authenticate('facebook', user_permissions), function(req, res) {
-    res.status(200).send('Facebook Redirected.');
+    var id = req._passport.session.user.id;
+    console.log("id is + " + id);
+    var profile = userQueries.getIDProfile(id, function(response){
+        res.status(200).send(response[0]["activiti_token"]);
+    })
 });
 
 // Exporting the functionality of the router to the calling module
-module.exports = router; 
+module.exports = router;
