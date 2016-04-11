@@ -55,14 +55,15 @@ router.get('/return', passport.authenticate('facebook', user_permissions), funct
 });
 
 router.get('/finish', function(req,res,next){
-    res.status(200).send(token);
+        console.log(req);
+        res.status(200).send(token);
 })
 
+//Build middleware
+
 function generateToken(req,res,next){
-    console.log("generateToken");
     var randtoken = require('rand-token');
     token = randtoken.generate(255);
-    console.log(token);
     next();
 }
 // Exporting the functionality of the router to the calling module
