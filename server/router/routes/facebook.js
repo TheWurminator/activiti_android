@@ -26,9 +26,9 @@ passport.use(new Strategy(fbauth, function(accessToken, refreshToken, profile, c
     	else{
 	 	//If a user doesn't exist, make a new one
           console.log("User doesn't exist");
-    		graphcall.getUserInfo(accessToken, function(response){
-                console.log(response);
-    			userQueries.createUser(token, response, accessToken, function(res){
+    		graphcall.getUserInfo(accessToken, function(fbres){
+                console.log(fbres);
+    			userQueries.createUser(token, fbres, accessToken, function(res){
                     if(res === null){
                     }
                 });
