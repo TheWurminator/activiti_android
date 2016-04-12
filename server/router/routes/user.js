@@ -26,7 +26,7 @@ router.post('/', jsonParser, function(req,res){
 			res.status(400).send("User was not successfully created");
 		}
 		else{
-			res.status(400).send("User was successfully created");
+			res.status(200).send("User was successfully created");
 		}
 	});	
 });

@@ -55,7 +55,7 @@ router.get('/return', passport.authenticate('facebook', user_permissions), funct
 });
 
 router.get('/finish', function(req,res,next){
-        console.log(req);
+        //console.log(req);
         res.status(200).send(token);
 })
 
