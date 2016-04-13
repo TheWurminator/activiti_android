@@ -18,6 +18,7 @@ app.use(jsonParser);
 //Called when user is logged in - redirected back from facebook
 passport.use(new Strategy(fbauth, function(accessToken, refreshToken, profile, cb) {
     //Do the graph call
+    console.log("profile is : " + profile);
     userQueries.uidExists(profile.id, function(response){
     	if(response === true){
     		//If a user already exists, update their token
