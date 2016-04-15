@@ -22,7 +22,7 @@ import java.util.Arrays;
 /**
  * Created by ksingletary on 4/10/16.
  */
-public class loginFragment extends Fragment {
+public class LoginFragment extends Fragment {
     private CallbackManager callbackManager=CallbackManager.Factory.create();
     private FacebookCallback<LoginResult> callback=new FacebookCallback<LoginResult>() {
         @Override
@@ -45,12 +45,11 @@ public class loginFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        FacebookSdk.sdkInitialize(MyApplication.getAppContext());
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        View view = inflater.inflate(R.layout.content_login, container, false);
+        View view = inflater.inflate(R.layout.content_login_page, container, false);
         return view;
     }
 

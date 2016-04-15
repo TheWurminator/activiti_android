@@ -1,56 +1,55 @@
 package rendezvous.activiti;
 
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.webkit.WebView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-
-import com.facebook.AccessToken;
-import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
-import com.facebook.Profile;
-import com.facebook.login.LoginManager;
-import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
-
-import java.util.Arrays;
 
 public class LoginActivity extends AppCompatActivity {
 
    // private CallbackManager callbackManager;
     private String responseString = "Test";
+    private WebLoginFragment webLoginFragment = new WebLoginFragment();
+    private LoginFragment loginFragment = new LoginFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(MyApplication.getAppContext());
         setContentView(R.layout.content_login_page);
-        loginFragment loginfragment = new loginFragment();
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.loginFragmentContainer, loginfragment);
-        fragmentTransaction.commit();
+        //navigate(loginFragment);
         //sendRequest();
     }
 
     public void loginServer(View view){
-        Intent i = new Intent(Intent.ACTION_VIEW,
-                Uri.parse("https://activiti.servebeer.com:8081/api/login/facebook"));
+        //Intent i = new Intent(Intent.ACTION_VIEW,
+        //        Uri.parse("https://activiti.servebeer.com:8081/api/login/facebook"));
 
         // Starts Implicit Activity
-        startActivity(i);
+        //startActivity(i);
+        setContentView(R.layout.content_web_login);
+        WebView myWebView = (WebView) findViewById(R.id.webview);
+        myWebView.loadUrl("https://activiti.servebeer.com:8081/api/login/facebook");
+        //myWebView.loadUrl("http://www.google.com");
+    }
+
+    public void navigate(Fragment fragment) {
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.loginFragmentContainer, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 
     /*public void loginClick(View view) {

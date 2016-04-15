@@ -42,15 +42,16 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
-    <EditText
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="date"
+        android:inputType="none"
         android:ems="10"
-        android:id="@+id/editDate"
+        android:id="@+id/editDateButton"
         android:layout_below="@+id/dateLabelView"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:onClick="setDate" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -63,15 +64,16 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <EditText
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="time"
         android:ems="10"
-        android:id="@+id/editTime"
+        android:id="@+id/editTimeButton"
         android:layout_below="@+id/timeLabelView"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:onClick="setTime"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -80,7 +82,7 @@
         android:text="Time:"
         android:inputType="time"
         android:id="@+id/timeLabelView"
-        android:layout_below="@+id/editDate"
+        android:layout_below="@+id/editDateButton"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -100,7 +102,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Location:"
         android:id="@+id/locationLabelView"
-        android:layout_below="@+id/editTime"
+        android:layout_below="@+id/editTimeButton"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -158,11 +160,8 @@
         android:layout_below="@+id/descriptionLabelView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/editName"
-        android:layout_alignEnd="@+id/editName" />
-
-    </RelativeLayout>
-    </ScrollView>
+        android:layout_alignRight="@+id/editNameButton"
+        android:layout_alignEnd="@+id/editNameButton" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -174,6 +173,9 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
+    </ScrollView>
 
 
 </RelativeLayout>
