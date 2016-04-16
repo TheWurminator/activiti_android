@@ -26,6 +26,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.google.android.gms.maps.MapFragment;
 
 import org.json.JSONObject;
 
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         navigate(profileViewFragment);
 
     }
+
 
     @Override
     public void onBackPressed(){
@@ -140,47 +142,7 @@ public class MainActivity extends AppCompatActivity {
     public void chatFragment(View view) {
         navigate(chatFragment);
     }
-
-    public boolean isValidDate(){
-        Calendar c = Calendar.getInstance();
-        int month = 0, day = 0, year = 0;
-
-        //check month
-        if(month < 1 || month > 12){
-            return false;
-        }
-
-        //check leap year days
-        if(month==2){
-            if(year % 4 == 0){
-                if(day > 29)
-                    return false;
-            }
-
-            else
-                if(day > 28)
-                    return false;
-        }
-
-        else if(month == 4 || month == 6 || month == 9 || month == 11){
-            if(day > 30)
-                return false;
-        }
-
-        else{
-            if(day > 31)
-                return false;
-        }
-
-        if(day < 1)
-            return false;
-
-        if(year < c.YEAR || year > (c.YEAR + 10)){
-            return false;
-        }
-
-        return true;
-    }
+    
 
     public void sendRequest(int requestMethod, String url){
         VolleySingleton volleySing = VolleySingleton.getInstance();
@@ -256,5 +218,14 @@ public class MainActivity extends AppCompatActivity {
         }, mHour, mMinute, true);
         mTimePicker.setTitle("Select Time");
         mTimePicker.show();
+    }
+
+    public void chooseLocation(View view) {
+        Fragment mMapFragment = MapFragment.newInstance();
+        FragmentTransaction fragmentTransaction =
+                getFragmentManager().beginTransaction();
+        fragmentTransaction.add(R.id.mapContainer, mMapFragment);
+        fragmentTransaction.commit();
+
     }
 }

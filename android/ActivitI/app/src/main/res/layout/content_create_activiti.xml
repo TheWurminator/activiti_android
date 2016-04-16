@@ -35,7 +35,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editName"
+        android:id="@+id/editNameButton"
         android:layout_below="@+id/nameLabelView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -60,7 +60,7 @@
         android:text="Date:"
         android:inputType="date"
         android:id="@+id/dateLabelView"
-        android:layout_below="@+id/editName"
+        android:layout_below="@+id/editNameButton"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -173,6 +173,24 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Location"
+            android:id="@+id/locationPick"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/submitButton"
+            android:layout_toStartOf="@+id/submitButton"
+            android:onClick="chooseLocation"/>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="400dp"
+            android:id="@+id/mapContainer"
+            android:layout_below="@+id/editDescription">
+
+        </RelativeLayout>
 
     </RelativeLayout>
     </ScrollView>

@@ -16,6 +16,12 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyD1_6soHKHGXnBCJ13XTgKqMTeHq0uX6wg 	"/>
+
+
+
         <activity
             android:name=".LoginActivity"
             android:label="@string/app_name"
@@ -26,11 +32,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.facebook.FacebookActivity"
-                  android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-                  android:theme="@android:style/Theme.Translucent.NoTitleBar"
-                  android:label="@string/app_name" >
-        </activity>
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"></activity>
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main_menu"
@@ -55,7 +61,6 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
-
         </activity>
     </application>
 
