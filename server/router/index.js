@@ -22,7 +22,7 @@ module.exports = function (app) {
 	app.use('/api/activiti', auth, require('./routes/activiti')); 
 	app.use('/api/search', auth, require('./routes/search')); 
 	app.use('/api/messaging', auth, require('./routes/messaging'));
-
+	app.use('/api/tags', auth, require('./routes/tags'));
 	
 	//Wildcard Route - Catch all failed routes
 	app.use('/*', function(req,res){

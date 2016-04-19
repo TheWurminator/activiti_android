@@ -1,9 +1,11 @@
 //Import Modules
 var express = require('express'); 
+var app = express();
 var router = express.Router();
 var userQueries = require('../../queries/userQueries');
+var tagQueries = require('../../queries/tagQueries');
 var bodyParser = require('body-parser');
-var jsonParser = bodyParser.json();
+app.use(bodyParser.json());
 
 //Fetches user profile information
 router.get('/', function(req,res) {
@@ -17,8 +19,21 @@ router.get('/', function(req,res) {
 	});
 });
 
+//This is a function that will return a user's tags
+//Takes in a user token and returns a JSON file with the tags
+router.get('/tags', function(req,res){
+	tagQueries.getTagsUser(req.get('token'), function(response) {
+		if(response == null){
+			res.status(400).send("No tags found for this user");
+		}
+		else{
+			res.status(200).send(response);
+		}
+	})
+})
 
-router.post('/', jsonParser, function(req,res){
+
+router.post('/', function(req,res){
 	var randtoken = require('rand-token');
     token = randtoken.generate(255);
 	userQueries.createUser(token, req.body, "test_facebooktoken", function(response){
@@ -32,7 +47,7 @@ router.post('/', jsonParser, function(req,res){
 });
 
 //Update user profile information
-router.put('/', jsonParser, function(req, res) {
+router.put('/', function(req, res) {
 	userQueries.updateProfile(req.get('token'), req.body, function(response) {
 		if(response === null){
 			res.status(400).send("User profile not updated");

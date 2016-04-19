@@ -7,7 +7,8 @@ var jsonParser = bodyParser.json();
 
 //Creating new activiti
 router.post('/', function(req,res) {
-	//REPLACE ACTIVITIINFO WITH SPECS FROM HEADER -----
+	
+	//REPLACE ACTIVITIINFO WITH SPECS FROM BODY -----
 	var activitiInfo = req.get('stuff');
 
 	activitiQueries.createActiviti(activitiInfo, req.get('token'), function(response) {
@@ -22,7 +23,7 @@ router.post('/', function(req,res) {
 
 //Update activiti info
 router.put('/', function(req, res) {
-	//REPLACE WITH INFO FROM HEADER ----
+	//REPLACE WITH INFO FROM BODY ----
 	var aid = req.get('aid'); //Activiti ID to update
 
 	activitiQueries.updateActiviti(aid, req.body, function(response) {

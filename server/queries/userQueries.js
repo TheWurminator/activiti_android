@@ -3,7 +3,7 @@ this.pool = require('../node_modules/database/DBPool');
 //Makes a new user based on FB graph response
 exports.createUser = function(usertoken ,info, fbtoken, cb){
 	var act_token = usertoken;
-	var addQuery = "INSERT INTO users (uid, fb_token, activiti_token, first_name, bio, dob, gender, last_name) VALUES (\'" + info.id +"\', \'" + fbtoken +"\', \'" + act_token + "\', \'" + info.first_name + "\', \'"+ this.bio + "\', \'" +  info.dob + "\', \'" + info.gender + "\', \'" + info.last_name + "\');";
+	var addQuery = "INSERT INTO users (uid, fb_token, activiti_token, first_name, bio, dob, gender, last_name) VALUES (\'" + info.id +"\', \'" + fbtoken +"\', \'" + act_token + "\', \'" + info.first_name + "\', \'"+ this.bio + "\', \'" +  info.birthday + "\', \'" + info.gender + "\', \'" + info.last_name + "\');";
 	this.pool.sendQuery(addQuery, function(response,err){
 		if(err){
 			console.log(err);
@@ -27,6 +27,20 @@ exports.updateFacebookToken = function(uid, fbtoken){
 	this.pool.sendQuery(query, function(response){
 	});
 };
+
+//This is a function that takes in a user token and returns that user's uid
+exports.getUIDfromToken = function(usertoken, cb){
+	var query = "select * from users where activiti_token = \'"+usertoken +"\'";
+	this.pool.sendQuery(query, function(response){
+		if(err){
+			console.log(err);
+			cb(null);
+		}
+		else{
+			cb(response[0]['uid']);
+		}
+	});
+}
 
 //Deletes a user
 exports.deleteUser = function(token,cb){
