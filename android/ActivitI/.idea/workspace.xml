@@ -39,8 +39,8 @@
       <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.2801014">
-              <caret line="13" column="38" selection-start-line="13" selection-start-column="30" selection-end-line="13" selection-end-column="38" />
+            <state vertical-scroll-proportion="0.6768061">
+              <caret line="58" column="54" selection-start-line="58" selection-start-column="54" selection-end-line="58" selection-end-column="54" />
               <folding />
             </state>
           </provider>
@@ -49,7 +49,7 @@
       <file leaf-file-name="styles.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.2452831">
+            <state vertical-scroll-proportion="0.0">
               <caret line="7" column="53" selection-start-line="7" selection-start-column="53" selection-end-line="7" selection-end-column="53" />
               <folding />
             </state>
@@ -58,14 +58,18 @@
       </file>
       <file leaf-file-name="content_login_page.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_login_page.xml">
-          <provider editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="36" column="54" selection-start-line="36" selection-start-column="54" selection-end-line="36" selection-end-column="54" />
-              <folding />
-            </state>
-          </provider>
-          <provider selected="true" editor-type-id="android-designer">
+          <provider editor-type-id="android-designer">
             <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-13.290909">
+              <caret line="43" column="34" selection-start-line="43" selection-start-column="34" selection-end-line="43" selection-end-column="34" />
+              <folding>
+                <element signature="e#1070#1084#0" expanded="true" />
+                <element signature="e#1576#1590#0" expanded="true" />
+                <element signature="e#2494#2518#0" expanded="true" />
+              </folding>
+            </state>
           </provider>
         </entry>
       </file>
@@ -73,7 +77,7 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/rendezvous/activiti/LoginActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+              <caret line="50" column="63" selection-start-line="50" selection-start-column="41" selection-end-line="50" selection-end-column="63" />
               <folding />
             </state>
           </provider>
@@ -84,7 +88,27 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+                <element signature="e#3793#3794#0" expanded="false" />
+                <element signature="e#3838#3839#0" expanded="false" />
+                <element signature="e#3881#3882#0" expanded="false" />
+                <element signature="e#3927#3928#0" expanded="false" />
+                <element signature="e#4098#4099#0" expanded="false" />
+                <element signature="e#4143#4144#0" expanded="false" />
+                <element signature="e#4324#4325#0" expanded="false" />
+                <element signature="e#4372#4373#0" expanded="false" />
+                <element signature="e#4415#4416#0" expanded="false" />
+                <element signature="e#4461#4462#0" expanded="false" />
+                <element signature="e#4500#4501#0" expanded="false" />
+                <element signature="e#4543#4544#0" expanded="false" />
+                <element signature="e#4591#4592#0" expanded="false" />
+                <element signature="e#4636#4637#0" expanded="false" />
+                <element signature="e#4676#4677#0" expanded="false" />
+                <element signature="e#4720#4721#0" expanded="false" />
+                <element signature="e#4763#4764#0" expanded="false" />
+                <element signature="e#4801#4802#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -94,7 +118,11 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="57" column="54" selection-start-line="57" selection-start-column="54" selection-end-line="57" selection-end-column="54" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+                <element signature="e#1264#1265#0" expanded="false" />
+                <element signature="e#1314#1315#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -2022,15 +2050,15 @@
         <option value="$PROJECT_DIR$/app/src/main/java/rendezvous/activiti/LoginActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/name.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/name.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/content_login_page.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/content_login_page.xml" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="2576" />
+    <option name="width" value="2564" />
     <option name="height" value="1416" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
@@ -2058,8 +2086,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane" />
+      <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -2071,12 +2099,12 @@
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
-    <property name="settings.editor.selected.configurable" value="android.sdk-updates" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="device.picker.selection" value="Nexus_6_API_23" />
   </component>
@@ -2357,7 +2385,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="2576" height="1416" extended-state="7" />
+    <frame x="-8" y="-8" width="2564" height="1416" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -2367,14 +2395,15 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3298887" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33067092" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298887" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3298887" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14109698" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14177316" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
@@ -2386,7 +2415,6 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32949126" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -2438,6 +2466,85 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
+          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="53" selection-start-line="7" selection-start-column="53" selection-end-line="7" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_login_page.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#1070#1084#0" expanded="true" />
+            <element signature="e#1576#1590#0" expanded="true" />
+            <element signature="e#2494#2518#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/rendezvous/activiti/LoginActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/rendezvous/activiti/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#3793#3794#0" expanded="false" />
+            <element signature="e#3838#3839#0" expanded="false" />
+            <element signature="e#3881#3882#0" expanded="false" />
+            <element signature="e#3927#3928#0" expanded="false" />
+            <element signature="e#4098#4099#0" expanded="false" />
+            <element signature="e#4143#4144#0" expanded="false" />
+            <element signature="e#4324#4325#0" expanded="false" />
+            <element signature="e#4372#4373#0" expanded="false" />
+            <element signature="e#4415#4416#0" expanded="false" />
+            <element signature="e#4461#4462#0" expanded="false" />
+            <element signature="e#4500#4501#0" expanded="false" />
+            <element signature="e#4543#4544#0" expanded="false" />
+            <element signature="e#4591#4592#0" expanded="false" />
+            <element signature="e#4636#4637#0" expanded="false" />
+            <element signature="e#4676#4677#0" expanded="false" />
+            <element signature="e#4720#4721#0" expanded="false" />
+            <element signature="e#4763#4764#0" expanded="false" />
+            <element signature="e#4801#4802#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/rendezvous/activiti/loginFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="57" column="54" selection-start-line="57" selection-start-column="54" selection-end-line="57" selection-end-column="54" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1264#1265#0" expanded="false" />
+            <element signature="e#1314#1315#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
           <caret line="13" column="38" selection-start-line="13" selection-start-column="30" selection-end-line="13" selection-end-column="38" />
           <folding />
         </state>
@@ -2452,15 +2559,19 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_login_page.xml">
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
       <provider selected="true" editor-type-id="android-designer">
         <state />
       </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#1070#1084#0" expanded="true" />
+            <element signature="e#1576#1590#0" expanded="true" />
+            <element signature="e#2494#2518#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/rendezvous/activiti/LoginActivity.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -2474,7 +2585,27 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#3793#3794#0" expanded="false" />
+            <element signature="e#3838#3839#0" expanded="false" />
+            <element signature="e#3881#3882#0" expanded="false" />
+            <element signature="e#3927#3928#0" expanded="false" />
+            <element signature="e#4098#4099#0" expanded="false" />
+            <element signature="e#4143#4144#0" expanded="false" />
+            <element signature="e#4324#4325#0" expanded="false" />
+            <element signature="e#4372#4373#0" expanded="false" />
+            <element signature="e#4415#4416#0" expanded="false" />
+            <element signature="e#4461#4462#0" expanded="false" />
+            <element signature="e#4500#4501#0" expanded="false" />
+            <element signature="e#4543#4544#0" expanded="false" />
+            <element signature="e#4591#4592#0" expanded="false" />
+            <element signature="e#4636#4637#0" expanded="false" />
+            <element signature="e#4676#4677#0" expanded="false" />
+            <element signature="e#4720#4721#0" expanded="false" />
+            <element signature="e#4763#4764#0" expanded="false" />
+            <element signature="e#4801#4802#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2482,7 +2613,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="57" column="54" selection-start-line="57" selection-start-column="54" selection-end-line="57" selection-end-column="54" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1264#1265#0" expanded="false" />
+            <element signature="e#1314#1315#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2495,14 +2630,18 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_login_page.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="60" column="43" selection-start-line="60" selection-start-column="43" selection-end-line="60" selection-end-column="43" />
-          <folding />
+          <folding>
+            <element signature="e#1070#1084#0" expanded="true" />
+            <element signature="e#1576#1590#0" expanded="true" />
+            <element signature="e#2494#2518#0" expanded="true" />
+          </folding>
         </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/rendezvous/activiti/LoginActivity.java">
@@ -2517,7 +2656,27 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#3793#3794#0" expanded="false" />
+            <element signature="e#3838#3839#0" expanded="false" />
+            <element signature="e#3881#3882#0" expanded="false" />
+            <element signature="e#3927#3928#0" expanded="false" />
+            <element signature="e#4098#4099#0" expanded="false" />
+            <element signature="e#4143#4144#0" expanded="false" />
+            <element signature="e#4324#4325#0" expanded="false" />
+            <element signature="e#4372#4373#0" expanded="false" />
+            <element signature="e#4415#4416#0" expanded="false" />
+            <element signature="e#4461#4462#0" expanded="false" />
+            <element signature="e#4500#4501#0" expanded="false" />
+            <element signature="e#4543#4544#0" expanded="false" />
+            <element signature="e#4591#4592#0" expanded="false" />
+            <element signature="e#4636#4637#0" expanded="false" />
+            <element signature="e#4676#4677#0" expanded="false" />
+            <element signature="e#4720#4721#0" expanded="false" />
+            <element signature="e#4763#4764#0" expanded="false" />
+            <element signature="e#4801#4802#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2525,7 +2684,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="57" column="54" selection-start-line="57" selection-start-column="54" selection-end-line="57" selection-end-column="54" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1264#1265#0" expanded="false" />
+            <element signature="e#1314#1315#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2538,14 +2701,18 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_login_page.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="59" column="40" selection-start-line="59" selection-start-column="40" selection-end-line="59" selection-end-column="40" />
-          <folding />
+          <folding>
+            <element signature="e#1070#1084#0" expanded="true" />
+            <element signature="e#1576#1590#0" expanded="true" />
+            <element signature="e#2494#2518#0" expanded="true" />
+          </folding>
         </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/rendezvous/activiti/LoginActivity.java">
@@ -2560,7 +2727,27 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#3793#3794#0" expanded="false" />
+            <element signature="e#3838#3839#0" expanded="false" />
+            <element signature="e#3881#3882#0" expanded="false" />
+            <element signature="e#3927#3928#0" expanded="false" />
+            <element signature="e#4098#4099#0" expanded="false" />
+            <element signature="e#4143#4144#0" expanded="false" />
+            <element signature="e#4324#4325#0" expanded="false" />
+            <element signature="e#4372#4373#0" expanded="false" />
+            <element signature="e#4415#4416#0" expanded="false" />
+            <element signature="e#4461#4462#0" expanded="false" />
+            <element signature="e#4500#4501#0" expanded="false" />
+            <element signature="e#4543#4544#0" expanded="false" />
+            <element signature="e#4591#4592#0" expanded="false" />
+            <element signature="e#4636#4637#0" expanded="false" />
+            <element signature="e#4676#4677#0" expanded="false" />
+            <element signature="e#4720#4721#0" expanded="false" />
+            <element signature="e#4763#4764#0" expanded="false" />
+            <element signature="e#4801#4802#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2568,7 +2755,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="57" column="54" selection-start-line="57" selection-start-column="54" selection-end-line="57" selection-end-column="54" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1264#1265#0" expanded="false" />
+            <element signature="e#1314#1315#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2576,22 +2767,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/rendezvous/activiti/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/rendezvous/activiti/loginFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="57" column="54" selection-start-line="57" selection-start-column="54" selection-end-line="57" selection-end-column="54" />
           <folding />
         </state>
       </provider>
@@ -2613,37 +2788,81 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/rendezvous/activiti/LoginActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/rendezvous/activiti/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
+          <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#3793#3794#0" expanded="false" />
+            <element signature="e#3838#3839#0" expanded="false" />
+            <element signature="e#3881#3882#0" expanded="false" />
+            <element signature="e#3927#3928#0" expanded="false" />
+            <element signature="e#4098#4099#0" expanded="false" />
+            <element signature="e#4143#4144#0" expanded="false" />
+            <element signature="e#4324#4325#0" expanded="false" />
+            <element signature="e#4372#4373#0" expanded="false" />
+            <element signature="e#4415#4416#0" expanded="false" />
+            <element signature="e#4461#4462#0" expanded="false" />
+            <element signature="e#4500#4501#0" expanded="false" />
+            <element signature="e#4543#4544#0" expanded="false" />
+            <element signature="e#4591#4592#0" expanded="false" />
+            <element signature="e#4636#4637#0" expanded="false" />
+            <element signature="e#4676#4677#0" expanded="false" />
+            <element signature="e#4720#4721#0" expanded="false" />
+            <element signature="e#4763#4764#0" expanded="false" />
+            <element signature="e#4801#4802#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/rendezvous/activiti/loginFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="57" column="54" selection-start-line="57" selection-start-column="54" selection-end-line="57" selection-end-column="54" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1264#1265#0" expanded="false" />
+            <element signature="e#1314#1315#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="53" selection-start-line="7" selection-start-column="53" selection-end-line="7" selection-end-column="53" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/content_login_page.xml">
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="36" column="54" selection-start-line="36" selection-start-column="54" selection-end-line="36" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer">
+      <provider editor-type-id="android-designer">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.2452831">
-          <caret line="7" column="53" selection-start-line="7" selection-start-column="53" selection-end-line="7" selection-end-column="53" />
+        <state vertical-scroll-proportion="-13.290909">
+          <caret line="43" column="34" selection-start-line="43" selection-start-column="34" selection-end-line="43" selection-end-column="34" />
+          <folding>
+            <element signature="e#1070#1084#0" expanded="true" />
+            <element signature="e#1576#1590#0" expanded="true" />
+            <element signature="e#2494#2518#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/rendezvous/activiti/LoginActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="50" column="63" selection-start-line="50" selection-start-column="41" selection-end-line="50" selection-end-column="63" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2801014">
-          <caret line="13" column="38" selection-start-line="13" selection-start-column="30" selection-end-line="13" selection-end-column="38" />
+        <state vertical-scroll-proportion="0.6768061">
+          <caret line="58" column="54" selection-start-line="58" selection-start-column="54" selection-end-line="58" selection-end-column="54" />
           <folding />
         </state>
       </provider>

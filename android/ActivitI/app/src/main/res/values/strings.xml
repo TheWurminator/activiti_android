@@ -22,4 +22,5 @@
     <string name="punched_me">Punched Me in the Face</string>
     <string name="jacob">Was Jacob</string>
     <string name="title_activity_choose_location">ChooseLocation</string>
+    <string name="annoying_login">Annoying Login</string>
 </resources>
