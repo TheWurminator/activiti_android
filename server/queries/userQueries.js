@@ -108,3 +108,11 @@ exports.tokenExists = function(token, cb){
 		cb(true);
 	});
 }
+
+
+//This is a function that will set the tags for the user
+//Takes in a uid and json w/tags
+exports.setTagsUser = function(uid, tags, cb){
+	var query = "";
+
+}

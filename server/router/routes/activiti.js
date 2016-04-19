@@ -2,6 +2,7 @@
 var express = require('express'); 
 var router = express.Router();
 var activitiQueries = require('../../queries/activitiQueries');
+var tagQueries = require('../../queries/tagQueries');
 var bodyParser = require('body-parser');
 var jsonParser = bodyParser.json();
 
@@ -64,5 +65,14 @@ router.get('/', function(req,res) {
 		}
 	});
 });
+
+//This will return all of the tags for an activiti
+router.get('/tags', function(req,res){
+	tagQueries.getTagsActiviti(req.get("activiti_id"), function(response){
+		
+	});
+});
+
+
 
 module.exports = router; 

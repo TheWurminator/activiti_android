@@ -7,14 +7,23 @@ var jsonParser = bodyParser.json();
 
 //This is the function to create a tag
 router.post('/', jsonParser, function(req,res) {
-	var name = req.body.tagname.toLowerCase();
-	console.log(name);
-	tagQueries.createTag(name, function(response){
+	var name = req.body.tagname.toLowerCase(); //Converts the tag to lowercase
+	console.log(name); //Print the name out
+	var localRef = this;
+	tagQueries.tagExistsName(name, function(response){
 		if(response == null){
-			res.status(400).send("Unable to create tag");
+			//Make the tag
+			tagQueries.createTag(name, function(thisResponse){
+				if(thisResponse == null){
+					res.status(400).send("There was an error creating a tag");
+				}
+				else{
+					res.status(200).send("Tag successfully created");
+				}
+			});
 		}
 		else{
-			res.status(200).send("Tag Created.");
+			res.status(200).send("Tag already exists");
 		}
 	});
 });
@@ -34,13 +43,20 @@ router.delete('/', jsonParser, function(req,res){
 	})
 });
 
-
 //DEBUG
 //This function is used to edit the name of a tag in the db
 //This is based on a TID that is given
 router.put('/', jsonParser, function(req,res){
 	var tid = req.get('tid');
-	tagQueries.modifyTag()
+	var newName = req.get('newName');
+	tagQueries.modifyTag(tid, newName, function(response){
+		if(response == null){
+			res.status(400).send("Tag modification error");
+		}
+		else{
+			res.status(200).send("Tag successfully modified");
+		}
+	});
 });
 
 //DEBUG

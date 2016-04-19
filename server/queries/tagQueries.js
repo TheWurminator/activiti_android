@@ -29,19 +29,32 @@ exports.deleteTag = function(tid, cb){
 	});
 }
 
+exports.modifyTag = function(tid, newName, cb){
+	var query = "update tags set name = \'" + newName + "\' where tags.tid = " + tid;
+	this.pool.sendQuery(query, function(response){
+		if(response == null){
+			cb(null);
+		}
+		else{
+			cb(true);
+		}
+	});
+}
+
 //This is a function to see if a tag already exists
 //Takes in a string for a name and a callback reference
 //Either returns true or null
 exports.tagExistsName = function(name, cb){
 	searchName = name.toLowerCase();
 	var query = "select * from tags where name = \'" + searchName + "\'";
-	this.pool.sendQuery(query, function(response,err){
-		if(err){
-			console.log(err);
+	this.pool.sendQuery(query, function(response){
+		if(response == null || response.length == 0){
+			console.log("hahahaha");
 			cb(null);
 		}
-		else{
-			cb(True);
+		else{ //Tag exists
+			console.log(response.length);
+			cb(response[0].tid);
 		}
 	})
 }
@@ -50,7 +63,7 @@ exports.tagExistsName = function(name, cb){
 exports.getTagNameTID = function(tid, cb){
 	var query = "select * from tags where tid = \'" + tid +"\'"
 	this.pool.sendQuery(query, function(response,err){
-		if(err){
+		if(response.length == 0 || err){
 			//console.log(err);
 			cb(null);
 		}
@@ -60,6 +73,8 @@ exports.getTagNameTID = function(tid, cb){
 		}
 	});
 }
+
+
 
 //This is a function that will fetch the tags for an activiti
 //Takes in an activiti id, and returns a json with tags
@@ -73,21 +88,5 @@ exports.getTagsUser = function(usertoken, cb){
 	var query = ""; //INNER JOIN
 }
 
-//This is a function that will set the tags for a specific activiti
-//Taked in an aid and json w/tags
-//Returns 200 OK or 400 error
-exports.setTagsActiviti = function(activiti_id, tags, cb){
-	for (x in tags){
-		var query = "insert into tags (tid, aid) values (null, \'" + x + "\')";
 
-	}
 
-}
-
-//This is a function that will set the tags for the user
-//Takes in a uid and json w/tags
-//Returns 200 OK or 400 ERROR
-exports.setTagsUser = function(uid, tags, cb){
-	var query = "";
-
-}
