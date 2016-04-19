@@ -2,7 +2,7 @@ var pool = require('../node_modules/database/DBPool');
 var tagQueries = require('./tagQueries');
 var itself = require('./userQueries');
 var x = 0;
-//Creates a new user, mainly used for debugging purposes
+//Creates a new user, ONLY USED FOR DEBUGGING PURPOSES
 exports.debugCreateUser = function(usertoken, info, fbtoken, cb){
 	var act_token = usertoken;
 	var addQuery = "INSERT INTO users (uid, fb_token, activiti_token, first_name, bio, dob, gender, last_name) VALUES (\'" + info.id +"\', \'" + fbtoken +"\', \'" + act_token + "\', \'" + info.first_name + "\', \'"+ info.bio + "\', \'" +  info.dob + "\', \'" + info.gender + "\', \'" + info.last_name + "\');";
@@ -165,8 +165,7 @@ exports.setTags = function(uid, tags, cb){
 				console.log("Inside of create tag save is : " + response);
 				setTagUser(uid, response, function(res){
 					if(res == null){
-						console.log("Could not add the tag");
-						cb(null);
+						console.log("Could not add the tag, for some reason");
 					}
 					else{
 

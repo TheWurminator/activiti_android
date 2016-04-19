@@ -51,6 +51,24 @@ router.post('/', jsonParser, function(req,res){
 	});	
 });
 
+router.post('/tags', jsonParser, function(req,res){
+	userQueries.getUIDfromToken(req.get('token'), function(response){
+		if(response == null){
+			res.status(400).send("User doesn't exist");
+		}
+		else{
+			userQueries.setTags(response, req.body.tags, function(res2){
+				if(res2 == null){
+					res.status(400).send("Tags could not be created");
+				}
+				else{
+					res.status(200).send("Tags successfully added to user");
+				}
+			});
+		}
+	});
+});
+
 //Update user profile information
 router.put('/', jsonParser, function(req, res) {
 	userQueries.updateProfile(req.get('token'), req.body, function(response) {
