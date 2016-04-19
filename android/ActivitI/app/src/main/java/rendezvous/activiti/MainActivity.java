@@ -45,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
     private BadgeViewFragment badgeViewFragment = new BadgeViewFragment();
     private LeaveBadgeFragment leaveBadgeFragment = new LeaveBadgeFragment();
     private ChatFragment chatFragment = new ChatFragment();
+    private JSONObject jsonObject = new JSONObject();
+    private final String url = "https://activiti.servebeer.com:8081/";
     private String token = "YPTVjthbt365PsNJPzmBAzVCAqQOptTM3bHIUz6C47ccmuomo19sJ6p3ukYQ8uvUwRUMab9CNlWPpA7ALOtnj7rCWxHdPBCaRqhwUPZuAzSaRsZoopQekYlAn3RkUAqFwrsxmT3ZqTY8JVCY0OPjhKIRRmr2QryMI0GDvLA2JO0Fix7C2TQm7hMNys6Gv8lHWZNNyTTXtIbEPdyjYKd7RnxH36FV0auasAWjHgHuBbyOLB1H2Nbdw4Ku5JlOJQk";
 
     @Override
@@ -87,14 +89,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void viewOtherProfile(View view) {
-
         navigate(friendProfileViewFragment);
     } 
 
     public void viewProfile(View view) {
-
         navigate(profileViewFragment);
-        sendRequest(Request.Method.GET, "https://activiti.serverbeer.com:8081/user");
+        sendRequest(Request.Method.GET, "user/", jsonObject);
     }
 
     public void editProfile(View view) {
@@ -103,9 +103,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void viewActiviti(View view) {
         navigate(activitiViewFragment);
+        sendRequest(Request.Method.GET, "activiti/", jsonObject);
     }
 
     public void saveProfile(View view) {
+        sendRequest(Request.Method.PUT, "user/", jsonObject);
         viewProfile(view);
         //Code for sending updated data to server
     }
@@ -116,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void submitNewActiviti(View view) {
         //Code for sending new activiti data to server
+        sendRequest(Request.Method.PUT, "activiti/", jsonObject);
         viewProfile(view);
     }
 
@@ -142,17 +145,22 @@ public class MainActivity extends AppCompatActivity {
     public void chatFragment(View view) {
         navigate(chatFragment);
     }
-    
 
-    public void sendRequest(int requestMethod, String url){
-        VolleySingleton volleySing = VolleySingleton.getInstance();
+    public void sendRequest(int requestMethod, String path, JSONObject json) {
+        VolleySingleton vSing = VolleySingleton.getInstance();
         RequestQueue queue = VolleySingleton.getInstance().getRequestQueue();
-        JSONObject jsonObject = new JSONObject();
-        CustomJSONRequest testRequest = new CustomJSONRequest(requestMethod,url,jsonObject, new Response.Listener<JSONObject>()
-        {
+        final String pathname = path;
+        final int requestType = requestMethod;
+        CustomJSONRequest request = new CustomJSONRequest(requestMethod, url + path, json,
+            new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-
+                if(requestType == Request.Method.GET) {
+                    if (pathname.equals("user/"))
+                        displayProfile(response);
+                    else if (pathname.equals("activiti/"))
+                        displayActiviti(response);
+                }
             }
         }, new Response.ErrorListener() {
             @Override
@@ -161,11 +169,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        queue.add(testRequest);
+        queue.add(request);
     }
 
     public void displayProfile(JSONObject userinfo) {
+        //Take the information and display to the user
+    }
 
+    public void displayActiviti(JSONObject activitiinfo) {
+        //Take the information and display to the user
     }
 
     public static class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
@@ -222,8 +234,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void chooseLocation(View view) {
         Fragment mMapFragment = MapFragment.newInstance();
-        FragmentTransaction fragmentTransaction =
-                getFragmentManager().beginTransaction();
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.mapContainer, mMapFragment);
         fragmentTransaction.commit();
 
