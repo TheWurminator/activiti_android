@@ -20,20 +20,34 @@ exports.createUser = function(usertoken ,info, fbtoken, cb){
 	});
 };
 
+exports.fbCreateUser = function(userToken, fbResponse, activiti_token, cb){
+	var addQuery = "insert into users (uid, fb_token, activiti_token, dob, first_name, bio, gender, last_name) values (\'" + fbResponse.id + "\', \'" + userToken + "\', \'" + activiti_token + "\', \'" + fbResponse.birthday + "\', \'" + fbResponse.first_name + "\', \'" + "fbBio" + "\', \'" + fbResponse.gender + "\', \'" + fbResponse.last_name + "\')";
+	this.pool.sendQuery(addQuery, function(response){
+		if(response == null){
+			console.log("Facebook user not added");
+			cb(null);
+		}
+		else{
+			cb(true);
+		}
+	});
+}
+
 
 //Updates existing token
-exports.updateFacebookToken = function(uid, fbtoken){
-	var query = "update users set fb_token = \'" + fbtoken + "\' where users.uid = \'" + uid + "\'";
-	this.pool.sendQuery(query, function(response){
-	});
-};
+// exports.updateFacebookToken = function(uid, fbtoken){
+// 	var query = "update users set fb_token = \'" + fbtoken + "\' where users.uid = \'" + uid + "\'";
+// 	this.pool.sendQuery(query, function(response){
+// 		if(res)
+// 	});
+// };
 
 //This is a function that takes in a user token and returns that user's uid
 exports.getUIDfromToken = function(usertoken, cb){
-	var query = "select * from users where activiti_token = \'"+usertoken +"\'";
+	var query = "select * from users where activiti_token = \'"+ usertoken +"\'";
 	this.pool.sendQuery(query, function(response){
-		if(err){
-			console.log(err);
+		if(response == null){
+			console.log("There was an error in getUIDfromToken");
 			cb(null);
 		}
 		else{

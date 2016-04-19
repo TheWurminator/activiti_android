@@ -29,8 +29,9 @@ passport.use(new Strategy(fbauth, function(accessToken, refreshToken, profile, c
           console.log("User doesn't exist");
     		graphcall.getUserInfo(accessToken, function(fbres){
                 console.log(fbres);
-    			userQueries.fbcreateUser(token, fbres, accessToken, function(res){
+    			userQueries.fbCreateUser(token, fbres, accessToken, function(res){
                     if(res === null){
+                        console.log("User not created successfully");
                     }
                 });
     		});
