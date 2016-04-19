@@ -82,6 +82,20 @@ exports.updateActiviti = function(userToken, info, cb){
 	});
 }
 
+//This is a function that will fetch the tags for an activiti
+//Takes in an activiti id, and returns a json with tags
+exports.getTagsActiviti = function(activiti_id, cb){
+	var query = "select * from activiti_tags where aid = \'" + activiti_id + "\'";
+	this.pool.sendQuery(query, function(response){
+		if(response == null){
+			cb(null);
+		}
+		else{
+			cb(response);
+		}
+	});
+}
+
 //This is a function that will set the tags for a specific activiti
 //Taked in an aid and json w/tags
 function setTagsActiviti(activiti_id, tags, cb){

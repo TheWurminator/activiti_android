@@ -73,8 +73,9 @@ router.get('/', function(req,res) {
 
 //This will return all of the tags for an activiti
 router.get('/tags', function(req,res){
-	tagQueries.getTagsActiviti(req.get("activiti_id"), function(response){
-
+	activitiQueries.getTagsActiviti(req.get("aid"), function(response){
+		console.log(JSON.stringify(response));
+		res.status(200).send(response);
 	});
 });
 

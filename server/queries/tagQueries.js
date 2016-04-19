@@ -1,16 +1,29 @@
 //This is a middleware file that will create a tag
-this.pool = require('../node_modules/database/DBPool');
-
+var pool = require('../node_modules/database/DBPool');
+itself = require('./tagQueries');
 //This function will create a tag and put it into the database
+//First checks to see if the tag is actually present
+//If it isnt then itll make a new one
 exports.createTag = function(name, cb){
-	var query = "INSERT INTO tags (tid, name) values (NULL, \'" + name + "\')";
-	this.pool.sendQuery(query, function(response,err){
-		if(err){
-			console.log(err);
-			cb(null);
+	itself.tagExistsName(name, function(response){
+		if(response == null){
+			var query = "INSERT INTO tags (tid, name) values (NULL, \'" + name + "\')";
+			console.log(query);
+			pool.sendQuery(query, function(res2){
+				console.log("Db response is: " + JSON.stringify(res2));
+				if(res2 == null){
+					console.log("Error is: " + res2);
+					cb(null);
+				}
+				else{
+					console.log("insert id is : " + res2.insertId);
+					cb(res2.insertId);
+				}
+			});
 		}
 		else{
-			cb(response);
+			console.log("Response is: " + response);
+			cb(response); // This is the TID
 		}
 	});
 }
@@ -18,7 +31,7 @@ exports.createTag = function(name, cb){
 //This is a debug function that will be used to delete a tag
 exports.deleteTag = function(tid, cb){
 	var query = "delete from tags where tid = \'" + tid +"\'";
-	this.pool.sendQuery(query, function(response,err){
+	pool.sendQuery(query, function(response,err){
 		if(err){
 			console.log(err);
 			cb(null);
@@ -29,9 +42,11 @@ exports.deleteTag = function(tid, cb){
 	});
 }
 
+//This will modify the name of a tag based on the tid entered
+//Must pass in a name
 exports.modifyTag = function(tid, newName, cb){
 	var query = "update tags set name = \'" + newName + "\' where tags.tid = " + tid;
-	this.pool.sendQuery(query, function(response){
+	pool.sendQuery(query, function(response){
 		if(response == null){
 			cb(null);
 		}
@@ -47,24 +62,23 @@ exports.modifyTag = function(tid, newName, cb){
 exports.tagExistsName = function(name, cb){
 	searchName = name.toLowerCase();
 	var query = "select * from tags where name = \'" + searchName + "\'";
-	this.pool.sendQuery(query, function(response){
+	pool.sendQuery(query, function(response){
 		if(response == null || response.length == 0){
-			console.log("hahahaha");
+			console.log("Tag does not already exist");
 			cb(null);
 		}
 		else{ //Tag exists
 			console.log(response.length);
 			cb(response[0].tid);
 		}
-	})
+	});
 }
 
 //This is a function that will take in a TID and will return that tag's name
 exports.getTagNameTID = function(tid, cb){
 	var query = "select * from tags where tid = \'" + tid +"\'"
-	this.pool.sendQuery(query, function(response,err){
+	pool.sendQuery(query, function(response,err){
 		if(response.length == 0 || err){
-			//console.log(err);
 			cb(null);
 		}
 		else{
@@ -76,17 +90,8 @@ exports.getTagNameTID = function(tid, cb){
 
 
 
-//This is a function that will fetch the tags for an activiti
-//Takes in an activiti id, and returns a json with tags
-exports.getTagsActiviti = function(activiti_id, cb){
-	var query = "";
-}
 
-//This is a function that will fetch the tags for a specific user
-//Takes in a user_token and returns a json with tags
-exports.getTagsUser = function(usertoken, cb){
-	var query = ""; //INNER JOIN
-}
+
 
 
 
