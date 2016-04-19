@@ -14,6 +14,7 @@ import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.text.format.DateFormat;
+import android.util.EventLogTags;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.DatePicker;
@@ -28,6 +29,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.google.android.gms.maps.MapFragment;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Calendar;
@@ -55,9 +57,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.content_main_menu);
         ProfileViewFragment profileViewFragment = new ProfileViewFragment();
         navigate(profileViewFragment);
-
     }
-
 
     @Override
     public void onBackPressed(){
@@ -97,10 +97,6 @@ public class MainActivity extends AppCompatActivity {
         sendRequest(Request.Method.GET, "user/", jsonObject);
     }
 
-    public void editProfile(View view) {
-        navigate(editProfileFragment);
-    }
-
     public void viewActiviti(View view) {
         navigate(activitiViewFragment);
         sendRequest(Request.Method.GET, "activiti/", jsonObject);
@@ -112,14 +108,18 @@ public class MainActivity extends AppCompatActivity {
         //Code for sending updated data to server
     }
 
-    public void seeAllActivitis(View view) {
-        navigate(allActivitiFragment);
-    }
-
     public void submitNewActiviti(View view) {
         //Code for sending new activiti data to server
         sendRequest(Request.Method.PUT, "activiti/", jsonObject);
         viewProfile(view);
+    }
+
+    public void seeAllActivitis(View view) {
+        navigate(allActivitiFragment);
+    }
+
+    public void editProfile(View view) {
+        navigate(editProfileFragment);
     }
 
     public void createActiviti(View view) {
@@ -174,25 +174,27 @@ public class MainActivity extends AppCompatActivity {
 
     public void displayProfile(JSONObject userinfo) {
         //Take the information and display to the user
+        try{
+        //User Info
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     public void displayActiviti(JSONObject activitiinfo) {
         //Take the information and display to the user
-    }
-
-    public static class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
-
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState){
-            final Calendar c = Calendar.getInstance();
-            int hour = c.get(Calendar.HOUR_OF_DAY);
-            int minute = c.get(Calendar.MINUTE);
-
-            return new TimePickerDialog(MyApplication.getAppContext(), this, hour, minute, DateFormat.is24HourFormat(MyApplication.getAppContext()));
-        }
-
-        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-
+        try{
+            String name = activitiinfo.getString("name");
+            String description = activitiinfo.getString("description");
+            double cost = activitiinfo.getDouble("cost");
+            int maxAttendees = activitiinfo.getInt("max_attendees");
+            //Date
+            //Time
+            //Lat
+            //Long
+            //Tags
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 
@@ -237,6 +239,6 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.mapContainer, mMapFragment);
         fragmentTransaction.commit();
-
     }
+    
 }
