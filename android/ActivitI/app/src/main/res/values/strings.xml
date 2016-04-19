@@ -23,4 +23,5 @@
     <string name="jacob">Was Jacob</string>
     <string name="title_activity_choose_location">ChooseLocation</string>
     <string name="annoying_login">Annoying Login</string>
+    <string name="get_me_in">Get Me In</string>
 </resources>

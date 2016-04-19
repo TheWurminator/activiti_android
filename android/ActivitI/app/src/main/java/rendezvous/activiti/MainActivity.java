@@ -174,11 +174,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void displayProfile(JSONObject userinfo) {
         //Take the information and display to the user
-        try{
+        //try{
         //User Info
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        //} catch (JSONException e) {
+        //    e.printStackTrace();
+        //}
     }
 
     public void displayActiviti(JSONObject activitiinfo) {
