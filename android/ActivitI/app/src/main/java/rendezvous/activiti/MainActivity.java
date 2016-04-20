@@ -47,6 +47,9 @@ public class MainActivity extends AppCompatActivity {
     private BadgeViewFragment badgeViewFragment = new BadgeViewFragment();
     private LeaveBadgeFragment leaveBadgeFragment = new LeaveBadgeFragment();
     private ChatFragment chatFragment = new ChatFragment();
+
+    private SlidingMenuFragment slidingMenuFragment = new SlidingMenuFragment();
+
     private JSONObject jsonObject = new JSONObject();
     private final String url = "https://activiti.servebeer.com:8081/";
     private String token = "YPTVjthbt365PsNJPzmBAzVCAqQOptTM3bHIUz6C47ccmuomo19sJ6p3ukYQ8uvUwRUMab9CNlWPpA7ALOtnj7rCWxHdPBCaRqhwUPZuAzSaRsZoopQekYlAn3RkUAqFwrsxmT3ZqTY8JVCY0OPjhKIRRmr2QryMI0GDvLA2JO0Fix7C2TQm7hMNys6Gv8lHWZNNyTTXtIbEPdyjYKd7RnxH36FV0auasAWjHgHuBbyOLB1H2Nbdw4Ku5JlOJQk";
@@ -54,7 +57,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.content_main_menu);
+        //setContentView(R.layout.content_main_menu);
+        setContentView(R.layout.content_menu);
         ProfileViewFragment profileViewFragment = new ProfileViewFragment();
         navigate(profileViewFragment);
     }
@@ -90,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void viewOtherProfile(View view) {
         navigate(friendProfileViewFragment);
-    } 
+    }
 
     public void viewProfile(View view) {
         navigate(profileViewFragment);
@@ -114,21 +118,16 @@ public class MainActivity extends AppCompatActivity {
         viewProfile(view);
     }
 
-    public void seeAllActivitis(View view) {
-        navigate(allActivitiFragment);
-    }
+    //4/20 - Amon
+    public void useTestSlide (View view) {navigate(slidingMenuFragment);}
 
-    public void editProfile(View view) {
-        navigate(editProfileFragment);
-    }
+    public void seeAllActivitis(View view) {navigate(allActivitiFragment);}
 
-    public void createActiviti(View view) {
-        navigate(createActivitiFragment);
-    }
+    public void editProfile(View view) {navigate(editProfileFragment);}
 
-    public void findActiviti(View view) {
-        navigate(findActivitiFragment);
-    }
+    public void createActiviti(View view) {navigate(createActivitiFragment);}
+
+    public void findActiviti(View view) {navigate(findActivitiFragment);}
 
     public void badgeView(View view){
         navigate(badgeViewFragment);
@@ -240,5 +239,5 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.add(R.id.mapContainer, mMapFragment);
         fragmentTransaction.commit();
     }
-    
+
 }

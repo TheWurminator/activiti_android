@@ -179,10 +179,10 @@
             android:layout_height="wrap_content"
             android:text="Select Location"
             android:id="@+id/locationPick"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/submitButton"
-            android:layout_toStartOf="@+id/submitButton"
-            android:onClick="chooseLocation"/>
+            android:onClick="chooseLocation"
+            android:layout_alignTop="@+id/mapContainer"
+            android:layout_alignLeft="@+id/moneyRequiredCheckBox"
+            android:layout_alignStart="@+id/moneyRequiredCheckBox" />
 
         <RelativeLayout
             android:layout_width="wrap_content"

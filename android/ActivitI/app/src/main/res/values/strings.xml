@@ -24,4 +24,7 @@
     <string name="title_activity_choose_location">ChooseLocation</string>
     <string name="annoying_login">Annoying Login</string>
     <string name="get_me_in">Get Me In</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
