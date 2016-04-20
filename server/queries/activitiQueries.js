@@ -76,7 +76,6 @@ exports.setTags = function(aid, tags, cb){
 
 function setTagActiviti(aid, tid, cb){
 	var query = "insert into activiti_tags (aid, tid) values (\'" + aid + "\', \'" + tid + "\')";
-	console.log(query);
 	pool.sendQuery(query, function(response){
 		if(response == null){
 			console.log("Tag could not be added");
@@ -107,7 +106,6 @@ exports.activitiExists = function(uid, cb){
 
 //Gets activiti information, sends it up through callback
 exports.getActiviti = function(aid, cb){
-	console.log("Fetching activiti");
 	var query = "select * from activitis where aid = \'" + aid + "\'";
 	pool.sendQuery(query, function(response, err){
 		if(err){
@@ -129,15 +127,13 @@ exports.getActiviti = function(aid, cb){
 exports.updateActiviti = function(aid, info, cb){
 	for(x in info){
 		if(x != "tags"){
-			// var query = "update activitis set " + x + " = \'" + info[x] + "\' where activitis.aid = " + parseInt(aid);
-			var query = "select * from users";
+			var query = "update activitis set " + x + " = \'" + info[x] + "\' where activitis.aid = " + parseInt(aid);
 			pool.sendQuery(query, function(response){
 				console.log("Affected rows = " + response.affectedRows);
 				if(response === null || response.affectedRows < 1){
-					console.log("This query did not do what was intended");
+					console.log("Query Error : updateActiviti");
 				}
 				else{
-					console.log("Query is successful: ");
 				}
 			});
 		}

@@ -2,11 +2,8 @@
 var express = require('express'); 
 var router = express.Router(); 
 
+router.post('/activiti', function(req,res){
 
-//Used to send search parameters and send back the results in a JSON format
-router.post('/', function(req,res){
-	res.send('Not Implemented');
-	var query = "";
 });
 
 //Functionality not set
