@@ -6,7 +6,7 @@ var itself = require('./activitiQueries');
 exports.createActiviti = function(info, userToken, cb){
 	//This will catch an error, so the entire server doesn't crash when the JSON is wrong
 	try {
-		var addQuery = "insert into activitis (aid, name, description, cost, max_attendees, start_date, end_date, start_time, end_time, latitude, longitude, uid) values (\'null\', + \'" + info.name + "\', \'" + info.cost + "\', \'" + info.description + "\', \'" + info.max_attendees + "\', \'" + info.start_date + "\', \'" + info.end_date + "\', \'" + info.start_time + "\', \'" + info.end_time + "\', \'" + info.latitude + "\', \'" + info.longitude + "\', \'" + userToken + "\')"
+		var addQuery = "insert into activitis (aid, name, description, cost, max_attendees, start_date, end_date, start_time, end_time, latitude, longitude, uid) values (\'null\', + \'" + info.name + "\', \'" + info.cost + "\', \'" + info.description + "\', \'" + info.max_attendees + "\', \'" + info.start_date + "\', \'" + info.end_date + "\', \'" + info.start_time + "\', \'" + info.end_time + "\', \'" + info.latitude + "\', \'" + info.longitude + "\', \'" + userToken + "\')";
 		pool.sendQuery(addQuery, function(response){
 			if(response == null){
 				console.log("It broke");
@@ -127,15 +127,13 @@ exports.getActiviti = function(aid, cb){
 //We can just assume that this will work since it will catch if the original json is incorrect
 //Once the JSON is correct, they can pretty much change whatever they want
 exports.updateActiviti = function(aid, info, cb){
-	console.log(info);
 	for(x in info){
 		if(x != "tags"){
 			// var query = "update activitis set " + x + " = \'" + info[x] + "\' where activitis.aid = " + parseInt(aid);
 			var query = "select * from users";
-			console.log(query);
 			pool.sendQuery(query, function(response){
 				console.log("Affected rows = " + response.affectedRows);
-				if(response == null || response.affectedRows < 1){
+				if(response === null || response.affectedRows < 1){
 					console.log("This query did not do what was intended");
 				}
 				else{
@@ -143,9 +141,14 @@ exports.updateActiviti = function(aid, info, cb){
 				}
 			});
 		}
+		else{
+			itself.setTags(aid, info[x], function(response){
+				console.log("It all works");
+			});
+		}
 	}
 	cb(true);
-}
+};
 
 
 
