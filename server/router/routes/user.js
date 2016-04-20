@@ -9,8 +9,8 @@ var tagQueries = require('../../queries/tagQueries');
 
 //Fetches user profile information
 router.get('/', jsonParser, function(req,res) {
-	userQueries.getProfile(req.get('token'), function(response) {
-		if(response === null){
+	userQueries.getIDProfile(req.get('uid'), function(response) {
+		if(response == null){
 			res.status(400).send("User not found");
 		}
 		else{

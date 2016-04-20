@@ -1,6 +1,6 @@
 var pool = require('../node_modules/database/DBPool');
 var tagQueries = require('./tagQueries');
-this.userQueries = require('./userQueries');
+var userQueries = require('./userQueries');
 var itself = require('./activitiQueries');
 //Makes a new user based on FB graph response
 exports.createActiviti = function(info, userToken, cb){
@@ -31,11 +31,13 @@ exports.createActiviti = function(info, userToken, cb){
 	}
 };
 
-//Deletes a activit
-exports.deleteActiviti = function(aid, cb){
-	var query = "delete from activitis where activities.aid = \'" + aid + "\'";
+//Deletes a activiti
+//takes in an AID and a UID and a reference to a callback function
+exports.deleteActiviti = function(aid, uid, cb){
+	var query = "delete from activitis where activitis.aid = \'" + aid + "\'";
 	pool.sendQuery(query, function(response){
-		if(err){
+		console.log(response);
+		if(response == null || response.affectedRows == 0){
 			cb(null);
 		}
 		else{
@@ -120,18 +122,32 @@ exports.getActiviti = function(aid, cb){
 	});
 };
 
-//Update activiti information
-exports.updateActiviti = function(userToken, info, cb){
-	var query = "select * from activitis";
-	pool.sendQuery(query, function(response,err){
-		if(err){
-			console.log(err);
+//Update activiti information, 
+//First we need to update certain parts, then update the tags separately
+//We can just assume that this will work since it will catch if the original json is incorrect
+//Once the JSON is correct, they can pretty much change whatever they want
+exports.updateActiviti = function(aid, info, cb){
+	console.log(info);
+	for(x in info){
+		if(x != "tags"){
+			// var query = "update activitis set " + x + " = \'" + info[x] + "\' where activitis.aid = " + parseInt(aid);
+			var query = "select * from users";
+			console.log(query);
+			pool.sendQuery(query, function(response){
+				console.log("Affected rows = " + response.affectedRows);
+				if(response == null || response.affectedRows < 1){
+					console.log("This query did not do what was intended");
+				}
+				else{
+					console.log("Query is successful: ");
+				}
+			});
 		}
-		else{
-			console.log("Activiti successfully updated");
-		}
-	});
+	}
+	cb(true);
 }
+
+
 
 //This is a function that will fetch the tags for an activiti
 //Takes in an activiti id, and returns a json with tags

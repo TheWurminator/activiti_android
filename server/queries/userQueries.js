@@ -5,7 +5,7 @@ var x = 0;
 //Creates a new user, ONLY USED FOR DEBUGGING PURPOSES
 exports.debugCreateUser = function(usertoken, info, fbtoken, cb){
 	var act_token = usertoken;
-	var addQuery = "INSERT INTO users (uid, fb_token, activiti_token, first_name, bio, dob, gender, last_name) VALUES (\'" + info.id +"\', \'" + fbtoken +"\', \'" + act_token + "\', \'" + info.first_name + "\', \'"+ info.bio + "\', \'" +  info.dob + "\', \'" + info.gender + "\', \'" + info.last_name + "\');";
+	var addQuery = "INSERT INTO users (uid, fb_token, activiti_token, first_name, bio, dob, gender, last_name) VALUES (\'" + info.uid +"\', \'" + fbtoken +"\', \'" + act_token + "\', \'" + info.first_name + "\', \'"+ info.bio + "\', \'" +  info.dob + "\', \'" + info.gender + "\', \'" + info.last_name + "\');";
 	pool.sendQuery(addQuery, function(res1){
 		if(res1 == null){ //Bad set
 			console.log(null);
@@ -95,45 +95,54 @@ exports.uidExists = function(uid, cb){
 	});
 };
 
+
+//This will return a user's profile information given a UID
 exports.getIDProfile = function(uid, cb){
 	var query = "select * from users where uid = \'" + uid + "\'";
 	pool.sendQuery(query, function(response){
-		cb(response);
+		if(response == null){
+			cb(null);
+		}
+		else{
+			//Removing the sensitive information from the response
+			var alteredResponse = response;
+			delete alteredResponse[0]['activiti_token'];
+			delete alteredResponse[0]['fb_token'];
+			cb(alteredResponse[0]);
+		}
 	});
 }
 
-//Gets profile information, sends it up through callback
-exports.getProfile = function(token, cb){
-	var query = "select * from users where activiti_token = \'" + token + "\'";
-	pool.sendQuery(query, function(response){
-		console.log(response);
-		cb(response);
-	});
-};
 
 //Updates user's information in the database
 exports.updateProfile = function(userToken, info, cb){
-	console.log(info);
-	try{
-		var dob = info["dob"];
-		var first_name = info["first_name"];
-		var last_name = info["last_name"];
-		var bio = info["bio"];
-		var gender	 = info["gender"];
-		var query = "update users set first_name = \'" + first_name + "\', last_name = \'" + last_name + "\', bio = \'" + bio + "\', gender = \'" + gender + "\' where users.activiti_token = \'" + userToken + "\'";
-		pool.sendQuery(query, function(response){
-			if(response == null){
-				cb(null);
+	itself.getUIDfromToken(userToken, function(response){
+		if(response == null){
+			console.log("This is broken");
+			cb(null);
+		}
+		else{
+			for(x in info){
+				if(x != "tags"){
+					var query = "update users set " + x + " = \'" + info[x] + "\' where users.uid = \'" + response + "\'" ;
+					console.log(query);
+					pool.sendQuery(query, function(res2){
+						if(response == null || response.affectedRows < 1){
+							console.log("This query did not do what was intended");
+						}
+						else{
+							console.log("Query is successful: ");
+						}
+					});
+				}
+				else{
+					itself.setTags(response, x, function(res3){
+						
+					});
+				}
 			}
-			else{
-				cb(response);
-			}
-		});
-	}
-	catch(e){
-		console.log("User profile update error");
-		cb(null);
-	}
+		cb(true);
+		}});
 }
 
 //This is a function that checks if a token exists in the database

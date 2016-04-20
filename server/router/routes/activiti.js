@@ -41,28 +41,34 @@ router.post('/tags', jsonParser, function(req,res){
 router.put('/', jsonParser, function(req, res) {
 	//REPLACE WITH INFO FROM BODY ----
 	var aid = req.get('aid'); //Activiti ID to update
-
-	activitiQueries.updateActiviti(aid, req.body, function(response) {
+	activitiQueries.updateActiviti(aid, req.body, function(response){
+		console.log("response is: " + response);
 		if(response == null){
-			res.status(400).send("Activiti not updated");
+			res.status(400).send("Activiti update has failed");
 		}
 		else{
-			res.status(200).send("Activiti updated");
+			res.status(200).send("Activiti successfully updated");
 		}
 	});
 });
 
 //Delete activiti
 router.delete('/', jsonParser, function(req,res) {
-	//REPLACE WITH ACTIVITI ID TO BE DELETED
 	var aid = req.get('aid');
-
-	activitiQueries.deleteActiviti(aid, function(response){
-		if(response == null || response.affectedRows == 0){
-			res.status(400).send("Unable to delete activiti, activiti not found");
+	console.log("Aid to get deleted: " + aid);
+	userQueries.getUIDfromToken(req.get('token'), function(response){
+		if(response == null){
+			res.status(401).send("Unauthorized to modify activiti");
 		}
 		else{
-			res.status(200).send("activiti deleted");
+			activitiQueries.deleteActiviti(aid, response, function(response){
+				if(response == null){
+					res.status(400).send("Deletion unsuccessful");
+				}
+				else{
+					res.status(200).send("Deletion successful");
+				}
+			});
 		}
 	});
 });
