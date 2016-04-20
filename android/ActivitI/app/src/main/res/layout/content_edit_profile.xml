@@ -25,7 +25,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editTag0"
+        android:id="@+id/editTag0Profile"
         android:layout_below="@+id/tagsView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -36,7 +36,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Location:"
         android:id="@+id/generalLocationView"
-        android:layout_below="@+id/editTag0"
+        android:layout_below="@+id/editTag0Profile"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="8dp" />

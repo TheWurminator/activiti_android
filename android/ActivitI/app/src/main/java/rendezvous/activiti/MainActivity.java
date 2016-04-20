@@ -17,6 +17,7 @@ import android.text.format.DateFormat;
 import android.util.EventLogTags;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
@@ -92,33 +93,84 @@ public class MainActivity extends AppCompatActivity {
         //Code to send search query to server
     }
 
-    public void viewOtherProfile(View view) {
-        navigate(friendProfileViewFragment);
-    }
-
     public void viewProfile(View view) {
         navigate(profileViewFragment);
-        sendRequest(Request.Method.GET, "user/", jsonObject);
+        //sendRequest(Request.Method.GET, "user/", jsonObject);
     }
 
     public void viewActiviti(View view) {
         navigate(activitiViewFragment);
-        sendRequest(Request.Method.GET, "activiti/", jsonObject);
+        //sendRequest(Request.Method.GET, "activiti/", jsonObject);
     }
 
     public void saveProfile(View view) {
-        sendRequest(Request.Method.PUT, "user/", jsonObject);
+        EditText editLocation = (EditText) findViewById(R.id.editLocation);
+        EditText editBio = (EditText) findViewById(R.id.editBio);
+        EditText editTag = (EditText) findViewById(R.id.editTag0Profile);
+
+        String location = editLocation.getText().toString();
+        String bio = editBio.getText().toString();
+        String tags = editTag.getText().toString();
+
+        JSONObject updateProfile = new JSONObject();
+        try {
+            updateProfile.put("location", location);
+            updateProfile.put("bio", bio);
+            updateProfile.put("tags", tags);
+        }catch(JSONException e) {
+            e.printStackTrace();
+        }
+        sendRequest(Request.Method.PUT, "user/", updateProfile);
         viewProfile(view);
         //Code for sending updated data to server
     }
 
     public void submitNewActiviti(View view) {
-        //Code for sending new activiti data to server
-        sendRequest(Request.Method.PUT, "activiti/", jsonObject);
+        EditText editName = (EditText) findViewById(R.id.editNameText);
+        EditText editDescription = (EditText) findViewById(R.id.editDescription);
+        //EditText editCost = (EditText) findViewByID(R.id.editCost);
+        //EditText editMaxAttendees = (EditText) findViewById(R.id.editMaxAttendees);
+        Button editDate = (Button) findViewById(R.id.editDateButton);
+        Button editTime = (Button) findViewById(R.id.editTimeButton);
+        //Button editLocation = (Button) findViewById(R.id.editLocationButton);
+        EditText editTag = (EditText) findViewById(R.id.editTag0Activiti);
+
+        String name = editName.getText().toString();
+        String description = editDescription.getText().toString();
+        //double cost = editCost.getText().toDouble();
+        //int maxAttendees = editMaxAttendees.getText.toInt();
+        //Date
+        //Time
+        //double lat
+        //double long
+        String tags = editTag.getText().toString();
+
+        JSONObject newActiviti = new JSONObject();
+        try {
+            newActiviti.put("name", name);
+            newActiviti.put("description", description);
+            //newActiviti.put("cost", cost);
+            //newActiviti.put("max_attendees", maxAttendees);
+            //newActiviti.put("start_date", startDate);
+            //newActiviti.put("end_date", endDate);
+            //newActiviti.put("start_time", startTime);
+            //newActiviti.put("end_time", endTime);
+            //newActiviti.put("latitude", lat);
+            //newActiviti.put("longitude", long);
+            //newActiviti.put("tags", tags);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        sendRequest(Request.Method.POST, "activiti/", newActiviti);
         viewProfile(view);
     }
 
     //4/20 - Amon
+    public void viewOtherProfile(View view) {
+        navigate(friendProfileViewFragment);
+    }
+
     public void useTestSlide (View view) {navigate(slidingMenuFragment);}
 
     public void seeAllActivitis(View view) {navigate(allActivitiFragment);}
@@ -172,12 +224,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void displayProfile(JSONObject userinfo) {
-        //Take the information and display to the user
-        //try{
-        //User Info
-        //} catch (JSONException e) {
-        //    e.printStackTrace();
-        //}
+        //Take the information and display to the userry{
+        try {
+            String name = userinfo.getString("name");
+            String bio = userinfo.getString("bio");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     public void displayActiviti(JSONObject activitiinfo) {
