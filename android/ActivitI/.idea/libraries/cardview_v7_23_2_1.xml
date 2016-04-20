@@ -6,7 +6,11 @@
     </CLASSES>
     <JAVADOC />
     <SOURCES>
+<<<<<<< HEAD
       <root url="jar://D:/Programming/android_sdk/extras/android/m2repository/com/android/support/cardview-v7/23.2.1/cardview-v7-23.2.1-sources.jar!/" />
+=======
+      <root url="jar://$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/cardview-v7/23.2.1/cardview-v7-23.2.1-sources.jar!/" />
+>>>>>>> parent of 0cdcd64... Fixed git ignore and grade problems
     </SOURCES>
   </library>
 </component>
