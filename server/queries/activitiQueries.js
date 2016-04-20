@@ -6,7 +6,7 @@ var itself = require('./activitiQueries');
 exports.createActiviti = function(info, userToken, cb){
 	//This will catch an error, so the entire server doesn't crash when the JSON is wrong
 	try {
-		var addQuery = "insert into activitis (aid, name, description, cost, max_attendees, start_date, end_date, start_time, end_time, latitude, longitude, uid) values (\'null\', + \'" + info.name + "\', \'" + info.cost + "\', \'" + info.description + "\', \'" + info.max_attendees + "\', \'" + info.start_date + "\', \'" + info.end_date + "\', \'" + info.start_time + "\', \'" + info.end_time + "\', \'" + info.latitude + "\', \'" + info.longitude + "\', \'" + userToken + "\')";
+		var addQuery = "insert into activitis (aid, name, description, cost, max_attendees, start_date, end_date, latitude, longitude, uid) values (\'null\', + \'" + info.name + "\', \'" + info.cost + "\', \'" + info.description + "\', \'" + info.max_attendees + "\', \'" + info.start_date + "\', \'" + info.end_date + "\', \'" + info.latitude + "\', \'" + info.longitude + "\', \'" + userToken + "\')";
 		pool.sendQuery(addQuery, function(response){
 			if(response == null){
 				console.log("It broke");

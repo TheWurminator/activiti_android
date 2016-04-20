@@ -9,12 +9,19 @@ var tagQueries = require('../../queries/tagQueries');
 
 //Fetches user profile information
 router.get('/', jsonParser, function(req,res) {
-	userQueries.getIDProfile(req.get('uid'), function(response) {
+	userQueries.getUIDfromToken(req.get('token'), function(response){
 		if(response == null){
-			res.status(400).send("User not found");
+			res.status(400).send("user not found");
 		}
 		else{
-			res.status(200).send(response);
+			userQueries.getIDProfile(response, function(response) {
+			if(response == null){
+				res.status(400).send("User not found");
+			}
+			else{
+				res.status(200).send(response);
+			}
+			});	
 		}
 	});
 });
