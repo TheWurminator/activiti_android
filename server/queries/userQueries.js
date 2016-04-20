@@ -75,8 +75,13 @@ exports.getUIDfromToken = function(usertoken, cb){
 exports.deleteUser = function(token,cb){
 	var query = "delete from users where users.activiti_token = \'" + token + "\'";
 	pool.sendQuery(query, function(response){
-		console.log(response);
-		cb(response);
+		if(response == null){
+			cb(null);
+		}
+		else{
+			console.log(response);
+			cb(response);
+		}
 	}); 
 };
 
@@ -137,7 +142,7 @@ exports.updateProfile = function(userToken, info, cb){
 				}
 				else{
 					itself.setTags(response, x, function(res3){
-						
+
 					});
 				}
 			}

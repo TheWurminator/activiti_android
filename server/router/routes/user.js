@@ -91,7 +91,7 @@ router.put('/', jsonParser, function(req, res) {
 //Deletes yourself from database
 router.delete('/', jsonParser, function(req,res) {
 	userQueries.deleteUser(req.get('token'), function(response){
-		if(response === null || response.affectedRows === 0){
+		if(response === null || response.affectedRows == 0){
 			res.status(400).send("Unable to delete user, user not found");
 		}
 		else{
