@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(MyApplication.getAppContext());
         setContentView(R.layout.content_login_page);
-        //navigate(loginFragment);
+        //navigate(LoginFragment);
         //sendRequest();
     }
 

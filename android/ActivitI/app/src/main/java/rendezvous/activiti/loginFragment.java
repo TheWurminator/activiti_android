@@ -22,7 +22,7 @@ import java.util.Arrays;
 /**
  * Created by ksingletary on 4/10/16.
  */
-public class loginFragment extends Fragment {
+public class LoginFragment extends Fragment {
     private CallbackManager callbackManager=CallbackManager.Factory.create();
     private FacebookCallback<LoginResult> callback=new FacebookCallback<LoginResult>() {
         @Override

@@ -52,8 +52,7 @@ public class MainActivity extends AppCompatActivity {
     private SlidingMenuFragment slidingMenuFragment = new SlidingMenuFragment();
 
     private JSONObject jsonObject = new JSONObject();
-    private final String url = "https://activiti.servebeer.com:8081/";
-    private String token = "YPTVjthbt365PsNJPzmBAzVCAqQOptTM3bHIUz6C47ccmuomo19sJ6p3ukYQ8uvUwRUMab9CNlWPpA7ALOtnj7rCWxHdPBCaRqhwUPZuAzSaRsZoopQekYlAn3RkUAqFwrsxmT3ZqTY8JVCY0OPjhKIRRmr2QryMI0GDvLA2JO0Fix7C2TQm7hMNys6Gv8lHWZNNyTTXtIbEPdyjYKd7RnxH36FV0auasAWjHgHuBbyOLB1H2Nbdw4Ku5JlOJQk";
+    private final String url = "https://activiti.servebeer.com:8081/api/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,11 +121,10 @@ public class MainActivity extends AppCompatActivity {
         }
         sendRequest(Request.Method.PUT, "user/", updateProfile);
         viewProfile(view);
-        //Code for sending updated data to server
     }
 
     public void submitNewActiviti(View view) {
-        EditText editName = (EditText) findViewById(R.id.editNameText);
+        EditText editName = (EditText) findViewById(R.id.editName);
         EditText editDescription = (EditText) findViewById(R.id.editDescription);
         //EditText editCost = (EditText) findViewByID(R.id.editCost);
         //EditText editMaxAttendees = (EditText) findViewById(R.id.editMaxAttendees);
@@ -150,7 +148,8 @@ public class MainActivity extends AppCompatActivity {
             newActiviti.put("name", name);
             newActiviti.put("description", description);
             //newActiviti.put("cost", cost);
-            //newActiviti.put("max_attendees", maxAttendees);
+            //newActiviti.put("max_attendee", maxAttendeesme = (EditText) findViewById(R.id.editNameText);
+);
             //newActiviti.put("start_date", startDate);
             //newActiviti.put("end_date", endDate);
             //newActiviti.put("start_time", startTime);

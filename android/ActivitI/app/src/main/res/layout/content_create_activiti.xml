@@ -35,7 +35,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editNameText"
+        android:id="@+id/editName"
         android:layout_below="@+id/nameLabelView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -60,7 +60,7 @@
         android:text="Date:"
         android:inputType="date"
         android:id="@+id/dateLabelView"
-        android:layout_below="@+id/editNameText"
+        android:layout_below="@+id/editName"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -160,8 +160,8 @@
         android:layout_below="@+id/descriptionLabelView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/editNameText"
-        android:layout_alignEnd="@+id/editNameText" />
+        android:layout_alignRight="@+id/editName"
+        android:layout_alignEnd="@+id/editName" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
