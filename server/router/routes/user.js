@@ -9,27 +9,35 @@ var tagQueries = require('../../queries/tagQueries');
 
 //Fetches user profile information
 router.get('/', jsonParser, function(req,res) {
-	if(req.get('token')){
+	if(req.get('uid')){
 		console.log("Token is here");
-	}
-	else{
-		console.log("Token is not here");
-	}
-	userQueries.getUIDfromToken(req.get('token'), function(response){
-		if(response == null){
-			res.status(400).send("user not found");
-		}
-		else{
-			userQueries.getIDProfile(response, function(response) {
+		userQueries.getIDProfile(req.get('uid'), function(response){
 			if(response == null){
-				res.status(400).send("User not found");
+				res.status(400).send("user not found");
 			}
 			else{
 				res.status(200).send(response);
 			}
-			});	
-		}
-	});
+		});
+	}
+	else{ //Will just fetch the user profile
+		console.log("Token is not here");
+		userQueries.getUIDfromToken(req.get('token'), function(response){
+			if(response == null){
+				res.status(400).send("user not found");
+			}
+			else{
+				userQueries.getIDProfile(response, function(response) {
+				if(response == null){
+					res.status(400).send("User not found");
+				}
+				else{
+					res.status(200).send(response);
+				}
+				});	
+			}
+		});
+	}
 });
 
 //This is a function that will return a user's tags
