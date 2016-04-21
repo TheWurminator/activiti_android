@@ -6,6 +6,7 @@ module.exports = function (app) {
 		var token = req.get('token');
 		tokenChecker.checkToken(token, function(response){
 			if(Boolean(response) === false){
+				console.log("unauthorized request");
 				res.sendStatus(401);
 			}
 			else{
