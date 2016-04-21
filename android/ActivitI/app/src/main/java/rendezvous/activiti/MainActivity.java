@@ -25,6 +25,7 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -50,6 +51,8 @@ import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
@@ -234,7 +237,7 @@ public class MainActivity extends AppCompatActivity {
         navigate(chatFragment);
     }
 
-    public void sendRequest(int requestMethod, String path, JSONObject json) {
+    public void sendRequest(final int requestMethod, String path, JSONObject json) {
         Toast.makeText(MyApplication.getAppContext(), "Sending Request", Toast.LENGTH_LONG).show();
 
         trustEveryone();
@@ -243,55 +246,28 @@ public class MainActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "https://activiti.servebeer.com:8081/api/user";
 
-        // Request a string response from the provided URL.
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        // Display the first 500 characters of the response string.
-                        //mTextView.setText("Response is: "+ response.substring(0,500));
-                        String msg = "Response Received: " + response;
-                        Toast.makeText(MyApplication.getAppContext(), msg, Toast.LENGTH_LONG).show();
-
-                        Log.d("RES", msg);
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                //mTextView.setText("That didn't work!");
-                String msg = "Error Received: " + error;
-                Toast.makeText(MyApplication.getAppContext(), msg, Toast.LENGTH_LONG).show();
-
-                Log.d("RES", msg);
-            }
-        });
-
-        // Add the request to the RequestQueue.
-        queue.add(stringRequest);
-
-        /*CustomJSONRequest request = new CustomJSONRequest(requestMethod, google, json,
-            new Response.Listener<JSONObject>() {
+        CustomJSONRequest request = new CustomJSONRequest(requestMethod, url, json, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-
-
-                if(requestType == Request.Method.GET) {
-                    if (pathname.equals("user/"))
-                        displayProfile(response);
-                    else if (pathname.equals("activiti/"))
-                        displayActiviti(response);
-                }
+                Toast.makeText(MyApplication.getAppContext(), "JSON Res Good", Toast.LENGTH_LONG).show();
+                displayProfile(response);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                Toast.makeText(MyApplication.getAppContext(), "JSON Res Error", Toast.LENGTH_LONG).show();
             }
-        });
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> map = new HashMap<String, String>();
+                map.put("token","SKzbBSxzJWLYNMr3HWpPder9B316IrC7xptEoQdEDNdBqd6BfIVCn8DuALouRb6KMNILrL9LiQrSzx8uFLMpDCvma6x8gqBfJZXKFJ9PcN2fDDf3ChicSy4SJwVdusaIMTFm9EmrpKHlWeyXT5Uj3sRWue00Z9s3C7VWR2Hlt0EIDMOCbATkS83wHg0Ac7az670yGI2yTBFgZHwCzPa0wpu79nRVViSxQJh7icSiBiqhAeHlPejeXNdkuValh0r");
+
+                return map;
+            }
+        };
 
         queue.add(request);
-
-        */
     }
 
     private void trustEveryone() {
@@ -319,8 +295,11 @@ public class MainActivity extends AppCompatActivity {
     public void displayProfile(JSONObject userinfo) {
         //Take the information and display to the userry{
         try {
-            String name = userinfo.getString("name");
+            String name = userinfo.getString("first_name");
             String bio = userinfo.getString("bio");
+
+            Log.d("info", name);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
