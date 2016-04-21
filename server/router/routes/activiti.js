@@ -89,8 +89,12 @@ router.get('/', jsonParser, function(req,res) {
 //This will return all of the tags for an activiti
 router.get('/tags', jsonParser, function(req,res){
 	activitiQueries.getTagsActiviti(req.get("aid"), function(response){
-		console.log(JSON.stringify(response));
-		res.status(200).send(response);
+		if(response == null){
+			res.sendStatus(400);
+		}
+		else{
+			res.status(200).send(response);
+		}
 	});
 });
 

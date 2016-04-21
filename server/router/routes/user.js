@@ -9,6 +9,12 @@ var tagQueries = require('../../queries/tagQueries');
 
 //Fetches user profile information
 router.get('/', jsonParser, function(req,res) {
+	if(req.get('token')){
+		console.log("Token is here");
+	}
+	else{
+		console.log("Token is not here");
+	}
 	userQueries.getUIDfromToken(req.get('token'), function(response){
 		if(response == null){
 			res.status(400).send("user not found");
@@ -29,13 +35,20 @@ router.get('/', jsonParser, function(req,res) {
 //This is a function that will return a user's tags
 //Takes in a user token and returns a JSON file with the tags
 router.get('/tags', jsonParser, function(req,res){
-	userQueries.getTagsUser(req.get('uid'), function(response) {
+	userQueries.getUIDfromToken(req.get('token'), function(response){
 		if(response == null){
-			res.status(400).send("No tags found for this user");
+			res.sendStatus(400);
 		}
 		else{
-			console.log(JSON.stringify(response));
-			res.status(200).send(response);
+			userQueries.getTagsUser(response, function(res2) {
+				if(res2 == null){
+					res.status(400).send("No tags found for this user");
+				}
+				else{
+					console.log(JSON.stringify(res2));
+					res.status(200).send(res2);
+				}
+			});				
 		}
 	});
 });
@@ -58,6 +71,9 @@ router.post('/', jsonParser, function(req,res){
 	});	
 });
 
+//DEBUG
+//Used to set more tags for a user
+//Takes in a JSON containing a tags array
 router.post('/tags', jsonParser, function(req,res){
 	userQueries.getUIDfromToken(req.get('token'), function(response){
 		if(response == null){
@@ -77,6 +93,7 @@ router.post('/tags', jsonParser, function(req,res){
 });
 
 //Update user profile information
+//Takes in a JSON containing profile information
 router.put('/', jsonParser, function(req, res) {
 	userQueries.updateProfile(req.get('token'), req.body, function(response) {
 		if(response === null){
@@ -88,7 +105,9 @@ router.put('/', jsonParser, function(req, res) {
 	});
 });
 
-//Deletes yourself from database
+//Deletes user from database
+//Takes in token from header
+//Deletes the user associated with that token
 router.delete('/', jsonParser, function(req,res) {
 	userQueries.deleteUser(req.get('token'), function(response){
 		if(response === null || response.affectedRows == 0){
