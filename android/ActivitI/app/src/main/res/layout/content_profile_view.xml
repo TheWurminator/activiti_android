@@ -213,7 +213,8 @@
             android:onClick="badgeView"
             android:layout_above="@+id/profileActivitiPreview"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:background="#FFFFFF"/>
 
     </RelativeLayout>
 
