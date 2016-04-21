@@ -9,6 +9,7 @@
         android:layout_height="wrap_content"
         android:text="@string/get_me_in"
         android:id="@+id/getmein"
+        android:visibility="visible"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:onClick="getmein" />
@@ -57,12 +58,13 @@
             android:onClick="loginServer"
             android:layout_marginTop="29dp"
             android:layout_below="@+id/logo"
+            android:visibility="invisible"
             android:layout_centerHorizontal="true" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/annoying_login"
+            android:text="Login with Facebook"
             android:onClick="loginServer"
             android:id="@+id/annoyingLoginButton"
             style="?android:attr/buttonStyleSmall"
