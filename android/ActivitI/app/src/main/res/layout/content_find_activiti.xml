@@ -19,7 +19,8 @@
         android:layout_alignBottom="@+id/editSearchQuery"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:onClick="searchActivities" />
+        android:onClick="searchActivities"
+        android:background="#FFFFFF"/>
 
     <EditText
         android:layout_width="wrap_content"

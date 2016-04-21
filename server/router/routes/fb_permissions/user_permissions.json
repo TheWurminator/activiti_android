@@ -1,5 +1,0 @@
-{ 
-	"authType": "rerequest", 
-	"scope": ["user_birthday", "public_profile"],
-	"failureRedirect": "/login/facebook" 
-}

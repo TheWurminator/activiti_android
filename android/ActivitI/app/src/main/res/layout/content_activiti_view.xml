@@ -189,9 +189,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Signed up!"
+        android:text="Signed up!\nEnter chat"
+        android:onClick="chatFragment"
         android:id="@+id/textView3"
-        android:layout_alignBottom="@+id/activitiNameView"
+        android:layout_alignBaseline="@+id/activitiHostView"
+        android:layout_alignBottom="@+id/activitiHostView"
         android:layout_alignRight="@+id/div1activiti"
         android:layout_alignEnd="@+id/div1activiti" />
 

@@ -42,43 +42,49 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
-    <EditText
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="date"
+        android:inputType="none"
         android:ems="10"
-        android:id="@+id/editDate"
+        android:id="@+id/editDateButton"
         android:layout_below="@+id/dateLabelView"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:onClick="setDate"
+        android:background="#FFFFFF"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Date:"
+        android:inputType="date"
         android:id="@+id/dateLabelView"
         android:layout_below="@+id/editName"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <EditText
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="time"
         android:ems="10"
-        android:id="@+id/editTime"
+        android:id="@+id/editTimeButton"
         android:layout_below="@+id/timeLabelView"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:onClick="setTime"
+        android:background="#FFFFFF"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Time:"
+        android:inputType="time"
         android:id="@+id/timeLabelView"
-        android:layout_below="@+id/editDate"
+        android:layout_below="@+id/editDateButton"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -98,7 +104,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Location:"
         android:id="@+id/locationLabelView"
-        android:layout_below="@+id/editTime"
+        android:layout_below="@+id/editTimeButton"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -106,7 +112,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/moneyRequiredCheckBox"
-        android:layout_below="@+id/editLocation"
+        android:layout_below="@+id/moneyLabelView"
         android:layout_toRightOf="@+id/moneyLabelView"
         android:layout_toEndOf="@+id/moneyLabelView"
         android:layout_alignBaseline="@+id/moneyLabelView" />
@@ -122,37 +128,22 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="10dp" />
 
-    <Button
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:text="+"
-        android:id="@+id/addTags"
-        android:layout_marginRight="25dp"
-        android:layout_marginEnd="25dp"
-        android:layout_alignTop="@+id/editTag0"
-        android:layout_alignRight="@+id/editName"
-        android:layout_alignEnd="@+id/editName" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/editTag0"
-        android:layout_below="@+id/tagLabelView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/addTags"
-        android:layout_toStartOf="@+id/addTags" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Tags:"
-        android:id="@+id/tagLabelView"
-        android:layout_below="@+id/moneyRequiredCheckBox"
+        android:id="@+id/tagsActivitiView"
+        android:layout_below="@+id/moneyLabelView" />
+
+    <EditText
+        android:layout_width="290dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTag0Activiti"
+        android:layout_below="@+id/tagsActivitiView"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="5dp" />
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -160,9 +151,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Description:"
         android:id="@+id/descriptionLabelView"
-        android:layout_below="@+id/editTag0"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_below="@+id/editTag0Activiti" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -182,11 +171,29 @@
         android:layout_height="wrap_content"
         android:text="Submit"
         android:id="@+id/submitButton"
+        android:onClick="submitNewActiviti"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/editDescription"
-        android:onClick="submitNewActiviti"/>
+        android:layout_alignParentEnd="true"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Location"
+            android:id="@+id/locationPick"
+            android:onClick="chooseLocation"
+            android:background="#FFFFFF"
+            android:layout_alignTop="@+id/mapContainer"
+            android:layout_alignLeft="@+id/moneyRequiredCheckBox"
+            android:layout_alignStart="@+id/moneyRequiredCheckBox" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="400dp"
+            android:id="@+id/mapContainer"
+            android:layout_below="@+id/editDescription">
+
+        </RelativeLayout>
 
     </RelativeLayout>
     </ScrollView>

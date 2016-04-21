@@ -8,6 +8,14 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".MainActivity">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/fragmentContainer"
+        android:layout_below="@+id/viewProfileButton">
+
+    </RelativeLayout>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -24,9 +32,11 @@
         android:layout_height="wrap_content"
         android:text="Create"
         android:id="@+id/createActivitiButton"
+        android:onClick="createActiviti"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="createActiviti" />
+        android:layout_toRightOf="@+id/viewProfileButton"
+        android:layout_toEndOf="@+id/viewProfileButton"
+        android:nestedScrollingEnabled="false" />
 
     <Button
         android:layout_width="wrap_content"
@@ -38,11 +48,15 @@
         android:layout_alignParentEnd="true"
         android:onClick="findActiviti"/>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/fragmentContainer"
-        android:layout_below="@+id/viewProfileButton" >
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Test Slider"
+        android:id="@+id/testSlider"
+        android:layout_above="@+id/fragmentContainer"
+        android:layout_toRightOf="@+id/createActivitiButton"
+        android:layout_toEndOf="@+id/createActivitiButton"
+        android:onClick="useTestSlide" />
 
-    </RelativeLayout>
 </RelativeLayout>

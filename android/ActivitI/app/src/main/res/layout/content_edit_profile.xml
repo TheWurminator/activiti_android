@@ -16,31 +16,19 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Tags:"
+        android:layout_marginTop="30dp"
         android:id="@+id/tagsView"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <EditText
-        android:layout_width="290dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editTag0"
+        android:id="@+id/editTag0Profile"
         android:layout_below="@+id/tagsView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="+"
-        android:id="@+id/addTag"
-        android:layout_below="@+id/tagsView"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_toRightOf="@+id/editTag0"
-        android:layout_toEndOf="@+id/editTag0"
-        android:layout_alignBottom="@+id/editTag0" />
-
 
     <TextView
         android:layout_width="wrap_content"
@@ -48,7 +36,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Location:"
         android:id="@+id/generalLocationView"
-        android:layout_below="@+id/editTag0"
+        android:layout_below="@+id/editTag0Profile"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="8dp" />
@@ -89,6 +77,7 @@
         android:layout_height="wrap_content"
         android:text="Save"
         android:id="@+id/button2"
+        android:background="#FFFFFF"
         android:layout_below="@+id/editBio"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"

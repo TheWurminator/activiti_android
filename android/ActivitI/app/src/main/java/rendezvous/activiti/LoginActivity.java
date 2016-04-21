@@ -1,82 +1,61 @@
 package rendezvous.activiti;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.webkit.WebView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-
-import com.facebook.AccessToken;
-import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
-import com.facebook.Profile;
-import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
+import com.facebook.login.LoginFragment;
 
 public class LoginActivity extends AppCompatActivity {
 
    // private CallbackManager callbackManager;
     private String responseString = "Test";
+    private WebLoginFragment webLoginFragment = new WebLoginFragment();
+    private LoginFragment loginFragment = new LoginFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FacebookSdk.sdkInitialize(getApplicationContext());
-        setContentView(R.layout.content_login);
-        CallbackManager callbackManager = CallbackManager.Factory.create();
-        LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
-        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                AccessToken accessToken = loginResult.getAccessToken();
-                Profile profile = Profile.getCurrentProfile();
-            }
-
-            @Override
-            public void onCancel() {
-
-            }
-
-            @Override
-            public void onError(FacebookException error) {
-
-            }
-        });
-
-
+        FacebookSdk.sdkInitialize(MyApplication.getAppContext());
+        setContentView(R.layout.content_login_page);
+        //navigate(LoginFragment);
         //sendRequest();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_login, menu);
-        return true;
+    public void loginServer(View view){
+        //Intent i = new Intent(Intent.ACTION_VIEW,
+        //        Uri.parse("https://activiti.servebeer.com:8081/api/login/facebook"));
+
+        // Starts Implicit Activity
+        //startActivity(i);
+        setContentView(R.layout.content_web_login);
+        WebView myWebView = (WebView) findViewById(R.id.webview);
+        myWebView.loadUrl("https://activiti.servebeer.com:8081/api/login/facebook");
+        //myWebView.loadUrl("http://www.google.com");
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+    public void navigate(Fragment fragment) {
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.loginFragmentContainer, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
+
+    /*public void loginClick(View view) {
+        LoginManager.getInstance().logInWithReadPermissions(this, Arrays.asList("public_profile", "user_about_me", "user_birthday"));
+    }*/
 
     public void sendRequest(){
         VolleySingleton volleySing = VolleySingleton.getInstance();
@@ -112,4 +91,5 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
 }

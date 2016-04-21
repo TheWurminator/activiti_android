@@ -1,17 +1,65 @@
 package rendezvous.activiti;
 
+
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
+import android.text.format.DateFormat;
+import android.util.EventLogTags;
+import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.maps.MapFragment;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.net.URL;
+import java.security.KeyStore;
+import java.security.SecureRandom;
+import java.security.cert.Certificate;
+import java.security.cert.CertificateException;
+import java.security.cert.CertificateFactory;
+import java.security.cert.X509Certificate;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManagerFactory;
+import javax.net.ssl.X509TrustManager;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,29 +73,41 @@ public class MainActivity extends AppCompatActivity {
     private FriendProfileViewFragment friendProfileViewFragment = new FriendProfileViewFragment();
     private BadgeViewFragment badgeViewFragment = new BadgeViewFragment();
     private LeaveBadgeFragment leaveBadgeFragment = new LeaveBadgeFragment();
-    
+    private ChatFragment chatFragment = new ChatFragment();
+
+    private SlidingMenuFragment slidingMenuFragment = new SlidingMenuFragment();
+
+    private JSONObject jsonObject = new JSONObject();
+    private final String url = "https://activiti.servebeer.com:8081/api/";
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.content_main_menu);
+        //setContentView(R.layout.content_main_menu);
+        setContentView(R.layout.content_menu);
         ProfileViewFragment profileViewFragment = new ProfileViewFragment();
         navigate(profileViewFragment);
-
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         int count = getFragmentManager().getBackStackEntryCount();
 
-        if (count == 1){
+        if (count == 1) {
             super.onBackPressed();
             //additional code
-        }
-
-        else{
+        } else {
             getFragmentManager().popBackStack();
-            Toast toast = Toast.makeText(MyApplication.getAppContext(), "Back works!", Toast.LENGTH_SHORT);
-            toast.show();
+            /*Toast toast = Toast.makeText(MyApplication.getAppContext(), "Back works!", Toast.LENGTH_SHORT);
+            toast.show();*/
         }
     }
 
@@ -64,34 +124,93 @@ public class MainActivity extends AppCompatActivity {
         //Code to send search query to server
     }
 
-    public void viewOtherProfile(View view) {
-        navigate(friendProfileViewFragment);
-    } 
-
     public void viewProfile(View view) {
         navigate(profileViewFragment);
-    }
 
-    public void editProfile(View view) {
-        navigate(editProfileFragment);
+        sendRequest(Request.Method.GET, "user/", jsonObject);
     }
 
     public void viewActiviti(View view) {
         navigate(activitiViewFragment);
+        //sendRequest(Request.Method.GET, "activiti/", jsonObject);
     }
 
     public void saveProfile(View view) {
+        EditText editLocation = (EditText) findViewById(R.id.editLocation);
+        EditText editBio = (EditText) findViewById(R.id.editBio);
+        EditText editTag = (EditText) findViewById(R.id.editTag0Profile);
+
+        String location = editLocation.getText().toString();
+        String bio = editBio.getText().toString();
+        String tags = editTag.getText().toString();
+
+        JSONObject updateProfile = new JSONObject();
+        try {
+            updateProfile.put("location", location);
+            updateProfile.put("bio", bio);
+            updateProfile.put("tags", tags);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        sendRequest(Request.Method.PUT, "user/", updateProfile);
         viewProfile(view);
-        //Code for sending updated data to server
+    }
+
+    public void submitNewActiviti(View view) {
+        EditText editName = (EditText) findViewById(R.id.editName);
+        EditText editDescription = (EditText) findViewById(R.id.editDescription);
+        //EditText editCost = (EditText) findViewByID(R.id.editCost);
+        //EditText editMaxAttendees = (EditText) findViewById(R.id.editMaxAttendees);
+        Button editDate = (Button) findViewById(R.id.editDateButton);
+        Button editTime = (Button) findViewById(R.id.editTimeButton);
+        //Button editLocation = (Button) findViewById(R.id.editLocationButton);
+        EditText editTag = (EditText) findViewById(R.id.editTag0Activiti);
+
+        String name = editName.getText().toString();
+        String description = editDescription.getText().toString();
+        //double cost = editCost.getText().toDouble();
+        //int maxAttendees = editMaxAttendees.getText.toInt();
+        //Date
+        //Time
+        //double lat
+        //double long
+        String tags = editTag.getText().toString();
+
+        JSONObject newActiviti = new JSONObject();
+        try {
+            newActiviti.put("name", name);
+            newActiviti.put("description", description);
+            //newActiviti.put("cost", cost);
+            //newActiviti.put("max_attendee", maxAttendees;
+            //newActiviti.put("start_date", startDate);
+            //newActiviti.put("end_date", endDate);
+            //newActiviti.put("start_time", startTime);
+            //newActiviti.put("end_time", endTime);
+            //newActiviti.put("latitude", lat);
+            //newActiviti.put("longitude", long);
+            //newActiviti.put("tags", tags);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        sendRequest(Request.Method.POST, "activiti/", newActiviti);
+        viewProfile(view);
+    }
+
+    //4/20 - Amon
+    public void viewOtherProfile(View view) {
+        navigate(friendProfileViewFragment);
+    }
+
+    public void useTestSlide(View view) {
+        navigate(slidingMenuFragment);
     }
 
     public void seeAllActivitis(View view) {
         navigate(allActivitiFragment);
     }
 
-    public void submitNewActiviti(View view) {
-        //Code for sending new activiti data to server
-        viewProfile(view);
+    public void editProfile(View view) {
+        navigate(editProfileFragment);
     }
 
     public void createActiviti(View view) {
@@ -102,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
         navigate(findActivitiFragment);
     }
 
-    public void badgeView(View view){
+    public void badgeView(View view) {
         navigate(badgeViewFragment);
     }
 
@@ -110,48 +229,180 @@ public class MainActivity extends AppCompatActivity {
         navigate(allActivitiFragment);
     }
 
-    public void leaveBadge(View view){
+    public void leaveBadge(View view) {
         navigate(leaveBadgeFragment);
     }
 
-    public boolean isValidDate(){
-        Calendar c = Calendar.getInstance();
-        int month = 0, day = 0, year = 0;
+    public void chatFragment(View view) {
+        navigate(chatFragment);
+    }
 
-        //check month
-        if(month < 1 || month > 12){
-            return false;
-        }
+    public JSONObject sendRequest(final int requestMethod, String path, JSONObject json) {
+        Toast.makeText(MyApplication.getAppContext(), "Sending Request", Toast.LENGTH_LONG).show();
 
-        //check leap year days
-        if(month==2){
-            if(year % 4 == 0){
-                if(day > 29)
-                    return false;
+        trustEveryone();
+
+        // Instantiate the RequestQueue.
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url = "https://activiti.servebeer.com:8081/api/user";
+
+        CustomJSONRequest request = new CustomJSONRequest(requestMethod, url, json, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Toast.makeText(MyApplication.getAppContext(), "JSON Res Good", Toast.LENGTH_LONG).show();
+                displayProfile(response);
+                return response;
             }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(MyApplication.getAppContext(), "JSON Res Error", Toast.LENGTH_LONG).show();
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> map = new HashMap<String, String>();
+                map.put("token","SKzbBSxzJWLYNMr3HWpPder9B316IrC7xptEoQdEDNdBqd6BfIVCn8DuALouRb6KMNILrL9LiQrSzx8uFLMpDCvma6x8gqBfJZXKFJ9PcN2fDDf3ChicSy4SJwVdusaIMTFm9EmrpKHlWeyXT5Uj3sRWue00Z9s3C7VWR2Hlt0EIDMOCbATkS83wHg0Ac7az670yGI2yTBFgZHwCzPa0wpu79nRVViSxQJh7icSiBiqhAeHlPejeXNdkuValh0r");
 
-            else
-                if(day > 28)
-                    return false;
+                return map;
+            }
+        };
+
+        queue.add(request);
+    }
+
+    private void trustEveryone() {
+        try {
+            HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier(){
+                public boolean verify(String hostname, SSLSession session) {
+                    return true;
+                }});
+            SSLContext context = SSLContext.getInstance("TLS");
+            context.init(null, new X509TrustManager[]{new X509TrustManager(){
+                public void checkClientTrusted(X509Certificate[] chain,
+                                               String authType) throws CertificateException {}
+                public void checkServerTrusted(X509Certificate[] chain,
+                                               String authType) throws CertificateException {}
+                public X509Certificate[] getAcceptedIssuers() {
+                    return new X509Certificate[0];
+                }}}, new SecureRandom());
+            HttpsURLConnection.setDefaultSSLSocketFactory(
+                    context.getSocketFactory());
+        } catch (Exception e) { // should never happen
+            e.printStackTrace();
         }
+    }
 
-        else if(month == 4 || month == 6 || month == 9 || month == 11){
-            if(day > 30)
-                return false;
+    public void displayProfile(JSONObject userinfo) {
+        //Take the information and display to the userry{
+        try {
+            String name = userinfo.getString("first_name");
+            String bio = userinfo.getString("bio");
+
+            Log.d("info", name);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
+    }
 
-        else{
-            if(day > 31)
-                return false;
+    public void displayActiviti(JSONObject activitiinfo) {
+        //Take the information and display to the user
+        try {
+            String name = activitiinfo.getString("name");
+            String description = activitiinfo.getString("description");
+            double cost = activitiinfo.getDouble("cost");
+            int maxAttendees = activitiinfo.getInt("max_attendees");
+            //Date
+            //Time
+            //Lat
+            //Long
+            //Tags
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
+    }
 
-        if(day < 1)
-            return false;
+    public void setDate(View view) {
+        // final EditText datePick = (EditText) findViewById(R.id.editDate);
+        // datePick.setInputType(EditorInfo.TYPE_NULL);
+        Calendar mDate = Calendar.getInstance();
+        int mYear = mDate.get(Calendar.YEAR);
+        int mMonth = mDate.get(Calendar.MONTH);
+        int mDay = mDate.get(Calendar.DAY_OF_MONTH);
 
-        if(year < c.YEAR || year > (c.YEAR + 10)){
-            return false;
-        }
+        DatePickerDialog mDatePicker;
+        mDatePicker = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month += 1;
+                // datePick.setText(Integer.toString(month) + "/" + Integer.toString(day) + "/" + Integer.toString(year));
+            }
+        }, mYear, mMonth, mDay);
+        mDatePicker.setTitle("Select Date");
+        mDatePicker.show();
+    }
 
-        return true;
+    public void setTime(View view) {
+        // final EditText timePick = (EditText) findViewById(R.id.editTime);
+        Calendar mTime = Calendar.getInstance();
+        int mHour = mTime.get(Calendar.HOUR_OF_DAY);
+        int mMinute = mTime.get(Calendar.MINUTE);
+
+        TimePickerDialog mTimePicker;
+        mTimePicker = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                // timePick.setText(Integer.toString(hourOfDay) + ":" + Integer.toString(minute));
+            }
+        }, mHour, mMinute, true);
+        mTimePicker.setTitle("Select Time");
+        mTimePicker.show();
+    }
+
+    public void chooseLocation(View view) {
+        Fragment mMapFragment = MapFragment.newInstance();
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.add(R.id.mapContainer, mMapFragment);
+        fragmentTransaction.commit();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Main Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app URL is correct.
+                Uri.parse("android-app://rendezvous.activiti/http/host/path")
+        );
+        AppIndex.AppIndexApi.start(client, viewAction);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "Main Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app URL is correct.
+                Uri.parse("android-app://rendezvous.activiti/http/host/path")
+        );
+        AppIndex.AppIndexApi.end(client, viewAction);
+        client.disconnect();
     }
 }

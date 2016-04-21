@@ -1,4 +1,3 @@
 /server/node_modules/database/*.json
 /server/fbauth.json
 *.pem
-

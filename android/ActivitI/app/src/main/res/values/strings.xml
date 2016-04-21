@@ -10,6 +10,7 @@
     <string name="see_all"><u>See All</u></string>
     <string name="welcome_message">Welcome to ActivitI!\nIt\'s time to go outside."</string>
     <string name="title_activity_friend_profile_view">FriendProfileViewFragment</string>
+    <string name="google_app_id">AIzaSyD1_6soHKHGXnBCJ13XTgKqMTeHq0uX6wg</string>
 
     <string name="didnt_show">Didn\'t show up</string>
     <string name="delightful">Delightful company</string>
@@ -20,4 +21,10 @@
     <string name="accidentally_matching">Accidentally Matched Clothes</string>
     <string name="punched_me">Punched Me in the Face</string>
     <string name="jacob">Was Jacob</string>
+    <string name="title_activity_choose_location">ChooseLocation</string>
+    <string name="annoying_login">Annoying Login</string>
+    <string name="get_me_in">Get Me In</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
