@@ -149,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
             newActiviti.put("description", description);
             //newActiviti.put("cost", cost);
             //newActiviti.put("max_attendee", maxAttendeesme = (EditText) findViewById(R.id.editNameText);
-);
+
             //newActiviti.put("start_date", startDate);
             //newActiviti.put("end_date", endDate);
             //newActiviti.put("start_time", startTime);
