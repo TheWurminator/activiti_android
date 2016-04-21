@@ -237,7 +237,7 @@ public class MainActivity extends AppCompatActivity {
         navigate(chatFragment);
     }
 
-    public void sendRequest(final int requestMethod, String path, JSONObject json) {
+    public JSONObject sendRequest(final int requestMethod, String path, JSONObject json) {
         Toast.makeText(MyApplication.getAppContext(), "Sending Request", Toast.LENGTH_LONG).show();
 
         trustEveryone();
@@ -251,6 +251,7 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 Toast.makeText(MyApplication.getAppContext(), "JSON Res Good", Toast.LENGTH_LONG).show();
                 displayProfile(response);
+                return response;
             }
         }, new Response.ErrorListener() {
             @Override
