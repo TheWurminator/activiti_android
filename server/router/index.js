@@ -19,7 +19,7 @@ module.exports = function (app) {
 	app.use('/api/login/facebook', require('./routes/facebook'));
 
 	//Application Routes - From Web-URL redirect to specified file for processing
-	app.use('/api/user', auth, require('./routes/user'));
+	app.use('/api/user', require('./routes/user'));
 	app.use('/api/activiti', auth, require('./routes/activiti')); 
 	app.use('/api/search', auth, require('./routes/search')); 
 	app.use('/api/messaging', auth, require('./routes/messaging'));
