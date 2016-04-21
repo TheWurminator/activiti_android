@@ -23,7 +23,8 @@ router.delete('/', function(req,res) {
 
 //This will be used to receive new messages from the group chat
 router.get('/', function(req,res) {
-	var query = "select * from users";	
+	var query = "select * from users";
+	res.status(200).send("Daniel knows what he's doing");
 });
 
 //Function to send the query
