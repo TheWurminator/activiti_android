@@ -23,8 +23,9 @@ router.post('/', jsonParser, function(req,res) {
 			});
 		}
 	});
-})
-;
+});
+
+//This will allow the addition of tags to an activiti
 router.post('/tags', jsonParser, function(req,res){
 	activitiQueries.setTags(req.get('aid'), req.body.tags, function(response){
 		if(response == null){
@@ -32,6 +33,57 @@ router.post('/tags', jsonParser, function(req,res){
 		}
 		else{
 			res.status(200).send("tags successfully added to activiti");
+		}
+	});
+});
+
+//This will get a list of the UIDs of the users attending a specific activiti
+router.get('/attending', jsonParser, function(req,res){
+	console.log(req.get('aid'));
+	activitiQueries.getUsersAttending(req.get('aid'), function(response){
+		if(response == null){
+			res.sendStatus(400);
+		}
+		else{
+			res.status(200).send(response);
+		}
+	});
+});
+
+//This will allow a user to say they are attending an event
+router.post('/attending', jsonParser, function(req,res){
+	userQueries.getUIDfromToken(req.get('token'), function(response){
+		if(response == null){
+			res.sendStatus(400);
+		}
+		else{
+			activitiQueries.setUserAttending(req.get('aid'), response, function(res2){
+				if(res2 == null){
+					res.status(400).send("Already attending this event");
+				}
+				else{
+					res.status(200).send("You are now attending the event");
+				}
+			});
+		}
+	});
+});
+
+//This will remove a user from attending an event
+router.delete('/attending', jsonParser, function(req,res){
+	userQueries.getUIDfromToken(req.get('token'), function(response){
+		if(response == null){
+			res.sendStatus(400);
+		}
+		else{
+			activitiQueries.removeUserAttending(req.get('aid'), response, function(res2){
+				if(res2 == null){
+					res.sendStatus(400);
+				}
+				else{
+					res.status(200).send("No longer attending activiti");
+				}
+			});
 		}
 	});
 });

@@ -31,6 +31,46 @@ exports.createActiviti = function(info, uid, cb){
 	}
 };
 
+exports.setUserAttending = function(aid, uid, cb){
+	//INSERT INTO `activiti_data`.`attending` (`uid`, `aid`) VALUES ('123456', '118');
+	var query = "insert into attending (uid, aid) values (\'"+uid+"\', \'"+aid+"\')";
+	pool.sendQuery(query, function(response){
+		console.log(response);
+		if(response == null){
+			cb(null);
+		}
+		else{
+			cb(true);
+		}
+	});
+}
+
+exports.getUsersAttending = function(aid, cb){
+	var query = "select uid from attending where attending.aid = \'" + aid + "\'";
+	pool.sendQuery(query, function(response){
+		console.log(response.length);
+		if(response == null || response.length < 1){
+			cb(null);
+		}
+		else{
+			cb(response);
+		}
+	});
+}
+
+exports.removeUserAttending = function(aid, uid, cb){
+	var query = "delete from attending where attending.uid = \'"+uid+"\' and attending.aid = \'"+aid+"\'";
+	pool.sendQuery(query, function(response){
+		console.log(response);
+		if(response == null){
+			cb(null);
+		}
+		else{
+			cb(true);
+		}
+	});
+}
+
 //Deletes a activiti
 //takes in an AID and a UID and a reference to a callback function
 exports.deleteActiviti = function(aid, uid, cb){
@@ -149,9 +189,9 @@ exports.updateActiviti = function(aid, info, cb){
 
 
 //This is a function that will fetch the tags for an activiti
-//Takes in an activiti id, and returns a json with tags
+//Takes in an activiti id, and returns a json with tags(tid, name)
 exports.getTagsActiviti = function(activiti_id, cb){
-	var query = "select * from activiti_tags where aid = \'" + activiti_id + "\'";
+	var query = "select t.name, atag.tid from tags t inner join activiti_tags atag on atag.tid = t.tid where atag.aid = \'"+activiti_id+"\'";
 	pool.sendQuery(query, function(response){
 		if(response == null){
 			cb(null);
