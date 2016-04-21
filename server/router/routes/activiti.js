@@ -29,7 +29,7 @@ router.post('/', jsonParser, function(req,res) {
 router.post('/tags', jsonParser, function(req,res){
 	activitiQueries.setTags(req.get('aid'), req.body.tags, function(response){
 		if(response == null){
-			res.status(400).send("DOesn't work");
+			res.status(400).send("Doesn't work");
 		}
 		else{
 			res.status(200).send("tags successfully added to activiti");

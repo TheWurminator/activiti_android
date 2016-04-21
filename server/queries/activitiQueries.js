@@ -3,17 +3,17 @@ var tagQueries = require('./tagQueries');
 var userQueries = require('./userQueries');
 var itself = require('./activitiQueries');
 //Makes a new user based on FB graph response
-exports.createActiviti = function(info, userToken, cb){
+exports.createActiviti = function(info, uid, cb){
 	//This will catch an error, so the entire server doesn't crash when the JSON is wrong
 	try {
-		var addQuery = "insert into activitis (aid, name, description, cost, max_attendees, start_date, end_date, latitude, longitude, uid) values (\'null\', + \'" + info.name + "\', \'" + info.cost + "\', \'" + info.description + "\', \'" + info.max_attendees + "\', \'" + info.start_date + "\', \'" + info.end_date + "\', \'" + info.latitude + "\', \'" + info.longitude + "\', \'" + userToken + "\')";
+		var addQuery = "insert into activitis (aid, name, description, cost, max_attendees, start_date, end_date, latitude, longitude, uid) values (\'null\', + \'" + info.name + "\', \'" + info.description + "\', \'" + info.cost + "\', \'" + info.max_attendees + "\', \'" + info.start_date + "\', \'" + info.end_date + "\', \'" + info.latitude + "\', \'" + info.longitude + "\', \'" + uid + "\')";
 		pool.sendQuery(addQuery, function(response){
 			if(response == null){
 				console.log("It broke");
 				cb(null);
 			}
 			else{
-				console.log(response);
+				//console.log(response);
 				itself.setTags(response.insertId, info.tags, function(resp){
 					if(resp == null){
 						cb(null);
@@ -36,7 +36,7 @@ exports.createActiviti = function(info, userToken, cb){
 exports.deleteActiviti = function(aid, uid, cb){
 	var query = "delete from activitis where activitis.aid = \'" + aid + "\'";
 	pool.sendQuery(query, function(response){
-		console.log(response);
+		//console.log(response);
 		if(response == null || response.affectedRows == 0){
 			cb(null);
 		}
@@ -50,7 +50,7 @@ exports.deleteActiviti = function(aid, uid, cb){
 //Takes in a uid and json w/tags
 exports.setTags = function(aid, tags, cb){
 	for(x = 0; x < tags.length; x++){ //Need ot run through the available tags
-		console.log("This is " + tags[x]);
+		//console.log("This is " + tags[x]);
 		var save = tags[x].toLowerCase();
 		tagQueries.createTag(save, function(response){
 			if(response == null){
@@ -59,7 +59,7 @@ exports.setTags = function(aid, tags, cb){
 			}
 			else{
 				//The tag was created, now we need to do something about it
-				console.log("Inside of create tag save is : " + response);
+				//console.log("Inside of create tag save is : " + response);
 				setTagActiviti(aid, response, function(res){
 					if(res == null){
 						console.log("Could not add the tag, for some reason");
