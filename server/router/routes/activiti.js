@@ -14,18 +14,17 @@ router.post('/', jsonParser, function(req,res) {
 	userQueries.getUIDfromToken(req.get('token'), function(response){
 		if(response !== null){
 			activitiQueries.createActiviti(activitiInfo, response, function(res2) {
-			if(res2 == null){
-				res.status(400).send("Unable to create Activiti");
-			}
-			else{
-				res.status(200).send("Activiti Created.");
-				//Activiti is created, now to add the tags
-			}
+				if(res2 == null){
+					res.status(400).send("Unable to create Activiti");
+				}
+				else{
+					res.status(201).send("Activiti Created.");
+				}
 			});
 		}
 	});
-});
-
+})
+;
 router.post('/tags', jsonParser, function(req,res){
 	activitiQueries.setTags(req.get('aid'), req.body.tags, function(response){
 		if(response == null){
