@@ -537,11 +537,30 @@ public class MainActivity extends AppCompatActivity {
         int mDay = mDate.get(Calendar.DAY_OF_MONTH);
         dateDay = mDay;dateMonth = mMonth-1;dateYear = mYear;
 
+        final Button datePick = (Button) findViewById(R.id.editDateButton);
         DatePickerDialog mDatePicker;
         mDatePicker = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month += 1;
-                // datePick.setText(Integer.toString(month) + "/" + Integer.toString(day) + "/" + Integer.toString(year));
+                datePick.setText(Integer.toString(month) + "/" + Integer.toString(day) + "/" + Integer.toString(year));
+            }
+        }, mYear, mMonth, mDay);
+        mDatePicker.setTitle("Select Date");
+        mDatePicker.show();
+    }
+    public void setDate3(View view) {
+        Calendar mDate = Calendar.getInstance();
+        int mYear = mDate.get(Calendar.YEAR);
+        int mMonth = mDate.get(Calendar.MONTH);
+        int mDay = mDate.get(Calendar.DAY_OF_MONTH);
+        dateDay = mDay;dateMonth = mMonth-1;dateYear = mYear;
+
+        final Button datePick = (Button)findViewById(R.id.search_startdateButt);
+        DatePickerDialog mDatePicker;
+        mDatePicker = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month += 1;
+                datePick.setText(Integer.toString(month) + "/" + Integer.toString(day) + "/" + Integer.toString(year));
             }
         }, mYear, mMonth, mDay);
         mDatePicker.setTitle("Select Date");
@@ -554,11 +573,12 @@ public class MainActivity extends AppCompatActivity {
         int mDay = mDate.get(Calendar.DAY_OF_MONTH);
         dateDay2 = mDay;dateMonth2 = mMonth-1;dateYear2 = mYear;
 
+        final Button datePick = (Button) findViewById(R.id.search_enddateButt);
         DatePickerDialog mDatePicker;
         mDatePicker = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month += 1;
-                // datePick.setText(Integer.toString(month) + "/" + Integer.toString(day) + "/" + Integer.toString(year));
+                datePick.setText(Integer.toString(month) + "/" + Integer.toString(day) + "/" + Integer.toString(year));
             }
         }, mYear, mMonth, mDay);
         mDatePicker.setTitle("Select Date");
@@ -566,7 +586,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setTime(View view) {
-        // final EditText timePick = (EditText) findViewById(R.id.editTime);
+        final Button timePick = (Button) findViewById(R.id.editTimeButton);
         Calendar mTime = Calendar.getInstance();
         int mHour = mTime.get(Calendar.HOUR_OF_DAY);
         int mMinute = mTime.get(Calendar.MINUTE);
@@ -576,7 +596,7 @@ public class MainActivity extends AppCompatActivity {
         mTimePicker = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                // timePick.setText(Integer.toString(hourOfDay) + ":" + Integer.toString(minute));
+                timePick.setText(Integer.toString(hourOfDay) + ":" + Integer.toString(minute));
             }
         }, mHour, mMinute, true);
         mTimePicker.setTitle("Select Time");
