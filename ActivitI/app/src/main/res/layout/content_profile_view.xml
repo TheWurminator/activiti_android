@@ -12,164 +12,146 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".ProfileViewFragment" >
 
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/profilePic"
+        android:minHeight="100dp"
+        android:minWidth="100dp"
+        android:background="@android:color/holo_green_light"
+        android:src="@drawable/com_facebook_profile_picture_blank_square"
+        android:adjustViewBounds="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/profilePic"
-            android:minHeight="100dp"
-            android:minWidth="100dp"
-            android:background="@android:color/holo_green_light"
-            android:src="@drawable/com_facebook_profile_picture_blank_square"
-            android:adjustViewBounds="true"
-            android:layout_below="@+id/button3"
-            android:layout_centerHorizontal="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Name"
-            android:id="@+id/nameView"
-            android:singleLine="true"
-            android:layout_alignTop="@+id/profilePic"
-            android:layout_toRightOf="@+id/profilePic"
-            android:layout_toEndOf="@+id/profilePic"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp"/>
-
-            <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Location"
-            android:id="@+id/locationView"
-            android:layout_alignBottom="@+id/profilePic"
-            android:layout_alignLeft="@+id/nameView"
-            android:layout_alignStart="@+id/nameView" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Name"
+        android:id="@+id/nameView"
+        android:singleLine="true"
+        android:layout_alignTop="@+id/profilePic"
+        android:layout_toRightOf="@+id/profilePic"
+        android:layout_toEndOf="@+id/profilePic"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"/>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Biography"
-            android:id="@+id/bioView"
-            android:layout_below="@+id/profilePic"
-            android:layout_alignLeft="@+id/profilePic"
-            android:layout_alignStart="@+id/profilePic"
-            android:layout_marginTop="10dp" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Location"
+        android:id="@+id/locationView"
+        android:layout_below="@+id/birthdayLabel"
+        android:layout_marginTop="45dp"
+        android:layout_alignLeft="@+id/nameView"
+        android:layout_alignStart="@+id/nameView" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray"
-            android:id="@+id/div1"
-            android:layout_below="@+id/bioView"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="105dp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray"
-            android:id="@+id/div2"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="5dp"
-            android:layout_below="@+id/div1" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Biography"
+        android:id="@+id/bioView"
+        android:layout_below="@+id/profilePic"
+        android:layout_alignLeft="@+id/profilePic"
+        android:layout_alignStart="@+id/profilePic"
+        android:layout_marginTop="10dp" />
 
         <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="50dp"
-            android:layout_height="40dp"
-            android:text="@string/edit_button_text"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="50dp"
+        android:layout_height="40dp"
+        android:text="@string/edit_button_text"
             android:id="@+id/editProfileButton"
-            android:textSize="12sp"
-            android:background="#acff1c"
-            android:onClick="editProfile"
-            android:layout_alignParentRight="false"
-            android:layout_alignParentEnd="true"
-            android:layout_alignTop="@+id/nameView" />
+        android:textSize="12sp"
+        android:background="#acff1c"
+        android:onClick="editProfile"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="See badges"
-                android:id="@+id/button3"
-                android:onClick="badgeView"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:background="#FFFFFF"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="See badges"
+            android:id="@+id/button3"
+            android:onClick="badgeView"
+            android:background="#FFFFFF"
+            android:layout_alignParentBottom="true"
+            android:layout_toLeftOf="@+id/profilePic"
+            android:layout_toStartOf="@+id/profilePic"
+            android:layout_marginBottom="91dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:id="@+id/nameText"
-                android:layout_alignTop="@+id/nameView"
-                android:layout_toRightOf="@+id/locationView"
-                android:layout_toEndOf="@+id/locationView" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:id="@+id/nameText"
+            android:layout_alignTop="@+id/nameView"
+            android:layout_toRightOf="@+id/locationView"
+            android:layout_toEndOf="@+id/locationView" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:id="@+id/bioText"
-                android:layout_below="@+id/bioView"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginTop="9dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/bioText"
+            android:layout_below="@+id/bioView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="9dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Gender"
-                android:id="@+id/genderLabel"
-                android:layout_below="@+id/editProfileButton"
-                android:layout_alignLeft="@+id/nameView"
-                android:layout_alignStart="@+id/nameView" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Gender"
+            android:id="@+id/genderLabel"
+            android:layout_below="@+id/nameView"
+            android:layout_alignLeft="@+id/nameView"
+            android:layout_alignStart="@+id/nameView"
+            android:layout_marginTop="45dp"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:id="@+id/genderText"
-                android:layout_alignTop="@+id/genderLabel"
-                android:layout_alignLeft="@+id/nameText"
-                android:layout_alignStart="@+id/nameText" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:id="@+id/genderText"
+            android:layout_alignTop="@+id/genderLabel"
+            android:layout_alignLeft="@+id/nameText"
+            android:layout_alignStart="@+id/nameText" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Birthday"
-                android:id="@+id/birthdayLabel"
-                android:layout_below="@+id/genderLabel"
-                android:layout_alignLeft="@+id/genderLabel"
-                android:layout_alignStart="@+id/genderLabel"
-                android:layout_marginTop="29dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Birthday"
+            android:id="@+id/birthdayLabel"
+            android:layout_below="@+id/genderLabel"
+            android:layout_alignLeft="@+id/genderLabel"
+            android:layout_alignStart="@+id/genderLabel"
+            android:layout_marginTop="45dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:id="@+id/dobText"
-                android:layout_alignTop="@+id/birthdayLabel"
-                android:layout_alignLeft="@+id/genderText"
-                android:layout_alignStart="@+id/genderText" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:id="@+id/dobText"
+            android:layout_alignTop="@+id/birthdayLabel"
+            android:layout_alignLeft="@+id/genderText"
+            android:layout_alignStart="@+id/genderText" />
 
-        </RelativeLayout>
-    </ScrollView>
+    </RelativeLayout>
 
 
 </RelativeLayout>
