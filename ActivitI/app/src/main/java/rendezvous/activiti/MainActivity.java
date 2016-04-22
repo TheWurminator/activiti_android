@@ -42,6 +42,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.MapFragment;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -58,6 +59,7 @@ import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import javax.net.ssl.HostnameVerifier;
@@ -119,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
 
         viewProfile();
+        searchActivities();
     }
 
     public void openSlideMenu(View view) {
@@ -149,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
+
 
 
     public void makeSearch(View view) {
@@ -188,10 +192,36 @@ public class MainActivity extends AppCompatActivity {
         minAttend.setText("");
         maxAttend.setText("");
 
+    private void searchActivities() {
+        HashMap<String, String> headerMap = new HashMap<String, String>();
+        headerMap.put("token", getToken());
+
+        JSONObject body = new JSONObject();
+        try{
+            body.put("name", "birthday");
+
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        JSONArray jsonArray = new JSONArray();
+        Iterator x = body.keys();
+        jsonArray.put(body);
+        Log.d("keys3", jsonArray.toString());
+        String path = getResources().getString(R.string.url) + getResources().getString(R.string.activitiSearchPath);
+
+
+        RequestManager.sendArrayRequest(Request.Method.POST, path, headerMap, jsonArray, new RequestArrayCallBack() {
+            public void callback(JSONArray res) {
+                //Where amon comes in
+                
+            }
+        });
+
     }
 
     public void searchActivities(View view) {
         navigate(listResultsFragment);
+        searchActivities();
         //Code to send search query to server
     }
 
