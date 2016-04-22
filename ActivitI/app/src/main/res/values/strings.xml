@@ -11,6 +11,8 @@
     <string name="welcome_message">Welcome to ActivitI!\nIt\'s time to go outside."</string>
     <string name="title_activity_friend_profile_view">FriendProfileViewFragment</string>
     <string name="google_app_id">AIzaSyD1_6soHKHGXnBCJ13XTgKqMTeHq0uX6wg</string>
+    <string name="token_store">token</string>
+    <string name="login_url_finish">finish#_=_</string>
 
     <string name="didnt_show">Didn\'t show up</string>
     <string name="delightful">Delightful company</string>
