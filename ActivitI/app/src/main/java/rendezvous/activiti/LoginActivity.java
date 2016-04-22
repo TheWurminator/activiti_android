@@ -161,7 +161,8 @@ public class LoginActivity extends AppCompatActivity {
         public void onPageFinished(WebView view, String url) {
             if(url.contains(getResources().getString(R.string.login_url_finish))) {
                 view.loadUrl("javascript:window.HTMLOUT.processHTML(document.getElementsByTagName('html')[0].innerHTML);");
-                //login();
+                view.setVisibility(View.GONE);
+                login();
             }
         }
         //Required to display self-signed ssl certifications
