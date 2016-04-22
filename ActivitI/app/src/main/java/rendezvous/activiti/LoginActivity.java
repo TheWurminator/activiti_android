@@ -20,6 +20,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginFragment;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -86,18 +88,28 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private class SSLTolerantWebView extends WebViewClient {
+        private boolean flag;
+
         @Override
         public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
             handler.proceed();
         }
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            URL aURL = null;
-            try {
-                aURL = new URL(url);
+            if(flag) {
+                URL aURL = new URL(url);
                 URLConnection conn = aURL.openConnection();
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
+                conn.connect();
+                InputStream is = conn.getInputStream();
+
+                return true;
+            }
+            return false;
+        }
+        @Override
+        public void onPageFinished (WebView view, String url) {
+            if (url.toLowerCase().contains("finish#_=_")) {
+
             }
         }
     }
