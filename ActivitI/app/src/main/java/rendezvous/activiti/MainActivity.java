@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.v4.widget.SlidingPaneLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.text.format.DateFormat;
@@ -36,6 +37,7 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.MapFragment;
+import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -75,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
     private ChatFragment chatFragment = new ChatFragment();
 
     private SlidingMenuFragment slidingMenuFragment = new SlidingMenuFragment();
+    SlidingUpPanelLayout slideLayout;
 
     private JSONObject jsonObject = new JSONObject();
     private final String url = "https://activiti.servebeer.com:8081/api/";
@@ -89,11 +92,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.content_main_menu);
         setContentView(R.layout.content_menu);
+        slideLayout = (SlidingUpPanelLayout) findViewById(R.id.sliding_layout);
+        slideLayout.setTouchEnabled(false);
+
         ProfileViewFragment profileViewFragment = new ProfileViewFragment();
         navigate(profileViewFragment);
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+    }
+
+    public void openSlideMenu(View view) {
+        SlidingUpPanelLayout.PanelState temp = slideLayout.getPanelState();
+        if(temp.equals(SlidingUpPanelLayout.PanelState.COLLAPSED))slideLayout.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
+        else slideLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
     }
 
     @Override

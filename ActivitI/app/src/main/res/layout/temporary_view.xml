@@ -6,7 +6,8 @@
     android:orientation="vertical"
     android:clickable="true"
     android:focusable="false"
-    android:id="@+id/dragView">
+    android:id="@+id/dragView"
+    android:onClick="openSlideMenu">
 
     <ScrollView
         android:layout_width="wrap_content"
@@ -48,8 +49,11 @@
             android:background="#00ffffff"
             android:layout_gravity="center_vertical|right"
             android:onClick="createActiviti"
+            android:layout_marginLeft="12dp"
+            android:layout_marginStart="12dp"
             android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true" />
+            android:layout_toRightOf="@+id/profileButton"
+            android:layout_toEndOf="@+id/profileButton" />
         <ImageButton
             android:layout_width="45dp"
             android:layout_height="45dp"
@@ -66,7 +70,20 @@
             android:layout_alignTop="@+id/createActivitiButton"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginRight="10dp" />
+            android:layout_marginRight="9dp"
+            android:layout_marginEnd="9dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/menu_button"
+            android:src="@drawable/menu_icon"
+            android:maxHeight="80dp"
+            android:maxWidth="150dp"
+            android:adjustViewBounds="true"
+            android:tint="#ffffff"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
 
     </RelativeLayout>
 
