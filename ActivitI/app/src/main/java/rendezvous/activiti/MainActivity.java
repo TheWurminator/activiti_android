@@ -65,6 +65,8 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManagerFactory;
 import javax.net.ssl.X509TrustManager;
 
+
+
 public class MainActivity extends AppCompatActivity {
     private ListResultsFragment listResultsFragment = new ListResultsFragment();
     private ProfileViewFragment profileViewFragment = new ProfileViewFragment();
@@ -215,17 +217,20 @@ public class MainActivity extends AppCompatActivity {
     public void submitNewActiviti(View view) {
         EditText editName = (EditText) findViewById(R.id.editName);
         EditText editDescription = (EditText) findViewById(R.id.editDescription);
-        //EditText editCost = (EditText) findViewByID(R.id.editCost);
-        //EditText editMaxAttendees = (EditText) findViewById(R.id.editMaxAttendees);
+        EditText editCost = (EditText) findViewById(R.id.moneyTextBox);
+        EditText editMaxAttendees = (EditText) findViewById(R.id.attendeesText);
         Button editDate = (Button) findViewById(R.id.editDateButton);
         Button editTime = (Button) findViewById(R.id.editTimeButton);
-        //Button editLocation = (Button) findViewById(R.id.editLocationButton);
+        Button editLocation = (Button) findViewById(R.id.locationPick);
         EditText editTag = (EditText) findViewById(R.id.editTag0Activiti);
 
         String name = editName.getText().toString();
         String description = editDescription.getText().toString();
-        //double cost = editCost.getText().toDouble();
-        //int maxAttendees = editMaxAttendees.getText.toInt();
+        double cost = Double.parseDouble(editCost.getText().toString());
+        int maxAttendees = Integer.parseInt(editMaxAttendees.getText().toString());
+
+        System.out.println(name);
+        System.out.println(editCost);
         //Date
         //Time
         //double lat
@@ -236,8 +241,8 @@ public class MainActivity extends AppCompatActivity {
         try {
             newActiviti.put("name", name);
             newActiviti.put("description", description);
-            //newActiviti.put("cost", cost);
-            //newActiviti.put("max_attendee", maxAttendees;
+            newActiviti.put("cost", cost);
+            newActiviti.put("max_attendee", maxAttendees);
             //newActiviti.put("start_date", startDate);
             //newActiviti.put("end_date", endDate);
             //newActiviti.put("start_time", startTime);
