@@ -172,8 +172,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void viewProfile() {
         HashMap<String, String> headerMap = new HashMap<String, String>();
-        String token = getToken();
-        headerMap.put("token", token);
+        headerMap.put("token", getToken());
 
         JSONObject body = new JSONObject();
 
@@ -188,10 +187,13 @@ public class MainActivity extends AppCompatActivity {
 
     public void viewActiviti(View view) {
         navigate(activitiViewFragment);
+    }
 
+    public void viewActiviti(String aid) {
         HashMap<String, String> headerMap = new HashMap<String, String>();
-        headerMap.put("token", "admin");
-        headerMap.put("aid", "118");
+
+        headerMap.put("token", getToken());
+        headerMap.put("aid", aid);
 
         JSONObject body = new JSONObject();
 
