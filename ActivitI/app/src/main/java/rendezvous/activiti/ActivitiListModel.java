@@ -6,7 +6,8 @@ package rendezvous.activiti;
 public class ActivitiListModel {
     String postOwnerName, destination, title, description;
     DateTime dateStart, dateEnd;
-    int cost, maxAttendees;
+    int  maxAttendees;
+    double cost;
     double lattitude, longitude;
 
 }

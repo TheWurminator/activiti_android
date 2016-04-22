@@ -87,6 +87,8 @@ public class MainActivity extends AppCompatActivity {
 
     private JSONObject jsonObject = new JSONObject();
     private final String url = "https://activiti.servebeer.com:8081/api/";
+
+    private int dateHour, dateMinute, dateMonth, dateYear, dateDay;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -98,8 +100,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.content_menu);
-
-        initializeArray();
+        
         ActivitiAdapter adapter = new ActivitiAdapter(this, activitiList);
         listView = (ListView)findViewById(R.id.list_menu);
         if(listView == null)Log.v("----------------", "listView is null");
@@ -116,17 +117,6 @@ public class MainActivity extends AppCompatActivity {
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-    }
-
-    private void initializeArray() {
-
-        for(int i=0;i<10;i++) {
-            ActivitiListModel temp = new ActivitiListModel();
-            temp.title = "Title is " + i;
-            temp.dateStart = new DateTime(i, 11+i, 2016);
-            temp.description = "Description is " + i+"==s;lkjasdl;kjasdflkjasf;lkjasdflkjsadflkjsflakjsdflkjasdflkjsflkjsdflkjsdflkjsdflkjsdflkjsdflkjsdf";
-            activitiList.add(temp);
-        }
     }
 
     public void openSlideMenu(View view) {
@@ -149,13 +139,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    //public void navigateSlide(Fragment fragment) {
-    //   FragmentManager fragmentManager = getFragmentManager();
-     //   FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-    //    fragmentTransaction.replace(R.id.activitiFeedContainer, fragment);
-     //   fragmentTransaction.addToBackStack(null);
-     //   fragmentTransaction.commit();
-    //}
 
     public void navigate(Fragment fragment) {
         FragmentManager fragmentManager = getFragmentManager();
@@ -228,14 +211,20 @@ public class MainActivity extends AppCompatActivity {
         String description = editDescription.getText().toString();
         double cost = Double.parseDouble(editCost.getText().toString());
         int maxAttendees = Integer.parseInt(editMaxAttendees.getText().toString());
-
-        System.out.println(name);
-        System.out.println(editCost);
-        //Date
-        //Time
-        //double lat
-        //double long
         String tags = editTag.getText().toString();
+
+        String[] tag = tags.split(",");
+
+        ActivitiListModel temp = new ActivitiListModel();
+        temp.cost = cost;
+        temp.dateStart = new DateTime(dateDay, dateMonth, dateYear, dateHour, dateMinute);
+        temp.description = description;
+        temp.maxAttendees = maxAttendees;
+        temp.title = name;
+
+        activitiList.add(temp);
+
+
 
         JSONObject newActiviti = new JSONObject();
         try {
@@ -357,6 +346,7 @@ public class MainActivity extends AppCompatActivity {
         int mYear = mDate.get(Calendar.YEAR);
         int mMonth = mDate.get(Calendar.MONTH);
         int mDay = mDate.get(Calendar.DAY_OF_MONTH);
+        dateDay = mDay;dateMonth = mMonth-1;dateYear = mYear;
 
         DatePickerDialog mDatePicker;
         mDatePicker = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
@@ -374,6 +364,7 @@ public class MainActivity extends AppCompatActivity {
         Calendar mTime = Calendar.getInstance();
         int mHour = mTime.get(Calendar.HOUR_OF_DAY);
         int mMinute = mTime.get(Calendar.MINUTE);
+        dateHour = mHour; dateMinute = mMinute;
 
         TimePickerDialog mTimePicker;
         mTimePicker = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
