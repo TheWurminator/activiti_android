@@ -21,7 +21,7 @@ import java.util.ArrayList;
 /**
  * Created by amona_000 on 4/21/2016.
  */
-public class ActivitiAdapter extends ArrayAdapter<ActivitiListModel>  {
+public class ActivitiAdapter extends ArrayAdapter<ActivitiListModel> implements OnClickListener {
 
     private Activity activity;
     private ArrayList<ActivitiListModel> data;
@@ -29,15 +29,16 @@ public class ActivitiAdapter extends ArrayAdapter<ActivitiListModel>  {
     public Resources res;
     ActivitiListModel tempValues = null;
 
-    public ActivitiAdapter(Activity a, ArrayList<ActivitiListModel> data){
+    public ActivitiAdapter(Activity a, ArrayList<ActivitiListModel> data) {
         super(a, R.layout.activiti_list_item, data);
         activity = a;
         this.data = data;
     }
 
     public int getCount() {
-        return (data.size()==0)?1:data.size();
+        return (data.size() == 0) ? 1 : data.size();
     }
+
     public long getItemId(int position) {
         return position;
     }
@@ -45,7 +46,7 @@ public class ActivitiAdapter extends ArrayAdapter<ActivitiListModel>  {
     public View getView(int position, View view, ViewGroup parent) {
         LayoutInflater inflater = activity.getLayoutInflater();
         View rowView = inflater.inflate(R.layout.activiti_list_item, parent, false);
-        if(data.size()==0)return rowView;
+        if (data.size() == 0) return rowView;
         TextView txtTitle = (TextView) rowView.findViewById(R.id.text_title);
         TextView textDate = (TextView) rowView.findViewById(R.id.text_date);
         TextView description = (TextView) rowView.findViewById(R.id.text_description);
@@ -55,4 +56,10 @@ public class ActivitiAdapter extends ArrayAdapter<ActivitiListModel>  {
         description.setText(data.get(position).description);
         return rowView;
     }
+
+    @Override
+    public void onClick(View v) {
+        Log.v("CustomAdapter", "=======Row Pressed========");
+    }
+
 }
