@@ -23,6 +23,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -52,6 +53,7 @@ import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -76,6 +78,8 @@ public class MainActivity extends AppCompatActivity {
     private LeaveBadgeFragment leaveBadgeFragment = new LeaveBadgeFragment();
     private ChatFragment chatFragment = new ChatFragment();
 
+    private ListView listView;
+    private ArrayList<ActivitiListModel> activitiList = new ArrayList<>();
     private SlidingMenuFragment slidingMenuFragment = new SlidingMenuFragment();
     SlidingUpPanelLayout slideLayout;
 
@@ -90,8 +94,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.content_main_menu);
+
         setContentView(R.layout.content_menu);
+
+        initializeArray();
+        ActivitiAdapter adapter = new ActivitiAdapter(this, activitiList);
+        listView = (ListView)findViewById(R.id.list_menu);
+        if(listView == null)Log.v("----------------", "listView is null");
+        listView.setAdapter(adapter);
+
+
         slideLayout = (SlidingUpPanelLayout) findViewById(R.id.sliding_layout);
         slideLayout.setTouchEnabled(false);
 
@@ -100,6 +112,17 @@ public class MainActivity extends AppCompatActivity {
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+    }
+
+    private void initializeArray() {
+
+        for(int i=0;i<10;i++) {
+            ActivitiListModel temp = new ActivitiListModel();
+            temp.title = "Title is " + i;
+            temp.dateStart = new DateTime(i, 11+i, 2016);
+            temp.description = "Description is " + i+"==s;lkjasdl;kjasdflkjasf;lkjasdflkjsadflkjsflakjsdflkjasdflkjsflkjsdflkjsdflkjsdflkjsdflkjsdflkjsdf";
+            activitiList.add(temp);
+        }
     }
 
     public void openSlideMenu(View view) {
@@ -121,6 +144,14 @@ public class MainActivity extends AppCompatActivity {
             toast.show();*/
         }
     }
+
+    //public void navigateSlide(Fragment fragment) {
+    //   FragmentManager fragmentManager = getFragmentManager();
+     //   FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+    //    fragmentTransaction.replace(R.id.activitiFeedContainer, fragment);
+     //   fragmentTransaction.addToBackStack(null);
+     //   fragmentTransaction.commit();
+    //}
 
     public void navigate(Fragment fragment) {
         FragmentManager fragmentManager = getFragmentManager();
