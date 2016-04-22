@@ -177,7 +177,8 @@ public class MainActivity extends AppCompatActivity {
                     mMaxCost = Integer.parseInt(maxCost.getText().toString());
             double mMaxDist = Double.parseDouble(maxDist.getText().toString()), mLongitude = Double.parseDouble(longitude.getText().toString()),
                     mLatitutde = Double.parseDouble(latitude.getText().toString());
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
 
         openSlideMenu(view);
 
@@ -191,6 +192,7 @@ public class MainActivity extends AppCompatActivity {
         minCost.setText("");
         minAttend.setText("");
         maxAttend.setText("");
+    }
 
     private void searchActivities() {
         HashMap<String, String> headerMap = new HashMap<String, String>();
