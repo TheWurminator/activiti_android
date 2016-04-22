@@ -151,15 +151,15 @@
                 android:backgroundTint="#000000" />
 
             <Button
-                style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Submit"
                 android:id="@+id/submitButton"
                 android:onClick="submitNewActiviti"
-                android:layout_below="@+id/locationPick"
+                android:layout_below="@+id/editDescription"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentEnd="true"
+                android:background="#ffffff" />
 
             <Button
                 android:layout_width="wrap_content"

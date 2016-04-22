@@ -257,7 +257,7 @@
         android:layout_alignLeft="@+id/search_minattendText"
         android:layout_alignStart="@+id/search_minattendText"
         android:layout_alignBottom="@+id/search_startdate"
-        android:onClick="setDate" />
+        android:onClick="setDate3" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -272,6 +272,6 @@
         android:layout_alignEnd="@+id/search_startdateButt"
         android:textColor="#ffffff"
         android:layout_above="@+id/search_mincostText"
-        android:onClick="setDate" />
+        android:onClick="setDate2" />
 
 </RelativeLayout>
