@@ -34,6 +34,9 @@ public class DateTime {
                 " "+((hour<10)?"0"+hour:hour)+"-"+((minute<10)?"0"+minute:minute)+"-00";
     }
 
+    public String formatedDateTime() {
+        return monthName[month%12] + " " + day +", "+year +" at "+hour+":"+minute;
+    }
     public void setDay(int day){ this.day = day;}
     public void setMonth(int month) {this.month = month;}
     public void setYear(int year) {this.year = year;}
