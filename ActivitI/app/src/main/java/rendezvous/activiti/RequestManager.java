@@ -29,6 +29,7 @@ public class RequestManager {
                 @Override
                 public void onResponse(JSONObject response) {
                     Toast.makeText(MyApplication.getAppContext(), "Response Good", Toast.LENGTH_LONG).show();
+                    Log.d("fb", response.toString());
 
                     requestCallBack.callback(response);
                 }

@@ -9,6 +9,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -24,6 +25,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -86,9 +88,6 @@ public class MainActivity extends AppCompatActivity {
     SlidingUpPanelLayout slideLayout;
     ActivitiAdapter adapter;
 
-    private JSONObject jsonObject = new JSONObject();
-    private final String url = "https://activiti.servebeer.com:8081/api/";
-
     private int dateHour, dateMinute, dateMonth, dateYear, dateDay;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -117,6 +116,8 @@ public class MainActivity extends AppCompatActivity {
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
+        viewProfile();
     }
 
     public void openSlideMenu(View view) {
@@ -131,14 +132,10 @@ public class MainActivity extends AppCompatActivity {
 
         if (count == 1) {
             super.onBackPressed();
-            //additional code
         } else {
             getFragmentManager().popBackStack();
-            /*Toast toast = Toast.makeText(MyApplication.getAppContext(), "Back works!", Toast.LENGTH_SHORT);
-            toast.show();*/
         }
     }
-
 
     public void navigate(Fragment fragment) {
         FragmentManager fragmentManager = getFragmentManager();
@@ -153,12 +150,21 @@ public class MainActivity extends AppCompatActivity {
         //Code to send search query to server
     }
 
+    public String getToken() {
+        SharedPreferences prefs = getSharedPreferences(MyApplication.getAppContext().getString(R.string.token_store), 0);
+        String token = prefs.getString("token", null);
+        return token;
+    }
 
     public void viewProfile(View view) {
         navigate(profileViewFragment);
 
+        viewProfile();
+    }
+
+    private void viewProfile() {
         HashMap<String, String> headerMap = new HashMap<String, String>();
-        headerMap.put("token", "admin");
+        headerMap.put("token", getToken());
 
         JSONObject body = new JSONObject();
 
@@ -173,7 +179,23 @@ public class MainActivity extends AppCompatActivity {
 
     public void viewActiviti(View view) {
         navigate(activitiViewFragment);
-        //sendRequest(Request.Method.GET, "activiti/", jsonObject);
+    }
+
+    public void viewActiviti(String aid) {
+        HashMap<String, String> headerMap = new HashMap<String, String>();
+
+        headerMap.put("token", getToken());
+        headerMap.put("aid", aid);
+
+        JSONObject body = new JSONObject();
+
+        String path = getResources().getString(R.string.url) + getResources().getString(R.string.activitiPath);
+
+        RequestManager.sendRequest(Request.Method.GET, path, headerMap, body, new RequestCallBack() {
+            public void callback(JSONObject res) {
+                displayActiviti(res);
+            }
+        });
     }
 
     public void saveProfile(View view) {
@@ -193,6 +215,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
         //sendRequest(Request.Method.PUT, "user/", updateProfile);
         viewProfile(view);
     }
@@ -316,10 +339,21 @@ public class MainActivity extends AppCompatActivity {
     public void displayProfile(JSONObject userinfo) {
         //Take the information and display to the userry{
         try {
-            String name = userinfo.getString("first_name");
+            String first_name = userinfo.getString("first_name");
+            String last_name = userinfo.getString("last_name");
+            String gender = userinfo.getString("gender");
             String bio = userinfo.getString("bio");
+            String dob = userinfo.getString("dob");
 
-            Log.d("info", name);
+            TextView nameText = (TextView)findViewById(R.id.nameText);
+            TextView genderText = (TextView)findViewById(R.id.genderText);
+            TextView bioText = (TextView)findViewById(R.id.bioText);
+            TextView dobText = (TextView)findViewById(R.id.dobText);
+
+            nameText.setText(first_name);
+            genderText.setText(gender);
+            bioText.setText(bio);
+            dobText.setText(dob);
 
         } catch (JSONException e) {
             e.printStackTrace();
