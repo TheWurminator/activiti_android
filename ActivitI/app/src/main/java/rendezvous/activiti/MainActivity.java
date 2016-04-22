@@ -46,6 +46,7 @@ import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
@@ -122,7 +123,6 @@ public class MainActivity extends AppCompatActivity {
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
 
         viewProfile();
-        searchActivities();
     }
 
     public void openSlideMenu(View view) {
@@ -171,15 +171,51 @@ public class MainActivity extends AppCompatActivity {
         String[] mTags = tags.getText().toString().split(",");
         String mName = name.getText().toString(), mDescription = description.getText().toString();
 
+        JSONObject body = new JSONObject();
+
         try {
-            int mStartDay = dateDay, mStartMonth = dateMonth, mStartYear = dateYear, mEndDay = dateDay2,
-                    mEndMonth = dateMonth2, mEndYear = dateYear2, mMinAttend = Integer.parseInt(minAttend.getText().toString()),
-                    mMaxAttend = Integer.parseInt(maxAttend.getText().toString()), mMinCost = Integer.parseInt(minCost.getText().toString()),
-                    mMaxCost = Integer.parseInt(maxCost.getText().toString());
-            double mMaxDist = Double.parseDouble(maxDist.getText().toString()), mLongitude = Double.parseDouble(longitude.getText().toString()),
-                    mLatitutde = Double.parseDouble(latitude.getText().toString());
+            try {
+                int mStartDay = dateDay, mStartMonth = dateMonth, mStartYear = dateYear, mEndDay = dateDay2,
+                        mEndMonth = dateMonth2, mEndYear = dateYear2, mMinAttend = Integer.parseInt(minAttend.getText().toString()),
+                        mMaxAttend = Integer.parseInt(maxAttend.getText().toString()), mMinCost = Integer.parseInt(minCost.getText().toString()),
+                        mMaxCost = Integer.parseInt(maxCost.getText().toString());
+                double mMaxDist = Double.parseDouble(maxDist.getText().toString()), mLongitude = Double.parseDouble(longitude.getText().toString()),
+                        mLatitutde = Double.parseDouble(latitude.getText().toString());
+            }
+            catch(Exception ex) {
+
+            }
+
+            if(mName.length() > 0)
+                body.put("name", mName);
+
+            if(mDescription.equals("") == false)
+                body.put("description", mDescription);
+
+            //body.put("start_date", new DateTime(mStartDay, mStartMonth, mStartYear).getRequestFormat());
+            //body.put("end_date", new DateTime(mEndDay, mEndMonth, mEndYear).getRequestFormat());
+            //body.put("max_distance", mMaxDist);
+            //body.put("longitude", mLongitude);
+            //body.put("latitude", mLatitutde);
+            //body.put("max_attendees", mMaxAttend);
+            //body.put("min_attendees", mMinAttend);
+
+            JSONArray ar = new JSONArray();
+
+            if(mTags[0].equals("") == false) {
+                for (int i = 0; i < mTags.length; i++) {
+                    //body.put("tags", );
+                    ar.put(mTags[i]);
+                }
+                 body.put("tags", ar);
+            }
+
+
         } catch (Exception e) {
         }
+
+        JSONArray ar2 = new JSONArray();
+        ar2.put(body);
 
         openSlideMenu(view);
 
@@ -193,30 +229,46 @@ public class MainActivity extends AppCompatActivity {
         minCost.setText("");
         minAttend.setText("");
         maxAttend.setText("");
+
+        searchActivities(ar2);
     }
 
-    private void searchActivities() {
+    private void searchActivities(JSONArray body) {
         HashMap<String, String> headerMap = new HashMap<String, String>();
         headerMap.put("token", getToken());
 
-        JSONObject body = new JSONObject();
-        try{
-            body.put("name", "birthday");
-
-        } catch(Exception e){
-            e.printStackTrace();
-        }
-        JSONArray jsonArray = new JSONArray();
-        Iterator x = body.keys();
-        jsonArray.put(body);
-        Log.d("keys3", jsonArray.toString());
         String path = getResources().getString(R.string.url) + getResources().getString(R.string.activitiSearchPath);
 
-
-        RequestManager.sendArrayRequest(Request.Method.POST, path, headerMap, jsonArray, new RequestArrayCallBack() {
+        RequestManager.sendArrayRequest(Request.Method.POST, path, headerMap, body, new RequestArrayCallBack() {
             public void callback(JSONArray res) {
-                //Where amon comes in
-                
+
+                activitiList.clear();
+                adapter.notifyDataSetChanged();
+                if(res!=null && res.length()>0){
+
+
+                    for (int i = 0; i < res.length(); i++) {
+                        try {
+                            Log.d("searches", res.get(i).toString());
+                            ActivitiListModel tmp = new ActivitiListModel();
+                            JSONObject obj = (JSONObject) new JSONTokener(res.get(i).toString()).nextValue();
+                            tmp.title = obj.getString("name");
+                            tmp.description = obj.getString("description");
+                            //tmp.cost = obj.getString("cost");
+                            //tmp.dateEnd = obj.getString("dateEnd");
+                            //tmp.dateStart = obj.getString("dateStart");
+                            //tmp.latitude = obj.getString("");
+                            //tmp.maxAttendees = ;
+                            //tmp.aid = obj.getString("aid");
+
+                            activitiList.add(tmp);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                }
             }
         });
 
@@ -224,7 +276,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void searchActivities(View view) {
         navigate(listResultsFragment);
-        searchActivities();
+        //searchActivities();
         //Code to send search query to server
     }
 

@@ -51,8 +51,13 @@ public class ActivitiAdapter extends ArrayAdapter<ActivitiListModel> implements 
         TextView textDate = (TextView) rowView.findViewById(R.id.text_date);
         TextView description = (TextView) rowView.findViewById(R.id.text_description);
 
-        txtTitle.setText(data.get(position).title);
-        textDate.setText(data.get(position).dateStart.formatedDateTime());
+        if(txtTitle != null)
+            txtTitle.setText(data.get(position).title);
+
+        if(textDate != null && data.get(position).dateStart != null)
+            textDate.setText(data.get(position).dateStart.formatedDateTime());
+
+        if(description != null)
         description.setText(data.get(position).description);
         return rowView;
     }
