@@ -95,6 +95,8 @@ public class MainActivity extends AppCompatActivity {
         slideLayout = (SlidingUpPanelLayout) findViewById(R.id.sliding_layout);
         slideLayout.setTouchEnabled(false);
 
+        trustEveryone();
+
         ProfileViewFragment profileViewFragment = new ProfileViewFragment();
         navigate(profileViewFragment);
         // ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -135,10 +137,22 @@ public class MainActivity extends AppCompatActivity {
         //Code to send search query to server
     }
 
+
     public void viewProfile(View view) {
         navigate(profileViewFragment);
 
-        sendRequest(Request.Method.GET, "user/", jsonObject);
+        HashMap<String, String> headerMap = new HashMap<String, String>();
+        headerMap.put("token", "admin");
+
+        JSONObject body = new JSONObject();
+
+        String path = getResources().getString(R.string.url) + getResources().getString(R.string.userPath);
+
+        RequestManager.sendRequest(Request.Method.GET, path, headerMap, body, new RequestCallBack() {
+            public void callback(JSONObject res) {
+                displayProfile(res);
+            }
+        });
     }
 
     public void viewActiviti(View view) {
@@ -163,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        sendRequest(Request.Method.PUT, "user/", updateProfile);
+        //sendRequest(Request.Method.PUT, "user/", updateProfile);
         viewProfile(view);
     }
 
@@ -203,7 +217,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        sendRequest(Request.Method.POST, "activiti/", newActiviti);
+        //sendRequest(Request.Method.POST, "activiti/", newActiviti);
         viewProfile(view);
     }
 
@@ -246,40 +260,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void chatFragment(View view) {
         navigate(chatFragment);
-    }
-
-    public void sendRequest(final int requestMethod, String path, JSONObject json) {
-        Toast.makeText(MyApplication.getAppContext(), "Sending Request", Toast.LENGTH_LONG).show();
-
-        trustEveryone();
-
-        // Instantiate the RequestQueue.
-        RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "https://activiti.servebeer.com:8081/api/user";
-
-        CustomJSONRequest request = new CustomJSONRequest(requestMethod, url, json, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                Toast.makeText(MyApplication.getAppContext(), "JSON Res Good", Toast.LENGTH_LONG).show();
-                displayProfile(response);
-                //return response;
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(MyApplication.getAppContext(), "JSON Res Error", Toast.LENGTH_LONG).show();
-            }
-        }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> map = new HashMap<String, String>();
-                map.put("token","SKzbBSxzJWLYNMr3HWpPder9B316IrC7xptEoQdEDNdBqd6BfIVCn8DuALouRb6KMNILrL9LiQrSzx8uFLMpDCvma6x8gqBfJZXKFJ9PcN2fDDf3ChicSy4SJwVdusaIMTFm9EmrpKHlWeyXT5Uj3sRWue00Z9s3C7VWR2Hlt0EIDMOCbATkS83wHg0Ac7az670yGI2yTBFgZHwCzPa0wpu79nRVViSxQJh7icSiBiqhAeHlPejeXNdkuValh0r");
-
-                return map;
-            }
-        };
-
-        queue.add(request);
     }
 
     private void trustEveryone() {

@@ -12,6 +12,14 @@
     <string name="title_activity_friend_profile_view">FriendProfileViewFragment</string>
     <string name="google_app_id">AIzaSyD1_6soHKHGXnBCJ13XTgKqMTeHq0uX6wg</string>
 
+    <string name="url">https://activiti.servebeer.com:8081/api</string>
+    <string name="userPath">/user</string>
+    <string name="userTagsPath">/user/tags</string>
+    <string name="activitiPath">/activiti</string>
+    <string name="activitiTagsPath">/activiti/tags</string>
+    <string name="activitiSearchPath">/search/activiti</string>
+    <string name="tagsPath">/tags</string>
+
     <string name="didnt_show">Didn\'t show up</string>
     <string name="delightful">Delightful company</string>
     <string name="likes_trump">Likes Trump</string>
