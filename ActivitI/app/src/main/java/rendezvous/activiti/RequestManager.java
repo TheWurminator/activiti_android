@@ -63,7 +63,7 @@ public class RequestManager {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Toast.makeText(MyApplication.getAppContext(), "Response Good", Toast.LENGTH_LONG).show();
+                        Toast.makeText(MyApplication.getAppContext(), "Response Array Good", Toast.LENGTH_LONG).show();
                         Log.d("response5", response.toString());
                         requestArrayCallBack.callback(response);
                     }
@@ -72,7 +72,7 @@ public class RequestManager {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(MyApplication.getAppContext(), "Response Err" + error , Toast.LENGTH_LONG).show();
+                        Toast.makeText(MyApplication.getAppContext(), "Response Array Err" + error , Toast.LENGTH_LONG).show();
                     }
                 }
         )
