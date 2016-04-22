@@ -1,6 +1,7 @@
 package rendezvous.activiti;
 
 
+import android.annotation.TargetApi;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -297,7 +298,7 @@ public class MainActivity extends AppCompatActivity {
         //sendRequest(Request.Method.PUT, "user/", updateProfile);
         viewProfile(view);
     }
-
+    @TargetApi(19)
     public void submitNewActiviti(View view) {
         EditText editName = (EditText) findViewById(R.id.editName);
         EditText editDescription = (EditText) findViewById(R.id.editDescription);
@@ -315,6 +316,10 @@ public class MainActivity extends AppCompatActivity {
         String tags = editTag.getText().toString();
 
         String[] tag = tags.split(",");
+        for(int j = 0; j < tag.length; j++){
+            Log.d("Tags", tag[j]);
+
+        }
 
         ActivitiListModel temp = new ActivitiListModel();
         temp.cost = cost;
@@ -325,29 +330,40 @@ public class MainActivity extends AppCompatActivity {
 
         activitiList.add(temp);
         adapter.notifyDataSetChanged();
-
+        JSONObject objtemp = new JSONObject();
+        try{
+            objtemp.put("name",temp.title);
+            objtemp.put("cost", temp.cost);
+            objtemp.put("description", temp.description);
+            objtemp.put("max_attendees", temp.maxAttendees);
+            objtemp.put("start_date", temp.dateStart.getRequestFormat());
+            objtemp.put("end_date", temp.dateEnd.getRequestFormat());
+            objtemp.put("latitude", "28.097");
+            objtemp.put("longitude", "56.78");
+            JSONArray ty = new JSONArray();
+            for(int i = 0; i < tag.length; i++){
+                ty.put(tag[i]);
+                Log.d("objtemp", tag[i].toString());
+            }
+            objtemp.put("tags",ty);
+        }catch (Exception e){
+            Log.d("iwjij", "wodk");
+        }
+        Log.d("objtemp", objtemp.toString());
         editName.setText("");
         editDescription.setText("");
         editCost.setText("");
         editTag.setText("");
         editMaxAttendees.setText("");
-        JSONObject newActiviti = new JSONObject();
-        try {
-            newActiviti.put("name", name);
-            newActiviti.put("description", description);
-            newActiviti.put("cost", cost);
-            newActiviti.put("max_attendee", maxAttendees);
-            //newActiviti.put("start_date", startDate);
-            //newActiviti.put("end_date", endDate);
-            //newActiviti.put("start_time", startTime);
-            //newActiviti.put("end_time", endTime);
-            //newActiviti.put("latitude", lat);
-            //newActiviti.put("longitude", long);
-            //newActiviti.put("tags", tags);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        //sendRequest(Request.Method.POST, "activiti/", newActiviti);
+        String path = getResources().getString(R.string.url) + getResources().getString(R.string.activitiPath);
+        HashMap<String, String> headerMap = new HashMap<String, String>();
+        headerMap.put("token", getToken());
+        RequestManager.sendRequest(Request.Method.POST, path, headerMap, objtemp, new RequestCallBack() {
+            @Override
+            public void callback(JSONObject res) {
+
+            }
+        } );
         viewProfile(view);
     }
 
@@ -371,6 +387,10 @@ public class MainActivity extends AppCompatActivity {
     public void createActiviti(View view) {
         closeSlideMenu(view);
         navigate(createActivitiFragment);
+    }
+
+    public void createActiviti(JSONObject info){
+
     }
 
     public void findActiviti(View view) {
