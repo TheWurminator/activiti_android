@@ -89,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
     ActivitiAdapter adapter;
 
     private int dateHour, dateMinute, dateMonth, dateYear, dateDay;
+    private int dateMonth2, dateYear2, dateDay2;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -126,6 +127,10 @@ public class MainActivity extends AppCompatActivity {
         else slideLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
     }
 
+    public void closeSlideMenu(View view) {
+        slideLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
+    }
+
     @Override
     public void onBackPressed() {
         int count = getFragmentManager().getBackStackEntryCount();
@@ -145,6 +150,46 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
+
+    public void makeSearch(View view) {
+        EditText name = (EditText) findViewById(R.id.search_nameText);
+        EditText description = (EditText) findViewById(R.id.search_descriptionText);
+        EditText tags = (EditText) findViewById(R.id.search_tagsText);
+        EditText maxAttend = (EditText) findViewById(R.id.search_maxattendText);
+        EditText minAttend = (EditText) findViewById(R.id.search_minattendText);
+        EditText minCost = (EditText) findViewById(R.id.search_mincostText);
+        EditText maxCost = (EditText) findViewById(R.id.search_maxcostText);
+        EditText maxDist = (EditText) findViewById(R.id.search_maxdistText);
+        EditText longitude = (EditText) findViewById(R.id.search_longitudeText);
+        EditText latitude = (EditText) findViewById(R.id.search_latitudeText);
+
+        String[] mTags = tags.getText().toString().split(",");
+        String mName = name.getText().toString(), mDescription = description.getText().toString();
+
+        try {
+            int mStartDay = dateDay, mStartMonth = dateMonth, mStartYear = dateYear, mEndDay = dateDay2,
+                    mEndMonth = dateMonth2, mEndYear = dateYear2, mMinAttend = Integer.parseInt(minAttend.getText().toString()),
+                    mMaxAttend = Integer.parseInt(maxAttend.getText().toString()), mMinCost = Integer.parseInt(minCost.getText().toString()),
+                    mMaxCost = Integer.parseInt(maxCost.getText().toString());
+            double mMaxDist = Double.parseDouble(maxDist.getText().toString()), mLongitude = Double.parseDouble(longitude.getText().toString()),
+                    mLatitutde = Double.parseDouble(latitude.getText().toString());
+        } catch (Exception e) {}
+
+        openSlideMenu(view);
+
+        name.setText("");
+        description.setText("");
+        tags.setText("");
+        latitude.setText("");
+        longitude.setTag("");
+        maxDist.setText("");
+        maxCost.setText("");
+        minCost.setText("");
+        minAttend.setText("");
+        maxAttend.setText("");
+
+    }
+
     public void searchActivities(View view) {
         navigate(listResultsFragment);
         //Code to send search query to server
@@ -157,6 +202,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void viewProfile(View view) {
+        closeSlideMenu(view);
         navigate(profileViewFragment);
 
         viewProfile();
@@ -291,10 +337,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void createActiviti(View view) {
+        closeSlideMenu(view);
         navigate(createActivitiFragment);
     }
 
     public void findActiviti(View view) {
+        closeSlideMenu(view);
         navigate(findActivitiFragment);
     }
 
@@ -378,13 +426,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setDate(View view) {
-        // final EditText datePick = (EditText) findViewById(R.id.editDate);
-        // datePick.setInputType(EditorInfo.TYPE_NULL);
         Calendar mDate = Calendar.getInstance();
         int mYear = mDate.get(Calendar.YEAR);
         int mMonth = mDate.get(Calendar.MONTH);
         int mDay = mDate.get(Calendar.DAY_OF_MONTH);
         dateDay = mDay;dateMonth = mMonth-1;dateYear = mYear;
+
+        DatePickerDialog mDatePicker;
+        mDatePicker = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month += 1;
+                // datePick.setText(Integer.toString(month) + "/" + Integer.toString(day) + "/" + Integer.toString(year));
+            }
+        }, mYear, mMonth, mDay);
+        mDatePicker.setTitle("Select Date");
+        mDatePicker.show();
+    }
+    public void setDate2(View view) {
+        Calendar mDate = Calendar.getInstance();
+        int mYear = mDate.get(Calendar.YEAR);
+        int mMonth = mDate.get(Calendar.MONTH);
+        int mDay = mDate.get(Calendar.DAY_OF_MONTH);
+        dateDay2 = mDay;dateMonth2 = mMonth-1;dateYear2 = mYear;
 
         DatePickerDialog mDatePicker;
         mDatePicker = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {

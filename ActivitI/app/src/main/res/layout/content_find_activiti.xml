@@ -10,55 +10,268 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Search"
-        android:id="@+id/searchButton"
-        android:layout_alignBottom="@+id/editSearchQuery"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:onClick="searchActivities"
-        android:background="#FFFFFF"/>
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/editSearchQuery"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/searchButton"
-        android:layout_toStartOf="@+id/searchButton" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Within:"
-        android:id="@+id/textView2"
-        android:layout_below="@+id/editSearchQuery"
+        android:text="Name"
+        android:id="@+id/search_name"
+        android:layout_below="@+id/search_description"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="10dp" />
 
-    <EditText
-        android:layout_width="50dp"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:id="@+id/editDistance"
-        android:layout_below="@+id/editSearchQuery"
-        android:layout_toRightOf="@+id/textView2" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Description"
+        android:id="@+id/search_description"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="mi."
-        android:id="@+id/textView"
-        android:layout_alignTop="@+id/textView2"
-        android:layout_toRightOf="@+id/editDistance"
-        android:layout_toEndOf="@+id/editDistance" />
+        android:text="Tags"
+        android:id="@+id/search_tags"
+        android:layout_below="@+id/search_name"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="9dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Min Attendees"
+        android:id="@+id/search_minattend"
+        android:layout_marginTop="12dp"
+        android:layout_below="@+id/search_maxattend"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Max Attendees"
+        android:id="@+id/search_maxattend"
+        android:layout_below="@+id/search_tags"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Start Date"
+        android:id="@+id/search_startdate"
+        android:layout_marginTop="13dp"
+        android:layout_below="@+id/search_minattend"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="End Date"
+        android:id="@+id/serach_enddate"
+        android:layout_below="@+id/search_startdate"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="15dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Min Cost"
+        android:id="@+id/search_mincost"
+        android:layout_marginTop="13dp"
+        android:layout_below="@+id/serach_enddate"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Max Cost"
+        android:id="@+id/search_maxcost"
+        android:layout_below="@+id/search_mincost"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="16dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Max Distance"
+        android:id="@+id/search_maxDist"
+        android:layout_alignBaseline="@+id/search_maxdistText"
+        android:layout_alignBottom="@+id/search_maxdistText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/search_descriptionText"
+        android:width="200dp"
+        android:layout_alignBaseline="@+id/search_description"
+        android:layout_alignBottom="@+id/search_description"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/search_nameText"
+        android:layout_alignBaseline="@+id/search_name"
+        android:layout_alignBottom="@+id/search_name"
+        android:layout_alignLeft="@+id/search_descriptionText"
+        android:layout_alignStart="@+id/search_descriptionText"
+        android:width="200dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/search_tagsText"
+        android:width="200dp"
+        android:layout_alignBaseline="@+id/search_tags"
+        android:layout_alignBottom="@+id/search_tags"
+        android:layout_alignLeft="@+id/search_nameText"
+        android:layout_alignStart="@+id/search_nameText" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/search_maxattendText"
+        android:width="200dp"
+        android:layout_below="@+id/search_tags"
+        android:layout_alignLeft="@+id/search_tagsText"
+        android:layout_alignStart="@+id/search_tagsText" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/search_minattendText"
+        android:width="200dp"
+        android:layout_alignBaseline="@+id/search_minattend"
+        android:layout_alignBottom="@+id/search_minattend"
+        android:layout_alignLeft="@+id/search_maxattendText"
+        android:layout_alignStart="@+id/search_maxattendText" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/search_mincostText"
+        android:width="200dp"
+        android:layout_below="@+id/serach_enddate"
+        android:layout_alignLeft="@+id/search_minattendText"
+        android:layout_alignStart="@+id/search_minattendText" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/search_maxcostText"
+        android:width="200dp"
+        android:layout_below="@+id/search_mincost"
+        android:layout_alignLeft="@+id/search_mincostText"
+        android:layout_alignStart="@+id/search_mincostText" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/search_maxdistText"
+        android:width="200dp"
+        android:layout_below="@+id/search_maxcost"
+        android:layout_alignLeft="@+id/search_maxcostText"
+        android:layout_alignStart="@+id/search_maxcostText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Longitude"
+        android:id="@+id/search_longitude"
+        android:layout_below="@+id/search_maxdistText"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Latitude"
+        android:id="@+id/search_latitude"
+        android:layout_below="@+id/search_longitude"
+        android:layout_marginTop="16dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/search_longitudeText"
+        android:width="200dp"
+        android:layout_below="@+id/search_maxDist"
+        android:layout_alignLeft="@+id/search_maxdistText"
+        android:layout_alignStart="@+id/search_maxdistText" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/search_latitudeText"
+        android:width="200dp"
+        android:layout_below="@+id/search_longitude"
+        android:layout_alignLeft="@+id/search_longitudeText"
+        android:layout_alignStart="@+id/search_longitudeText" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search!"
+        android:id="@+id/search_makeSearch"
+        android:hint="hello"
+        android:textColor="#ffffff"
+        android:layout_below="@+id/search_latitudeText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="26dp"
+        android:onClick="makeSearch" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Set Date"
+        android:id="@+id/search_startdateButt"
+        android:layout_marginLeft="51dp"
+        android:layout_marginStart="51dp"
+        android:textColor="#ffffff"
+        android:layout_below="@+id/search_minattend"
+        android:layout_alignLeft="@+id/search_minattendText"
+        android:layout_alignStart="@+id/search_minattendText"
+        android:layout_alignBottom="@+id/search_startdate"
+        android:onClick="setDate" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Set Date"
+        android:id="@+id/search_enddateButt"
+        android:layout_below="@+id/search_startdateButt"
+        android:layout_alignLeft="@+id/search_startdateButt"
+        android:layout_alignStart="@+id/search_startdateButt"
+        android:layout_alignRight="@+id/search_startdateButt"
+        android:layout_alignEnd="@+id/search_startdateButt"
+        android:textColor="#ffffff"
+        android:layout_above="@+id/search_mincostText"
+        android:onClick="setDate" />
+
 </RelativeLayout>
