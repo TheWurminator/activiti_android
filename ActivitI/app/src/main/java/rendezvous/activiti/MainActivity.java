@@ -84,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<ActivitiListModel> activitiList = new ArrayList<>();
     private SlidingMenuFragment slidingMenuFragment = new SlidingMenuFragment();
     SlidingUpPanelLayout slideLayout;
+    ActivitiAdapter adapter;
 
     private JSONObject jsonObject = new JSONObject();
     private final String url = "https://activiti.servebeer.com:8081/api/";
@@ -101,9 +102,8 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.content_menu);
         
-        ActivitiAdapter adapter = new ActivitiAdapter(this, activitiList);
+        adapter = new ActivitiAdapter(this, activitiList);
         listView = (ListView)findViewById(R.id.list_menu);
-        if(listView == null)Log.v("----------------", "listView is null");
         listView.setAdapter(adapter);
 
 
@@ -223,9 +223,13 @@ public class MainActivity extends AppCompatActivity {
         temp.title = name;
 
         activitiList.add(temp);
+        adapter.notifyDataSetChanged();
 
-
-
+        editName.setText("");
+        editDescription.setText("");
+        editCost.setText("");
+        editTag.setText("");
+        editMaxAttendees.setText("");
         JSONObject newActiviti = new JSONObject();
         try {
             newActiviti.put("name", name);

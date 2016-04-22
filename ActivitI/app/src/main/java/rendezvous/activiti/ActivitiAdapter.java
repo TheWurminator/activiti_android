@@ -45,7 +45,7 @@ public class ActivitiAdapter extends ArrayAdapter<ActivitiListModel>  {
     public View getView(int position, View view, ViewGroup parent) {
         LayoutInflater inflater = activity.getLayoutInflater();
         View rowView = inflater.inflate(R.layout.activiti_list_item, parent, false);
-
+        if(data.size()==0)return rowView;
         TextView txtTitle = (TextView) rowView.findViewById(R.id.text_title);
         TextView textDate = (TextView) rowView.findViewById(R.id.text_date);
         TextView description = (TextView) rowView.findViewById(R.id.text_description);
