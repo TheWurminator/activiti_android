@@ -56,24 +56,28 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //setup
         FacebookSdk.sdkInitialize(MyApplication.getAppContext());
         setContentView(R.layout.content_login_page);
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        //Used for location data. Currently unimplemented
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+        //Code to allow self-signed certifications
         trustEveryone();
     }
 
+    //ONclick method for the main login button
     public void loginServer(View view) {
         setContentView(R.layout.content_web_login);
         //Displays the login page in a web view
         WebView myWebView = (WebView) findViewById(R.id.webview);
+        //Displays the login page in a web view, then receives response and saves the token
         myWebView.getSettings().setJavaScriptEnabled(true);
         myWebView.setWebViewClient(new SSLTolerantWebView());
         myWebView.addJavascriptInterface(new MyJavaScriptInterface(), "HTMLOUT");
         myWebView.loadUrl("https://activiti.servebeer.com:8081/api/login/facebook");
     }
 
+    //Navigate function for moving between different sections of the application
     public void navigate(Fragment fragment) {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -82,11 +86,13 @@ public class LoginActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
+    //Back door that
     public void getmein(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
+    //This function allows for the application to trust self-signed certificates, like the one for this project
     private void trustEveryone() {
         try {
             HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier() {
@@ -119,8 +125,7 @@ public class LoginActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        //unimplemeneted feature, used for location data
         client.connect();
         Action viewAction = Action.newAction(
                 Action.TYPE_VIEW, // TODO: choose an action type.
@@ -139,8 +144,7 @@ public class LoginActivity extends AppCompatActivity {
     public void onStop() {
         super.onStop();
 
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        //Unimplemented feature useing location data
         Action viewAction = Action.newAction(
                 Action.TYPE_VIEW, // TODO: choose an action type.
                 "Login Page", // TODO: Define a title for the content shown.
@@ -155,6 +159,7 @@ public class LoginActivity extends AppCompatActivity {
         client.disconnect();
     }
 
+    //special class of webview client that can capture the html response from a webview
     private class SSLTolerantWebView extends WebViewClient {
         //Grabs the token from the webview
         @Override

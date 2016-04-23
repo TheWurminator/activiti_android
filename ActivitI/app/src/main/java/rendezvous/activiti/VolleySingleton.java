@@ -17,6 +17,7 @@ public class VolleySingleton {
     private RequestQueue sQueue;
     private ImageLoader sImageLoader;
 
+    //volley singleton, because a new request queue is too expensive
     public static VolleySingleton getInstance() {
         if(sInstance == null){
             sInstance = new VolleySingleton();
@@ -24,6 +25,7 @@ public class VolleySingleton {
         return sInstance;
     }
 
+    //This way, Volley.newRequestQueue only needs to be called once
     public RequestQueue getRequestQueue(){
         if(sQueue == null){
             sQueue = Volley.newRequestQueue(MyApplication.returnInstance().getApplicationContext());
@@ -31,6 +33,7 @@ public class VolleySingleton {
         return sQueue;
     }
 
+    //Image loader, because images were going to be a part of the app, images are unimplemented
     private VolleySingleton() {
         sQueue = Volley.newRequestQueue(MyApplication.returnInstance().getApplicationContext());
         sImageLoader = new ImageLoader(sQueue, new ImageLoader.ImageCache() {

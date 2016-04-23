@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+//EditProfileFragment, a subclass of fragment, is used when the user would like to edit their profile
 public class EditProfileFragment extends Fragment {
 
     @Override

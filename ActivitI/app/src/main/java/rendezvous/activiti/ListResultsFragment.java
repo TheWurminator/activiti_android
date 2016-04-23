@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 /**
  * Created by James on 4/8/2016.
  */
+//Unimplemented feature. Was going to list the results when the user submitted their search query
 public class ListResultsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

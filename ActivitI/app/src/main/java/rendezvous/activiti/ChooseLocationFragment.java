@@ -16,12 +16,15 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+//Not fully implemented. Was going to be used to get a lat long pair from a user from a click on a map
 public class ChooseLocationFragment extends FragmentActivity implements OnMapReadyCallback {
 
+    //Members
     private GoogleMap mMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //setup for when this fragment is created
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_location);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -42,7 +45,7 @@ public class ChooseLocationFragment extends FragmentActivity implements OnMapRea
         final Location mLocation = mMap.getMyLocation();
         mMap.addMarker(new MarkerOptions().position(new LatLng(mLocation.getLatitude(), mLocation.getLongitude())).draggable(true));
         mMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
-
+            //Unimplemented Feature
             @Override
             public void onMarkerDrag(Marker marker) {
 

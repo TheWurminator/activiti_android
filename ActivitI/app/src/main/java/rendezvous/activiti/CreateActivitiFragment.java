@@ -11,6 +11,8 @@ import android.widget.TextView;
 /**
  * Created by James on 4/8/2016.
  */
+
+//A subclass of Fragment, createActivitiFragment is used when the user wants to create a new activiti
 public class CreateActivitiFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

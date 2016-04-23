@@ -74,6 +74,7 @@ import javax.net.ssl.X509TrustManager;
 
 
 public class MainActivity extends AppCompatActivity {
+    //Fragment objects used to handle navigation
     private ListResultsFragment listResultsFragment = new ListResultsFragment();
     private ProfileViewFragment profileViewFragment = new ProfileViewFragment();
     private EditProfileFragment editProfileFragment = new EditProfileFragment();
@@ -86,18 +87,17 @@ public class MainActivity extends AppCompatActivity {
     private LeaveBadgeFragment leaveBadgeFragment = new LeaveBadgeFragment();
     private ChatFragment chatFragment = new ChatFragment();
 
+    //List view for displaying activities
     private ListView listView;
     private ArrayList<ActivitiListModel> activitiList = new ArrayList<>();
     private SlidingMenuFragment slidingMenuFragment = new SlidingMenuFragment();
     SlidingUpPanelLayout slideLayout;
     ActivitiAdapter adapter;
 
+    //variables to store date and time information
     private int dateHour, dateMinute, dateMonth, dateYear, dateDay;
     private int dateMonth2, dateYear2, dateDay2;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
+
     private GoogleApiClient client;
 
     @Override
@@ -105,36 +105,41 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.content_menu);
-        
+
+        //Sets up the menu bar
         adapter = new ActivitiAdapter(this, activitiList);
         listView = (ListView)findViewById(R.id.list_menu);
         listView.setAdapter(adapter);
 
-
+        //Sets up the sliding layout
         slideLayout = (SlidingUpPanelLayout) findViewById(R.id.sliding_layout);
         slideLayout.setTouchEnabled(false);
 
+        //Allows volley to send requests to self signed certificates
         trustEveryone();
 
+        //On create, navigate to view profile
         ProfileViewFragment profileViewFragment = new ProfileViewFragment();
         navigate(profileViewFragment);
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
+
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
 
         viewProfile();
     }
 
+    //handles opening the sliding menu
     public void openSlideMenu(View view) {
         SlidingUpPanelLayout.PanelState temp = slideLayout.getPanelState();
         if(temp.equals(SlidingUpPanelLayout.PanelState.COLLAPSED))slideLayout.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
         else slideLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
     }
 
+    //handles closing the sliding menu
     public void closeSlideMenu(View view) {
         slideLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
     }
 
+    //Overriden function of onbackpressed . This makes you return to one screen prior
     @Override
     public void onBackPressed() {
         int count = getFragmentManager().getBackStackEntryCount();
@@ -146,6 +151,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //Handles navigation by inflating whatever fragment it is passed
     public void navigate(Fragment fragment) {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -157,6 +163,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void makeSearch(View view) {
+        //Sets up the GUI components for the activiti search function
         EditText name = (EditText) findViewById(R.id.search_nameText);
         EditText description = (EditText) findViewById(R.id.search_descriptionText);
         EditText tags = (EditText) findViewById(R.id.search_tagsText);
@@ -168,11 +175,14 @@ public class MainActivity extends AppCompatActivity {
         EditText longitude = (EditText) findViewById(R.id.search_longitudeText);
         EditText latitude = (EditText) findViewById(R.id.search_latitudeText);
 
+        //variable to store tags. tags are comma delimited
         String[] mTags = tags.getText().toString().split(",");
         String mName = name.getText().toString(), mDescription = description.getText().toString();
 
+        //placeholder body jsonobject
         JSONObject body = new JSONObject();
 
+        //Everything in this try catch block is used to handle input validation
         try {
             try {
                 int mStartDay = dateDay, mStartMonth = dateMonth, mStartYear = dateYear, mEndDay = dateDay2,
@@ -192,19 +202,10 @@ public class MainActivity extends AppCompatActivity {
             if(mDescription.equals("") == false)
                 body.put("description", mDescription);
 
-            //body.put("start_date", new DateTime(mStartDay, mStartMonth, mStartYear).getRequestFormat());
-            //body.put("end_date", new DateTime(mEndDay, mEndMonth, mEndYear).getRequestFormat());
-            //body.put("max_distance", mMaxDist);
-            //body.put("longitude", mLongitude);
-            //body.put("latitude", mLatitutde);
-            //body.put("max_attendees", mMaxAttend);
-            //body.put("min_attendees", mMinAttend);
-
             JSONArray ar = new JSONArray();
 
             if(mTags[0].equals("") == false) {
                 for (int i = 0; i < mTags.length; i++) {
-                    //body.put("tags", );
                     ar.put(mTags[i]);
                 }
                  body.put("tags", ar);
@@ -213,12 +214,15 @@ public class MainActivity extends AppCompatActivity {
 
         } catch (Exception e) {
         }
+        //End input validation
 
+        //create a json array
         JSONArray ar2 = new JSONArray();
         ar2.put(body);
 
         openSlideMenu(view);
 
+        //reset all the text fields
         name.setText("");
         description.setText("");
         tags.setText("");
@@ -234,11 +238,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void searchActivities(JSONArray body) {
+        //sets up for sending the token to the server in the header
         HashMap<String, String> headerMap = new HashMap<String, String>();
         headerMap.put("token", getToken());
 
+        //assemble the full path of the server
         String path = getResources().getString(R.string.url) + getResources().getString(R.string.activitiSearchPath);
 
+        //Send request, using post, path, the header, body, and a callback function
         RequestManager.sendArrayRequest(Request.Method.POST, path, headerMap, body, new RequestArrayCallBack() {
             public void callback(JSONArray res) {
 
@@ -254,12 +261,6 @@ public class MainActivity extends AppCompatActivity {
                             JSONObject obj = (JSONObject) new JSONTokener(res.get(i).toString()).nextValue();
                             tmp.title = obj.getString("name");
                             tmp.description = obj.getString("description");
-                            //tmp.cost = obj.getString("cost");
-                            //tmp.dateEnd = obj.getString("dateEnd");
-                            //tmp.dateStart = obj.getString("dateStart");
-                            //tmp.latitude = obj.getString("");
-                            //tmp.maxAttendees = ;
-                            //tmp.aid = obj.getString("aid");
 
                             activitiList.add(tmp);
 
@@ -274,35 +275,36 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void searchActivities(View view) {
-        navigate(listResultsFragment);
-        //searchActivities();
-        //Code to send search query to server
-    }
-
+    //Returns the token from local storage
     public String getToken() {
         SharedPreferences prefs = getSharedPreferences(MyApplication.getAppContext().getString(R.string.token_store), 0);
         String token = prefs.getString("token", null);
         return token;
     }
 
+    //view profile button click listener
     public void viewProfile(View view) {
+        //Navigate to and display the user's profile
         closeSlideMenu(view);
         navigate(profileViewFragment);
-
         viewProfile();
     }
 
     private void viewProfile() {
+        //prepares the header with a get request
         HashMap<String, String> headerMap = new HashMap<String, String>();
         headerMap.put("token", getToken());
 
+        //prepares the body of the request
         JSONObject body = new JSONObject();
 
+        //assembles the full path
         String path = getResources().getString(R.string.url) + getResources().getString(R.string.userPath);
 
+        //sends the request
         RequestManager.sendRequest(Request.Method.GET, path, headerMap, body, new RequestCallBack() {
             public void callback(JSONObject res) {
+                //call display profile on successful response
                 displayProfile(res);
             }
         });
@@ -312,6 +314,7 @@ public class MainActivity extends AppCompatActivity {
         navigate(activitiViewFragment);
     }
 
+    //for viewing the details of 1 specific activiti. Not fully implemented
     public void viewActiviti(String aid) {
         HashMap<String, String> headerMap = new HashMap<String, String>();
 
@@ -329,6 +332,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    //Save profile submit changes. Not fully implemented
     public void saveProfile(View view) {
         EditText editLocation = (EditText) findViewById(R.id.editLocation);
         EditText editBio = (EditText) findViewById(R.id.editBio);
@@ -352,6 +356,7 @@ public class MainActivity extends AppCompatActivity {
     }
     @TargetApi(19)
     public void submitNewActiviti(View view) {
+        //Sets up the gui components as objects
         EditText editName = (EditText) findViewById(R.id.editName);
         EditText editDescription = (EditText) findViewById(R.id.editDescription);
         EditText editCost = (EditText) findViewById(R.id.moneyTextBox);
@@ -361,18 +366,21 @@ public class MainActivity extends AppCompatActivity {
         Button editLocation = (Button) findViewById(R.id.locationPick);
         EditText editTag = (EditText) findViewById(R.id.editTag0Activiti);
 
+        //Assign values from respective gui components
         String name = editName.getText().toString();
         String description = editDescription.getText().toString();
         double cost = Double.parseDouble(editCost.getText().toString());
         int maxAttendees = Integer.parseInt(editMaxAttendees.getText().toString());
         String tags = editTag.getText().toString();
 
+        //Tags are comma delimited
         String[] tag = tags.split(",");
         for(int j = 0; j < tag.length; j++){
             Log.d("Tags", tag[j]);
 
         }
 
+        //Prepare an activitilistmodel
         ActivitiListModel temp = new ActivitiListModel();
         temp.cost = cost;
         temp.dateStart = new DateTime(dateDay, dateMonth, dateYear, dateHour, dateMinute);
@@ -382,6 +390,7 @@ public class MainActivity extends AppCompatActivity {
 
         activitiList.add(temp);
         adapter.notifyDataSetChanged();
+        //assemble a temporary jsonobject
         JSONObject objtemp = new JSONObject();
         try{
             objtemp.put("name",temp.title);
@@ -403,6 +412,7 @@ public class MainActivity extends AppCompatActivity {
             Log.d("iwjij", "wodk");
         }
         Log.d("objtemp", objtemp.toString());
+        //Resets all the gui components text
         editName.setText("");
         editDescription.setText("");
         editCost.setText("");
@@ -420,7 +430,7 @@ public class MainActivity extends AppCompatActivity {
         viewProfile(view);
     }
 
-    //4/20 - Amon
+    //The following eleven functoins are all solesly used in navigation and inflating fraggments
     public void viewOtherProfile(View view) {
         navigate(friendProfileViewFragment);
     }
@@ -467,6 +477,7 @@ public class MainActivity extends AppCompatActivity {
         navigate(chatFragment);
     }
 
+    //Function used to trust self signed certificates
     private void trustEveryone() {
         try {
             HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier(){
@@ -489,6 +500,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //Takes the information from the JSONObject and places them in text views
     public void displayProfile(JSONObject userinfo) {
         //Take the information and display to the userry{
         try {
@@ -498,11 +510,13 @@ public class MainActivity extends AppCompatActivity {
             String bio = userinfo.getString("bio");
             String dob = userinfo.getString("dob");
 
+            //TextViews
             TextView nameText = (TextView)findViewById(R.id.nameText);
             TextView genderText = (TextView)findViewById(R.id.genderText);
             TextView bioText = (TextView)findViewById(R.id.bioText);
             TextView dobText = (TextView)findViewById(R.id.dobText);
 
+            //Setting all the label's text
             nameText.setText(first_name);
             genderText.setText(gender);
             bioText.setText(bio);
@@ -513,6 +527,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //Displays the activity information. Not fully implemented
     public void displayActiviti(JSONObject activitiinfo) {
         //Take the information and display to the user
         try {
@@ -530,8 +545,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //Date picker
     public void setDate(View view) {
         Calendar mDate = Calendar.getInstance();
+        //variables to hold the year month and day
         int mYear = mDate.get(Calendar.YEAR);
         int mMonth = mDate.get(Calendar.MONTH);
         int mDay = mDate.get(Calendar.DAY_OF_MONTH);
@@ -542,6 +559,7 @@ public class MainActivity extends AppCompatActivity {
         mDatePicker = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month += 1;
+               //When a date is set, set the text of that button to the date picked
                 datePick.setText(Integer.toString(month) + "/" + Integer.toString(day) + "/" + Integer.toString(year));
             }
         }, mYear, mMonth, mDay);
@@ -550,6 +568,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void setDate3(View view) {
         Calendar mDate = Calendar.getInstance();
+        //variables to hold the year month and day
         int mYear = mDate.get(Calendar.YEAR);
         int mMonth = mDate.get(Calendar.MONTH);
         int mDay = mDate.get(Calendar.DAY_OF_MONTH);
@@ -560,6 +579,7 @@ public class MainActivity extends AppCompatActivity {
         mDatePicker = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month += 1;
+                //When a date is set, set the text of that button to the date picked
                 datePick.setText(Integer.toString(month) + "/" + Integer.toString(day) + "/" + Integer.toString(year));
             }
         }, mYear, mMonth, mDay);
@@ -568,6 +588,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void setDate2(View view) {
         Calendar mDate = Calendar.getInstance();
+        //variables to hold the year month and day
         int mYear = mDate.get(Calendar.YEAR);
         int mMonth = mDate.get(Calendar.MONTH);
         int mDay = mDate.get(Calendar.DAY_OF_MONTH);
@@ -578,6 +599,7 @@ public class MainActivity extends AppCompatActivity {
         mDatePicker = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month += 1;
+                //When a date is set, set the text of that button to the date picked
                 datePick.setText(Integer.toString(month) + "/" + Integer.toString(day) + "/" + Integer.toString(year));
             }
         }, mYear, mMonth, mDay);
@@ -588,6 +610,7 @@ public class MainActivity extends AppCompatActivity {
     public void setTime(View view) {
         final Button timePick = (Button) findViewById(R.id.editTimeButton);
         Calendar mTime = Calendar.getInstance();
+        //variables to hold the year minute and hour
         int mHour = mTime.get(Calendar.HOUR_OF_DAY);
         int mMinute = mTime.get(Calendar.MINUTE);
         dateHour = mHour; dateMinute = mMinute;
@@ -596,6 +619,7 @@ public class MainActivity extends AppCompatActivity {
         mTimePicker = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                //When a time is set, set the text of that button to the time picked
                 timePick.setText(Integer.toString(hourOfDay) + ":" + Integer.toString(minute));
             }
         }, mHour, mMinute, true);
@@ -603,6 +627,7 @@ public class MainActivity extends AppCompatActivity {
         mTimePicker.show();
     }
 
+    //used for choosing location, not fully implemented
     public void chooseLocation(View view) {
         Fragment mMapFragment = MapFragment.newInstance();
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
@@ -610,6 +635,7 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
+    //Used for maps, not implemented
     @Override
     public void onStart() {
         super.onStart();
@@ -630,6 +656,7 @@ public class MainActivity extends AppCompatActivity {
         AppIndex.AppIndexApi.start(client, viewAction);
     }
 
+    //Used for maps, not implemented
     @Override
     public void onStop() {
         super.onStop();

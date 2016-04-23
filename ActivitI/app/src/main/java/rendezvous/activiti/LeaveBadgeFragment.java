@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 /**
  * Created by ksingletary on 4/9/16.
  */
+//Unimplemented feature
 public class LeaveBadgeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

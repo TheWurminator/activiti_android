@@ -8,6 +8,7 @@ import android.widget.Toast;
 /**
  * Created by dm on 4/22/16.
  */
+//Javascript interface used to pluck the html out of the webview
 public class MyJavaScriptInterface {
     @JavascriptInterface
     @SuppressWarnings("unused")

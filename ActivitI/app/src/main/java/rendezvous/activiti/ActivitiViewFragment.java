@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class ActivitiViewFragment extends Fragment {
-
+    //A subclass of Fragment, ActivitiVCiewFragment is used when an activiti is clicked on for more information
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.content_activiti_view, container, false);
